@@ -27,6 +27,10 @@ body {
   .acc-item {
     @apply hover:bg-opaqueGrey transition-all rounded;
   }
+
+  .trow:hover {
+    @apply bg-opaqueGrey rounded;
+  }
 }
 
 /* @layer base {
