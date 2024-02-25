@@ -8,7 +8,7 @@ import {
 function OptionsBar() {
   return (
     <>
-      <div className="options-bar flex flex-col flex-grow gap-10 w-1/12 px-4 py-14 border-r border-red">
+      <div className="options-bar flex flex-col flex-grow gap-10 w-[10%] px-4 py-14 border-r border-red">
         <section className="layout-section flex items-start justify-center flex-col gap-5 w-full">
           <h3 className="text-2xl text-red">Layout</h3>
           <div className="layouts flex items-center justify-start gap-4">
