@@ -1,0 +1,15 @@
+{
+  "name": "kiln-trace",
+  "version": "1.0.0",
+  "description": "root folder npm install to run single start command",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd Server && npm run dev\" \"cd Client && npm run dev\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
