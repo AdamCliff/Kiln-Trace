@@ -18,12 +18,19 @@ function App() {
       });
   }, []);
 
+  const newPiece = () => {
+    useEffect(() => {
+      fetch("http://localhost:3000/piece");
+    });
+  };
+
   return (
     <>
       <Navbar />
       <div className="main-screen flex flex-grow">
         <OptionsBar />
         <PiecesView />
+        <button onClick={newPiece}>new piece</button>
       </div>
     </>
   );
