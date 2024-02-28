@@ -3,14 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const Piece = require("./models/pieces");
+const { createPiece } = require("./controllers/pieceController");
 
 // express app
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -18,19 +18,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
 
-app.get("/", (req, res) => {
-  console.log("get request");
-  res.send("response message");
-});
-
-app.get("/piece", (req, res) => {
-  const piece = new Piece({
-    title: "a piece",
-    form: "bowl",
-  });
-  console.log("piece endpoint");
-  piece.save();
-});
+app.post("/piece", createPiece);
