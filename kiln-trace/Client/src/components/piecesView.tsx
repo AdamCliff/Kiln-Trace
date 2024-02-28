@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Table,
   TableBody,
@@ -10,6 +12,23 @@ import {
 import PieceEntry from "./pieceEntry";
 
 function PiecesView() {
+  // piece state variable for fetched data
+  const [pieces, setPieces] = useState([null]);
+
+  // on load, fetch data and set to piece variable
+  useEffect(() => {
+    try {
+      fetch("http://localhost:3000/pieces")
+        .then((res) => res.json())
+        .then((data) => {
+          setPieces(data);
+        })
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <>
       <div className="w-11/12 px-10 py-14">
@@ -30,12 +49,7 @@ function PiecesView() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <PieceEntry />
-            <PieceEntry />
-            <PieceEntry />
-            <PieceEntry />
-            <PieceEntry />
-            <PieceEntry />
+            {pieces[0] && pieces.map((piece) => <PieceEntry piece={piece} />)}
           </TableBody>
         </Table>
       </div>

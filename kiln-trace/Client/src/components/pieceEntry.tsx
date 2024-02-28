@@ -1,23 +1,32 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 
-function PieceEntry() {
+function PieceEntry({ piece }: any) {
+  console.log(piece);
+
   return (
     <>
       <TableRow className="trow">
         <TableCell className=" text-black font-medium">Today</TableCell>
-        <TableCell className=" text-black font-medium">A title</TableCell>
-        <TableCell className=" text-black font-medium">Bisqued</TableCell>
-        <TableCell className=" text-black font-medium">Thrown</TableCell>
-        <TableCell className=" text-black font-medium">Vase</TableCell>
-        <TableCell className=" text-black font-medium">12 lbs</TableCell>
-        <TableCell className=" text-black font-medium">30'x20'x15'</TableCell>
+        <TableCell className=" text-black font-medium">{piece.title}</TableCell>
+        <TableCell className=" text-black font-medium">{piece.stage}</TableCell>
         <TableCell className=" text-black font-medium">
-          Pottery Peacock
+          {piece.method}
         </TableCell>
-        <TableCell className="text-black font-medium">Generica</TableCell>
+        <TableCell className=" text-black font-medium">{piece.form}</TableCell>
+        <TableCell className=" text-black font-medium">
+          {piece.weight}
+        </TableCell>
+        <TableCell className=" text-black font-medium">
+          blahxblahxblah
+        </TableCell>
+        <TableCell className=" text-black font-medium">
+          {piece.overglaze}
+        </TableCell>
+        <TableCell className="text-black font-medium">
+          {piece.underglaze}
+        </TableCell>
         <TableCell className="text-black font-medium text-right">
-          Demo notes, should not appear fully and instead have either an ellipse
-          with a hover to show all or similar idea
+          {piece.notes}
         </TableCell>
       </TableRow>
     </>

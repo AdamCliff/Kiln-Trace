@@ -40,7 +40,7 @@ function NewPiece() {
 
     try {
       // try post new piece
-      const res = await fetch("http://localhost:3000/piece", {
+      const res = await fetch("http://localhost:3000/new-piece", {
         method: "POST",
         body: JSON.stringify(piece),
         headers: { "Content-Type": "application/json" },

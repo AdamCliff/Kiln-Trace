@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const { createPiece } = require("./controllers/pieceController");
+const { createPiece, getPieces } = require("./controllers/pieceController");
 
 // express app
 const app = express();
@@ -26,4 +26,9 @@ app.listen(process.env.PORT, () => {
 });
 
 // routes
-app.post("/piece", createPiece);
+
+// create a new piece
+app.post("/new-piece", createPiece);
+
+// get list of pieces
+app.get("/pieces", getPieces);
