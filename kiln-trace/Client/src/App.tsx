@@ -1,6 +1,6 @@
 import Navbar from "./components/navbar.tsx";
 import OptionsBar from "./components/optionsbar.tsx";
-import PiecesView from "./components/piecesView.tsx";
+// import PiecesView from "./components/piecesView.tsx";
 import NewPiece from "./components/newPiece.tsx";
 
 function App() {
