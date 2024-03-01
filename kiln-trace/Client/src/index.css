@@ -21,17 +21,33 @@ body {
 
 @layer components {
   .nav-link {
-    @apply text-2xl uppercase text-red font-medium;
+    @apply text-2xl uppercase text-darkGreen font-medium;
   }
 
   .acc-item {
-    @apply hover:bg-opaqueGrey transition-all rounded;
+    @apply hover:bg-whiteGreen transition-all rounded;
   }
 
   .trow:hover {
-    @apply bg-opaqueGrey rounded;
+    @apply bg-mutedGreen rounded;
   }
 }
+
+/* Colors */
+/* :root {
+  --black: #111511;
+  --white: #ebf4ed;
+  --white-green: #f4fbf5;
+  --muted-green: #86c28f;
+  --dark-green: #283a2b;
+  --bright-green: #48b859;
+
+  --text: var(--black);
+  --background: var(--white-green);
+  --primary: var(--muted-green);
+  --secondary: var(--dark-green);
+  --accent: var(--bright-green);
+} */
 
 /* @layer base {
   :root {

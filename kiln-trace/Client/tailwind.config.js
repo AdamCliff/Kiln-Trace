@@ -18,12 +18,20 @@ module.exports = {
     },
     extend: {
       colors: {
-        red: "#801818",
-        grey: "#282421",
-        lightGrey: "#7e7c7a",
-        opaqueGrey: "#7e7c7a30",
-        black: "#100c08",
-        white: "#f7f7f7",
+        /* base colors */
+        black: "#111511",
+        white: "#ebf4ed",
+        whiteGreen: "#f4fbf5",
+        mutedGreen: "#7e8980",
+        darkGreen: "#283a2b",
+        brightGreen: "#48b859",
+        /* color scheme */
+        text: "#111511",
+        background: "#f4fbf5",
+        primary: "#7e8980",
+        secondary: "#283a2b",
+        accent: "#48b859",
+
         // border: "hsl(var(--border))",
         // input: "hsl(var(--input))",
         // ring: "hsl(var(--ring))",

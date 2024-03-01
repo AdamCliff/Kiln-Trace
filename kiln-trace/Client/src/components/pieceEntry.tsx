@@ -1,7 +1,21 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 
 function PieceEntry({ piece }: any) {
-  console.log(piece);
+  const handleDelete = async (e: any, id: any) => {
+    e.preventDefault();
+    console.log(e);
+    console.log(id);
+
+    try {
+      const res = await fetch(`http://localhost:3000/delete-piece/${id}`, {
+        method: "DELETE",
+      });
+      const json = await res.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -27,6 +41,15 @@ function PieceEntry({ piece }: any) {
         </TableCell>
         <TableCell className="text-black font-medium text-right">
           {piece.notes}
+        </TableCell>
+        <TableCell>
+          <button
+            onClick={(e) => {
+              handleDelete(e, piece._id);
+            }}
+          >
+            delete
+          </button>
         </TableCell>
       </TableRow>
     </>
