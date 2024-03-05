@@ -39,7 +39,7 @@ function PieceEntry({ piece }: any) {
         <TableCell className="text-black font-medium">
           {piece.underglaze}
         </TableCell>
-        <TableCell className="text-black font-medium text-right">
+        <TableCell className="text-black font-medium text-left">
           {piece.notes}
         </TableCell>
         <TableCell className="text-black font-medium text-right">

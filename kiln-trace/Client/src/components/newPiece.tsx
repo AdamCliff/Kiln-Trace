@@ -4,16 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import DatePicker from "@/components/ui/datePicker";
 import { Button } from "@/components/ui/button";
 
-import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function NewPiece() {
@@ -66,7 +60,7 @@ function NewPiece() {
 
       //   await response
       const json = await res.json();
-      // console.log(json);
+      console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +69,7 @@ function NewPiece() {
   return (
     <>
       <div id="new-piece-form" className="">
-        <DialogHeader>
+        <DialogHeader className="mb-4">
           <DialogTitle>New Piece</DialogTitle>
         </DialogHeader>
         <form

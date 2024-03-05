@@ -2,7 +2,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 
 import OptionsBar from "./optionsbar";
 import PieceData from "./pieceData";
-import NewPiece from "./newPiece";
 
 function DataPanel() {
   return (

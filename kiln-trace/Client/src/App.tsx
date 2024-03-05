@@ -4,7 +4,6 @@ function App() {
   return (
     <>
       <div className="screen">
-        {/* why is this div here? */}
         <Dashboard />
       </div>
     </>
