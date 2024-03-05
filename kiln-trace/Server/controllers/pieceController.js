@@ -48,6 +48,7 @@ const createPiece = async (req, res) => {
       artist,
       notes,
     });
+    console.log(piece);
     res.status(200).json(piece);
   } catch (error) {
     res.status(400).json({ error: error.message });

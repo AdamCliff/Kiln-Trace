@@ -8,9 +8,7 @@ import {
 function OptionsBar() {
   return (
     <>
-      <div id="options-bar" className="">
-        Options
-      </div>
+      <div id="options-bar">Options</div>
     </>
   );
 }

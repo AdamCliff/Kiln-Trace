@@ -3,15 +3,45 @@ const Schema = mongoose.Schema;
 
 const DimensionsSchema = new Schema({
   height: {
-    type: String,
+    type: Number,
     required: true,
   },
   width: {
-    type: String,
+    type: Number,
     required: true,
   },
   length: {
+    type: Number,
+    required: true,
+  },
+});
+
+const StageSchema = new Schema({
+  stage: {
     type: String,
+    required: true,
+  },
+});
+
+const StageLogSchema = new Schema({
+  formed: {
+    type: StageSchema,
+    required: true,
+  },
+  trimmed: {
+    type: StageSchema,
+    required: true,
+  },
+  bisqued: {
+    type: StageSchema,
+    required: true,
+  },
+  glazed: {
+    type: StageSchema,
+    required: true,
+  },
+  fired: {
+    type: StageSchema,
     required: true,
   },
 });
@@ -26,6 +56,10 @@ const PieceSchema = new Schema(
       type: String,
       required: false,
     },
+    stageLog: {
+      type: StageLogSchema,
+      required: false,
+    },
     method: {
       type: String,
       required: false,
@@ -35,7 +69,7 @@ const PieceSchema = new Schema(
       required: false,
     },
     weight: {
-      type: String,
+      type: Number,
       required: false,
     },
     dimensions: {

@@ -35,8 +35,8 @@ function PiecesList() {
       <div className="w-full h-full">
         <Table>
           <TableCaption>
-            <Link
-              to={"/"}
+            {/* <Link
+              to={"/new-piece"}
               id="new-piece-btn"
               className="flex items-center justify-center h-min w-min p-2 bg-mutedGreen rounded-xl"
             >
@@ -54,7 +54,7 @@ function PiecesList() {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
-            </Link>
+            </Link> */}
           </TableCaption>
           <TableHeader>
             <TableRow>
