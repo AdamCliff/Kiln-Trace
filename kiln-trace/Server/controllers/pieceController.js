@@ -5,6 +5,7 @@ const Piece = require("../models/pieceModel");
 // get pieces list
 const getPieces = async (req, res) => {
   try {
+    console.log("ran get pieces");
     const pieces = await Piece.find({});
     // console.log(pieces);
     res.status(200).json(pieces);

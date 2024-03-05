@@ -18,7 +18,6 @@ function DataPanel() {
           <Routes>
             <Route path="/" element={<Navigate to={"/pieces"} />} />
             <Route path="/pieces" element={<OptionsBar />} />
-            {/* <Route path="/new-piece" element={""} /> */}
             <Route path="/glazes" />
             <Route path="/schedules" />
           </Routes>
@@ -30,7 +29,6 @@ function DataPanel() {
           <Routes>
             <Route path="/" element={<Navigate to={"/pieces"} />} />
             <Route path="/pieces" element={<PieceData />} />
-            {/* <Route path="/new-piece" element={<NewPiece />} /> */}
             <Route path="/glazes" />
             <Route path="/schedules" />
           </Routes>
