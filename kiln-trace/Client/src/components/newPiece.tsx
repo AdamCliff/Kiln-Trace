@@ -4,8 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import DatePicker from "@/components/ui/datePicker";
+import { Button } from "@/components/ui/button";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -60,7 +66,7 @@ function NewPiece() {
 
       //   await response
       const json = await res.json();
-      console.log(json);
+      // console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +74,7 @@ function NewPiece() {
 
   return (
     <>
-      <div id="new-piece-form" className="space-y-4">
+      <div id="new-piece-form" className="">
         <DialogHeader>
           <DialogTitle>New Piece</DialogTitle>
         </DialogHeader>
@@ -327,13 +333,18 @@ function NewPiece() {
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
           </div>
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="self-center bg-secondary text-background h-min w-min p-4 rounded-xl"
-          >
-            Save
-          </button>
+          {/* <DialogFooter> */}
+          <DialogClose asChild>
+            <Button
+              onClick={handleSubmit}
+              type="button"
+              variant="secondary"
+              className="self-center bg-secondary text-background h-min w-min p-4 rounded-xl"
+            >
+              Save
+            </Button>
+          </DialogClose>
+          {/* </DialogFooter> */}
         </form>
       </div>
     </>
@@ -341,3 +352,6 @@ function NewPiece() {
 }
 
 export default NewPiece;
+
+// DIALOG BOX NOT CLOSING ON SAVE BECAUSE OF HANDLE SUBMIT FUNCTION
+// REFER TO OPEN STATE PROP FOR POSSIBLE FIX
