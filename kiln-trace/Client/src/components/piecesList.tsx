@@ -9,17 +9,18 @@ import {
 } from "@/components/ui/table";
 
 import PieceEntry from "./pieceEntry";
+import { Piece } from "@/types/piece";
 
 function PiecesList() {
   // piece state variable for fetched data
-  const [pieces, setPieces] = useState([null]);
+  const [pieces, setPieces] = useState<Piece[] | null>(null);
 
   // on load, fetch pieces data from db and set to pieces array
   useEffect(() => {
     try {
       fetch("http://localhost:3000/pieces")
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: Piece[]) => {
           setPieces(data);
         })
         .catch((error) => console.log(error));
@@ -40,7 +41,7 @@ function PiecesList() {
               <TableHead className="text-black w-[100px]">Method</TableHead>
               <TableHead className="text-black w-[100px]">Form</TableHead>
               <TableHead className="text-black w-[100px]">Weight</TableHead>
-              <TableHead className="text-black w-[100px]">Dmensions</TableHead>
+              <TableHead className="text-black w-[150px]">Dmensions</TableHead>
               <TableHead className="text-black w-[100px]">Overglaze</TableHead>
               <TableHead className="text-black w-[100px]">Underglaze</TableHead>
               <TableHead className="text-black text-left">Notes</TableHead>
@@ -51,7 +52,8 @@ function PiecesList() {
           </TableHeader>
           {/* once piece data has loaded, map it */}
           <TableBody>
-            {pieces[0] && pieces.map((piece) => <PieceEntry piece={piece} />)}
+            {pieces &&
+              pieces.map((piece: Piece) => <PieceEntry piece={piece} />)}
           </TableBody>
         </Table>
       </div>

@@ -12,21 +12,26 @@ import { useState } from "react";
 
 function NewPiece() {
   // state variables
-  const [title, setTitle] = useState("");
-  const [stage, setStage] = useState("");
+  const [title, setTitle] = useState<string>();
+  // const [stage, setStage] = useState<string>(); /* this is to be changed  */
   // const [date, setDate] = useState<Date>();
-  const [method, setMethod] = useState("");
-  const [form, setForm] = useState("");
-  const [material, setMaterial] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [width, setWidth] = useState("");
-  const [length, setLength] = useState("");
-  const [overglaze, setOverglaze] = useState("");
-  const [underglaze, setUnderglaze] = useState("");
-  const [photos, setPhotos] = useState("");
-  const [artist, setArtist] = useState("");
-  const [notes, setNotes] = useState("");
+  const [formed, setFormed] = useState<boolean>();
+  const [trimmed, setTrimmed] = useState<boolean>();
+  const [bisqued, setBisqued] = useState<boolean>();
+  const [glazed, setGlazed] = useState<boolean>();
+  const [fired, setFired] = useState<boolean>();
+  const [method, setMethod] = useState<string>();
+  const [form, setForm] = useState<string>();
+  const [material, setMaterial] = useState<string>();
+  const [weight, setWeight] = useState<number>();
+  const [height, setHeight] = useState<number>();
+  const [width, setWidth] = useState<number>();
+  const [length, setLength] = useState<number>();
+  const [overglaze, setOverglaze] = useState<string[]>();
+  const [underglaze, setUnderglaze] = useState<string[]>();
+  const [photos, setPhotos] = useState<string>();
+  const [artist, setArtist] = useState<string>();
+  const [notes, setNotes] = useState<string>();
 
   //submit handling
   const handleSubmit = async (e: any) => {
@@ -36,7 +41,11 @@ function NewPiece() {
     // create piece object from form fields
     const piece = {
       title,
-      stage,
+      formed,
+      trimmed,
+      bisqued,
+      glazed,
+      fired,
       method,
       form,
       weight,
@@ -117,14 +126,14 @@ function NewPiece() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="formed"
                   id="formed-stage"
                   onChange={(e) => {
-                    setStage(e.target.value);
+                    setFormed(e.target.checked);
                     // setDate(new Date());
                   }}
-                  value={stage}
+                  checked={formed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="formed">Formed</label>
@@ -134,11 +143,11 @@ function NewPiece() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="trimmed"
                   id="trimmed-stage"
-                  onChange={(e) => setStage(e.target.value)}
-                  value={stage}
+                  onChange={(e) => setTrimmed(e.target.checked)}
+                  checked={trimmed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="trimmed">Trimmed</label>
@@ -148,11 +157,11 @@ function NewPiece() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
                 <input
-                  type="radio"
+                  type="checkbox"
                   name="bisqued"
                   id="bisqued-stage"
-                  onChange={(e) => setStage(e.target.value)}
-                  value={stage}
+                  onChange={(e) => setBisqued(e.target.checked)}
+                  checked={bisqued}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="bisqued">Bisqued</label>
@@ -162,28 +171,28 @@ function NewPiece() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
                 <input
-                  type="radio"
-                  name="glazed"
-                  id="glazed-stage"
-                  onChange={(e) => setStage(e.target.value)}
-                  value={stage}
+                  type="checkbox"
+                  name="fired"
+                  id="fired-stage"
+                  onChange={(e) => setGlazed(e.target.checked)}
+                  checked={glazed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
-                <label htmlFor="glazed">Glazed</label>
+                <label htmlFor="fired">Fired</label>
               </div>
               <DatePicker />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
                 <input
-                  type="radio"
-                  name="fired"
-                  id="fired-stage"
-                  onChange={(e) => setStage(e.target.value)}
-                  value={stage}
+                  type="checkbox"
+                  name="glazed"
+                  id="glazed-stage"
+                  onChange={(e) => setFired(e.target.checked)}
+                  checked={fired}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
-                <label htmlFor="fired">Fired</label>
+                <label htmlFor="glazed">Glazed</label>
               </div>
               <DatePicker />
             </div>
@@ -243,7 +252,7 @@ function NewPiece() {
                       type="text"
                       name="width"
                       id="width"
-                      onChange={(e) => setWidth(e.target.value)}
+                      onChange={(e) => setWidth(+e.target.value)}
                       value={width}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
@@ -254,7 +263,7 @@ function NewPiece() {
                       type="text"
                       name="length"
                       id="length"
-                      onChange={(e) => setLength(e.target.value)}
+                      onChange={(e) => setLength(+e.target.value)}
                       value={length}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
@@ -265,7 +274,7 @@ function NewPiece() {
                       type="text"
                       name="height"
                       id="height"
-                      onChange={(e) => setHeight(e.target.value)}
+                      onChange={(e) => setHeight(+e.target.value)}
                       value={height}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
@@ -276,7 +285,7 @@ function NewPiece() {
                       type="text"
                       name="weight"
                       id="weight"
-                      onChange={(e) => setWeight(e.target.value)}
+                      onChange={(e) => setWeight(+e.target.value)}
                       value={weight}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
@@ -297,7 +306,7 @@ function NewPiece() {
                       type="text"
                       name="overglaze"
                       id="overglaze"
-                      onChange={(e) => setOverglaze(e.target.value)}
+                      onChange={(e) => setOverglaze([e.target.value])}
                       value={overglaze}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
@@ -308,7 +317,7 @@ function NewPiece() {
                       type="text"
                       name="underglaze"
                       id="underglaze"
-                      onChange={(e) => setUnderglaze(e.target.value)}
+                      onChange={(e) => setUnderglaze([e.target.value])}
                       value={underglaze}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />

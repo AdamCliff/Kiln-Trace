@@ -1,10 +1,15 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 
-function PieceEntry({ piece }: any) {
-  const handleDelete = async (e: any, id: any) => {
+import { Piece } from "@/types/piece";
+
+function PieceEntry({ piece }: { piece: Piece }) {
+  console.log(piece);
+
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: String
+  ) => {
     e.preventDefault();
-    console.log(e);
-    console.log(id);
 
     try {
       const res = await fetch(`http://localhost:3000/delete-piece/${id}`, {
@@ -17,21 +22,36 @@ function PieceEntry({ piece }: any) {
     }
   };
 
+  const getCurrentStage = (piece: Piece) => {
+    if (piece.fired) return "Fired";
+    if (piece.glazed) return "Glazed";
+    if (piece.bisqued) return "Bisqued";
+    if (piece.trimmed) return "Trimmed";
+    if (piece.formed) return "Formed";
+    return "-";
+  };
+
   return (
     <>
       <TableRow className="trow">
         <TableCell className=" text-black font-medium">Today</TableCell>
         <TableCell className=" text-black font-medium">{piece.title}</TableCell>
-        <TableCell className=" text-black font-medium">{piece.stage}</TableCell>
+        <TableCell className=" text-black font-medium">
+          {getCurrentStage(piece)}
+        </TableCell>
         <TableCell className=" text-black font-medium">
           {piece.method}
         </TableCell>
         <TableCell className=" text-black font-medium">{piece.form}</TableCell>
         <TableCell className=" text-black font-medium">
-          {piece.weight}
+          {piece.weight && piece.weight.toString()}
         </TableCell>
         <TableCell className=" text-black font-medium">
-          blahxblahxblah
+          {piece.pieceLength ? piece.pieceLength : "-"}
+          {" x "}
+          {piece.width ? piece.width : "-"}
+          {" x "}
+          {piece.height ? piece.height : "-"}
         </TableCell>
         <TableCell className=" text-black font-medium">
           {piece.overglaze}
