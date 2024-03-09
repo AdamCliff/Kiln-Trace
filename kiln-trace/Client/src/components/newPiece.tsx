@@ -13,8 +13,6 @@ import { useState } from "react";
 function NewPiece() {
   // state variables
   const [title, setTitle] = useState<string>();
-  // const [stage, setStage] = useState<string>(); /* this is to be changed  */
-  // const [date, setDate] = useState<Date>();
   const [formed, setFormed] = useState<boolean>();
   const [trimmed, setTrimmed] = useState<boolean>();
   const [bisqued, setBisqued] = useState<boolean>();

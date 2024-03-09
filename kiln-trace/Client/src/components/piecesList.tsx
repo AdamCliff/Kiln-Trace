@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   Table,
   TableBody,
@@ -10,24 +8,10 @@ import {
 
 import PieceEntry from "./pieceEntry";
 import { Piece } from "@/types/piece";
+import { usePieceContext } from "@/context/piecesContext";
 
 function PiecesList() {
-  // piece state variable for fetched data
-  const [pieces, setPieces] = useState<Piece[] | null>(null);
-
-  // on load, fetch pieces data from db and set to pieces array
-  useEffect(() => {
-    try {
-      fetch("http://localhost:3000/pieces")
-        .then((res) => res.json())
-        .then((data: Piece[]) => {
-          setPieces(data);
-        })
-        .catch((error) => console.log(error));
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const { pieces } = usePieceContext();
 
   return (
     <>
