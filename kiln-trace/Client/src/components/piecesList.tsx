@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import {
   Table,
   TableBody,
@@ -9,9 +11,29 @@ import {
 import PieceEntry from "./pieceEntry";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
+import { actionTypes } from "@/context/actionEnums";
 
 function PiecesList() {
-  const { pieces } = usePieceContext();
+  const { pieces, dispatch } = usePieceContext();
+
+  const shouldRun = useRef(true);
+  useEffect(() => {
+    if (shouldRun) {
+      shouldRun.current = false;
+      const fetchData = async () => {
+        try {
+          const res: Response = await fetch("http://localhost:3000/pieces");
+          const data: Piece[] | undefined = await res.json();
+
+          dispatch({ type: actionTypes.LOAD_PIECES, payload: data });
+        } catch (error) {
+          console.error(`Failed to fetch piece list: ${error}`);
+        }
+      };
+
+      fetchData();
+    }
+  }, [dispatch]);
 
   return (
     <>

@@ -6,12 +6,12 @@ function PieceData() {
   return (
     <>
       <div id="pieces-list-container" className="p-4 h-full w-full">
-        <PiecesListHeader />
-        <div id="pieces-list" className="h-[92.5%]">
-          <PieceContextProvider>
+        <PieceContextProvider>
+          <PiecesListHeader />
+          <div id="pieces-list" className="h-[92.5%]">
             <PiecesList />
-          </PieceContextProvider>
-        </div>
+          </div>
+        </PieceContextProvider>
       </div>
     </>
   );

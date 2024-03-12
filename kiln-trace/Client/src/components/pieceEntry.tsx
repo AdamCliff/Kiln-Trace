@@ -1,9 +1,11 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 
 import { Piece } from "@/types/piece";
+import { usePieceContext } from "@/context/piecesContext";
+import { actionTypes } from "@/context/actionEnums";
 
 function PieceEntry({ piece }: { piece: Piece }) {
-  console.log(piece);
+  const { dispatch } = usePieceContext();
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -15,8 +17,9 @@ function PieceEntry({ piece }: { piece: Piece }) {
       const res = await fetch(`http://localhost:3000/delete-piece/${id}`, {
         method: "DELETE",
       });
-      const json = await res.json();
-      console.log(json);
+      const data = await res.json();
+
+      dispatch({ type: actionTypes.REMOVE_PIECE, payload: data });
     } catch (error) {
       console.log(error);
     }

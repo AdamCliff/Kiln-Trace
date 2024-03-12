@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 
+import { usePieceContext } from "../context/piecesContext";
+import { actionTypes } from "@/context/actionEnums";
+
 function NewPiece() {
   // state variables
   const [title, setTitle] = useState<string>();
@@ -30,6 +33,8 @@ function NewPiece() {
   const [photos, setPhotos] = useState<string>();
   const [artist, setArtist] = useState<string>();
   const [notes, setNotes] = useState<string>();
+
+  const { dispatch } = usePieceContext();
 
   //submit handling
   const handleSubmit = async (e: any) => {
@@ -66,10 +71,12 @@ function NewPiece() {
       });
 
       //   await response
-      const json = await res.json();
-      console.log(json);
+      const data = await res.json();
+
+      // dispatch new piece
+      dispatch({ type: actionTypes.ADD_PIECE, payload: data });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
