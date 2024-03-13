@@ -52,6 +52,9 @@ function PiecesList() {
               <TableHead className="text-black w-[100px]">Underglaze</TableHead>
               <TableHead className="text-black text-left">Notes</TableHead>
               <TableHead className="text-black text-right w-min">
+                Edit
+              </TableHead>
+              <TableHead className="text-black text-right w-min">
                 Delete
               </TableHead>
             </TableRow>

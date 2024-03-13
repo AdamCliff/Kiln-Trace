@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
+
 import { TableCell, TableRow } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 import { Piece } from "@/types/piece";
+import EditPiece from "./editPiece";
 import { usePieceContext } from "@/context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
 
 function PieceEntry({ piece }: { piece: Piece }) {
   const { dispatch } = usePieceContext();
+
+  const [activePiece, setActivePiece] = useState<Piece>();
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -24,6 +36,27 @@ function PieceEntry({ piece }: { piece: Piece }) {
       console.log(error);
     }
   };
+
+  // const handleEdit = async (
+  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  //   id: String
+  // ) => {
+  //   e.preventDefault();
+
+  //   console.log(piece);
+  //   console.log(id);
+
+  //   try {
+  //     const res = await fetch(`http://localhost:3000/pieces/${id}`, {
+  //       method: "PUT",
+  //     });
+  //     const data = await res.json();
+
+  //     dispatch({ type: actionTypes.EDIT_PIECE, payload: data });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const getCurrentStage = (piece: Piece) => {
     if (piece.fired) return "Fired";
@@ -64,6 +97,29 @@ function PieceEntry({ piece }: { piece: Piece }) {
         </TableCell>
         <TableCell className="text-black font-medium text-left">
           {piece.notes}
+        </TableCell>
+        <TableCell className="text-black font-medium text-right">
+          <Dialog>
+            <DialogTrigger onClick={() => setActivePiece(piece)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
+            </DialogTrigger>
+            <DialogContent>
+              <EditPiece piece={activePiece} _id={piece._id} />
+            </DialogContent>
+          </Dialog>
         </TableCell>
         <TableCell className="text-black font-medium text-right">
           <button

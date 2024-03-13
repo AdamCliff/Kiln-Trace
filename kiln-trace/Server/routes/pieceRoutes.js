@@ -5,7 +5,7 @@ const router = express.Router();
 const {
   createPiece,
   getPieces,
-  updatePiece,
+  editPiece,
   deletePiece,
 } = require("../controllers/pieceController");
 
@@ -16,6 +16,9 @@ router.post("/new-piece", createPiece);
 router.get("/pieces", getPieces);
 
 // update a piece
+router.put("/pieces/:id", (req, res) => {
+  editPiece(req, res);
+});
 
 // delete a piece
 router.delete("/delete-piece/:id", (req, res) => {

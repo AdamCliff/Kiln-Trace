@@ -65,8 +65,11 @@ const createPiece = async (req, res) => {
 };
 
 // update piece
-const updatePiece = async (req, res) => {
+const editPiece = async (req, res) => {
   try {
+    const { id } = req.params;
+    const updatedPiece = await Piece.findByIdAndUpdate(id, req.body);
+    res.status(200).json(updatedPiece);
   } catch (error) {
     console.log(error);
   }
@@ -83,4 +86,4 @@ const deletePiece = async (req, res) => {
   }
 };
 
-module.exports = { createPiece, getPieces, updatePiece, deletePiece };
+module.exports = { createPiece, getPieces, editPiece, deletePiece };

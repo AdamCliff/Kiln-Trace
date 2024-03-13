@@ -13,26 +13,27 @@ import { useState } from "react";
 import { usePieceContext } from "../context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
 
-function NewPiece() {
+// change type later
+function EditPiece({ piece, _id }: { piece: any; _id: string }) {
   // state variables
-  const [title, setTitle] = useState<string>();
-  const [formed, setFormed] = useState<boolean>();
-  const [trimmed, setTrimmed] = useState<boolean>();
-  const [bisqued, setBisqued] = useState<boolean>();
-  const [glazed, setGlazed] = useState<boolean>();
-  const [fired, setFired] = useState<boolean>();
-  const [method, setMethod] = useState<string>();
-  const [form, setForm] = useState<string>();
-  const [material, setMaterial] = useState<string>();
-  const [weight, setWeight] = useState<number>();
-  const [height, setHeight] = useState<number>();
-  const [width, setWidth] = useState<number>();
-  const [pieceLength, setPieceLength] = useState<number>();
-  const [overglaze, setOverglaze] = useState<string[]>();
-  const [underglaze, setUnderglaze] = useState<string[]>();
-  const [photos, setPhotos] = useState<string>();
-  const [artist, setArtist] = useState<string>();
-  const [notes, setNotes] = useState<string>();
+  const [title, setTitle] = useState<string>(piece.title);
+  const [formed, setFormed] = useState<boolean>(piece.formed);
+  const [trimmed, setTrimmed] = useState<boolean>(piece.trimmed);
+  const [bisqued, setBisqued] = useState<boolean>(piece.bisqued);
+  const [glazed, setGlazed] = useState<boolean>(piece.glazed);
+  const [fired, setFired] = useState<boolean>(piece.fired);
+  const [method, setMethod] = useState<string>(piece.method);
+  const [form, setForm] = useState<string>(piece.form);
+  const [material, setMaterial] = useState<string>(piece.material);
+  const [weight, setWeight] = useState<number>(piece.weight);
+  const [height, setHeight] = useState<number>(piece.height);
+  const [width, setWidth] = useState<number>(piece.width);
+  const [pieceLength, setPieceLength] = useState<number>(piece.pieceLength);
+  const [overglaze, setOverglaze] = useState<string[]>(piece.overglaze);
+  const [underglaze, setUnderglaze] = useState<string[]>(piece.underglaze);
+  const [photos, setPhotos] = useState<string>(piece.photos);
+  const [artist, setArtist] = useState<string>(piece.artist);
+  const [notes, setNotes] = useState<string>(piece.notes);
 
   const { dispatch } = usePieceContext();
 
@@ -54,7 +55,7 @@ function NewPiece() {
       weight,
       height,
       width,
-      pieceLength,
+      length,
       overglaze,
       underglaze,
       photos,
@@ -63,20 +64,16 @@ function NewPiece() {
     };
 
     try {
-      // try post new piece
-      const res = await fetch("http://localhost:3000/new-piece", {
-        method: "POST",
+      const res = await fetch(`http://localhost:3000/pieces/${_id}`, {
+        method: "PUT",
         body: JSON.stringify(piece),
         headers: { "Content-Type": "application/json" },
       });
-
-      //   await response
       const data = await res.json();
 
-      // dispatch new piece
-      dispatch({ type: actionTypes.ADD_PIECE, payload: data });
+      dispatch({ type: actionTypes.EDIT_PIECE, payload: data });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -84,11 +81,11 @@ function NewPiece() {
     <>
       <div id="new-piece-form" className="">
         <DialogHeader className="mb-4">
-          <DialogTitle>New Piece</DialogTitle>
+          <DialogTitle>Edit Piece</DialogTitle>
         </DialogHeader>
         <form
-          action="/new-piece"
-          method="post"
+          action={`/pieces/${_id}`}
+          method="put"
           className="flex flex-col gap-6 w-full h-[95%]"
         >
           <div className="flex gap-2">
@@ -203,8 +200,12 @@ function NewPiece() {
             </div>
           </div>
           {/* details section */}
-          <Accordion type="single" collapsible>
-            <AccordionItem value="about">
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={form || method || material ? "details" : ""}
+          >
+            <AccordionItem value="details">
               <AccordionTrigger>Form, Method, Material</AccordionTrigger>
               <AccordionContent>
                 <div className="flex gap-2">
@@ -246,7 +247,13 @@ function NewPiece() {
             </AccordionItem>
           </Accordion>
           {/* dimensions section */}
-          <Accordion type="single" collapsible>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={
+              weight || height || pieceLength || width ? "dimensions" : ""
+            }
+          >
             <AccordionItem value="dimensions">
               <AccordionTrigger>Dimensions, Weight</AccordionTrigger>
               <AccordionContent>
@@ -341,25 +348,23 @@ function NewPiece() {
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
           </div>
-          {/* <DialogFooter> */}
           <DialogClose asChild>
             <Button
               onClick={handleSubmit}
               type="button"
               variant="secondary"
-              className="self-center bg-secondary text-background h-min w-min p-4 rounded-xl"
+              className="m-auto bg-secondary text-background h-min w-min p-4 rounded-xl"
             >
               Save
             </Button>
           </DialogClose>
-          {/* </DialogFooter> */}
         </form>
       </div>
     </>
   );
 }
 
-export default NewPiece;
+export default EditPiece;
 
 // DIALOG BOX NOT CLOSING ON SAVE BECAUSE OF HANDLE SUBMIT FUNCTION
 // REFER TO OPEN STATE PROP FOR POSSIBLE FIX

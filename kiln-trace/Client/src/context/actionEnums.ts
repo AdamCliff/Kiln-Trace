@@ -12,5 +12,6 @@ export enum actionTypes {
 export type actions =
   | { type: actionTypes.ADD_PIECE; payload: any }
   | { type: actionTypes.REMOVE_PIECE; payload: any }
+  | { type: actionTypes.EDIT_PIECE; payload: any }
   | { type: actionTypes.LOAD_PIECES; payload: Piece[] }
   | { type: actionTypes.SET_LOADING; payload: boolean };

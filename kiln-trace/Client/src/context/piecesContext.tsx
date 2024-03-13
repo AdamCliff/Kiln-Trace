@@ -55,6 +55,15 @@ export const piecesReducer = (
         ),
       };
     }
+    case actionTypes.EDIT_PIECE: {
+      state.pieces[
+        state.pieces.findIndex((piece) => piece._id === action.payload._id)
+      ] = action.payload;
+      console.log(state.pieces);
+      return {
+        pieces: state.pieces,
+      };
+    }
     default:
       return state;
   }
