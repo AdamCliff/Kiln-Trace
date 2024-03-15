@@ -25,6 +25,7 @@ function EditPiece({
 }) {
   // piece object state variables
   const [title, setTitle] = useState<string>(piece.title);
+  const [date, setDate] = useState<Date>(piece.date);
   const [formed, setFormed] = useState<boolean>(piece.formed);
   const [trimmed, setTrimmed] = useState<boolean>(piece.trimmed);
   const [bisqued, setBisqued] = useState<boolean>(piece.bisqued);

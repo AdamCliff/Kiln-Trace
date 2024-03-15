@@ -45,7 +45,7 @@ function PieceEntry({ piece }: { piece: Piece }) {
   return (
     <>
       <TableRow className="trow">
-        <TableCell className=" text-black font-medium">Today</TableCell>
+        <TableCell className=" text-black font-medium">{piece.date}</TableCell>
         <TableCell className=" text-black font-medium">{piece.title}</TableCell>
         <TableCell className=" text-black font-medium">
           {getCurrentStage(piece)}

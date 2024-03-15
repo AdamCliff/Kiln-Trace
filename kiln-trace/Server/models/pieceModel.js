@@ -11,20 +11,40 @@ const PieceSchema = new Schema(
       type: Boolean,
       required: false,
     },
+    formedDate: {
+      type: Date,
+      required: false,
+    },
     trimmed: {
       type: Boolean,
+      required: false,
+    },
+    trimmedDate: {
+      type: Date,
       required: false,
     },
     bisqued: {
       type: Boolean,
       required: false,
     },
+    bisquedDate: {
+      type: Date,
+      required: false,
+    },
     glazed: {
       type: Boolean,
       required: false,
     },
+    glazedDate: {
+      type: Date,
+      required: false,
+    },
     fired: {
       type: Boolean,
+      required: false,
+    },
+    firedDate: {
+      type: Date,
       required: false,
     },
     method: {

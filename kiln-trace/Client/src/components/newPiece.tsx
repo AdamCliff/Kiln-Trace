@@ -20,11 +20,16 @@ function NewPiece({
 }) {
   // state variables
   const [title, setTitle] = useState<string>();
-  const [formed, setFormed] = useState<boolean>();
-  const [trimmed, setTrimmed] = useState<boolean>();
-  const [bisqued, setBisqued] = useState<boolean>();
-  const [glazed, setGlazed] = useState<boolean>();
-  const [fired, setFired] = useState<boolean>();
+  const [formed, setFormed] = useState<boolean>(false);
+  const [formedDate, setFormedDate] = useState<Date>();
+  const [trimmed, setTrimmed] = useState<boolean>(false);
+  const [trimmedDate, setTrimmedDate] = useState<Date>();
+  const [bisqued, setBisqued] = useState<boolean>(false);
+  const [bisquedDate, setBisquedDate] = useState<Date>();
+  const [glazed, setGlazed] = useState<boolean>(false);
+  const [glazedDate, setGlazedDate] = useState<Date>();
+  const [fired, setFired] = useState<boolean>(false);
+  const [firedDate, setFiredDate] = useState<Date>();
   const [method, setMethod] = useState<string>();
   const [form, setForm] = useState<string>();
   const [material, setMaterial] = useState<string>();
@@ -49,10 +54,15 @@ function NewPiece({
     const piece = {
       title,
       formed,
+      formedDate,
       trimmed,
+      trimmedDate,
       bisqued,
+      bisquedDate,
       glazed,
+      glazedDate,
       fired,
+      firedDate,
       method,
       form,
       weight,
@@ -140,15 +150,20 @@ function NewPiece({
                   name="formed"
                   id="formed-stage"
                   onChange={(e) => {
-                    setFormed(e.target.checked);
-                    // setDate(new Date());
+                    const isChecked = e.target.checked;
+                    setFormed(isChecked);
+                    setFormedDate(isChecked ? new Date() : undefined);
                   }}
                   checked={formed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="formed">Formed</label>
               </div>
-              <DatePicker /* newDate={date} */ />
+              {formed ? (
+                <DatePicker newDate={formedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -156,13 +171,21 @@ function NewPiece({
                   type="checkbox"
                   name="trimmed"
                   id="trimmed-stage"
-                  onChange={(e) => setTrimmed(e.target.checked)}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setTrimmed(isChecked);
+                    setTrimmedDate(isChecked ? new Date() : undefined);
+                  }}
                   checked={trimmed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="trimmed">Trimmed</label>
               </div>
-              <DatePicker />
+              {trimmed ? (
+                <DatePicker newDate={trimmedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -170,13 +193,21 @@ function NewPiece({
                   type="checkbox"
                   name="bisqued"
                   id="bisqued-stage"
-                  onChange={(e) => setBisqued(e.target.checked)}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setBisqued(isChecked);
+                    setBisquedDate(isChecked ? new Date() : undefined);
+                  }}
                   checked={bisqued}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="bisqued">Bisqued</label>
               </div>
-              <DatePicker />
+              {bisqued ? (
+                <DatePicker newDate={bisquedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -184,13 +215,21 @@ function NewPiece({
                   type="checkbox"
                   name="glazed"
                   id="glazed-stage"
-                  onChange={(e) => setFired(e.target.checked)}
-                  checked={fired}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setGlazed(isChecked);
+                    setGlazedDate(isChecked ? new Date() : undefined);
+                  }}
+                  checked={glazed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="glazed">Glazed</label>
               </div>
-              <DatePicker />
+              {glazed ? (
+                <DatePicker newDate={glazedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -198,13 +237,21 @@ function NewPiece({
                   type="checkbox"
                   name="fired"
                   id="fired-stage"
-                  onChange={(e) => setGlazed(e.target.checked)}
-                  checked={glazed}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setFired(isChecked);
+                    setFiredDate(isChecked ? new Date() : undefined);
+                  }}
+                  checked={fired}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="fired">Fired</label>
               </div>
-              <DatePicker />
+              {fired ? (
+                <DatePicker newDate={firedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
           </div>
           {/* details section */}

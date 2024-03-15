@@ -16,6 +16,7 @@ export interface Piece {
   overglaze: string[];
   photos: string;
   title: string;
+  date: Date;
   underglaze: string[];
   __v: number;
   _id: string;
