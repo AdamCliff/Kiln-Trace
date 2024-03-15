@@ -13,7 +13,11 @@ import { useState } from "react";
 import { usePieceContext } from "../context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
 
-function NewPiece() {
+function NewPiece({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   // state variables
   const [title, setTitle] = useState<string>();
   const [formed, setFormed] = useState<boolean>();
@@ -75,6 +79,7 @@ function NewPiece() {
 
       // dispatch new piece
       dispatch({ type: actionTypes.ADD_PIECE, payload: data });
+      setOpen(false);
     } catch (error) {
       console.error(error);
     }
@@ -177,20 +182,6 @@ function NewPiece() {
               <div className="flex justify-between gap-2">
                 <input
                   type="checkbox"
-                  name="fired"
-                  id="fired-stage"
-                  onChange={(e) => setGlazed(e.target.checked)}
-                  checked={glazed}
-                  className="border border-secondary rounded-[6px] px-2 py-1"
-                />
-                <label htmlFor="fired">Fired</label>
-              </div>
-              <DatePicker />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between gap-2">
-                <input
-                  type="checkbox"
                   name="glazed"
                   id="glazed-stage"
                   onChange={(e) => setFired(e.target.checked)}
@@ -198,6 +189,20 @@ function NewPiece() {
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="glazed">Glazed</label>
+              </div>
+              <DatePicker />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between gap-2">
+                <input
+                  type="checkbox"
+                  name="fired"
+                  id="fired-stage"
+                  onChange={(e) => setGlazed(e.target.checked)}
+                  checked={glazed}
+                  className="border border-secondary rounded-[6px] px-2 py-1"
+                />
+                <label htmlFor="fired">Fired</label>
               </div>
               <DatePicker />
             </div>

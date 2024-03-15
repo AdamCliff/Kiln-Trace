@@ -14,8 +14,16 @@ import { usePieceContext } from "../context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
 
 // change type later
-function EditPiece({ piece, _id }: { piece: any; _id: string }) {
-  // state variables
+function EditPiece({
+  setOpen,
+  piece,
+  _id,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  piece: any;
+  _id: string;
+}) {
+  // piece object state variables
   const [title, setTitle] = useState<string>(piece.title);
   const [formed, setFormed] = useState<boolean>(piece.formed);
   const [trimmed, setTrimmed] = useState<boolean>(piece.trimmed);
@@ -38,7 +46,7 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
   const { dispatch } = usePieceContext();
 
   //submit handling
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     // prevent refresh
     e.preventDefault();
 
@@ -52,10 +60,11 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
       fired,
       method,
       form,
+      material,
       weight,
       height,
       width,
-      length,
+      pieceLength,
       overglaze,
       underglaze,
       photos,
@@ -72,8 +81,9 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
       const data = await res.json();
 
       dispatch({ type: actionTypes.EDIT_PIECE, payload: data });
+      setOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -174,20 +184,6 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
               <div className="flex justify-between gap-2">
                 <input
                   type="checkbox"
-                  name="fired"
-                  id="fired-stage"
-                  onChange={(e) => setGlazed(e.target.checked)}
-                  checked={glazed}
-                  className="border border-secondary rounded-[6px] px-2 py-1"
-                />
-                <label htmlFor="fired">Fired</label>
-              </div>
-              <DatePicker />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between gap-2">
-                <input
-                  type="checkbox"
                   name="glazed"
                   id="glazed-stage"
                   onChange={(e) => setFired(e.target.checked)}
@@ -195,6 +191,20 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="glazed">Glazed</label>
+              </div>
+              <DatePicker />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between gap-2">
+                <input
+                  type="checkbox"
+                  name="fired"
+                  id="fired-stage"
+                  onChange={(e) => setGlazed(e.target.checked)}
+                  checked={glazed}
+                  className="border border-secondary rounded-[6px] px-2 py-1"
+                />
+                <label htmlFor="fired">Fired</label>
               </div>
               <DatePicker />
             </div>
@@ -307,7 +317,11 @@ function EditPiece({ piece, _id }: { piece: any; _id: string }) {
             </AccordionItem>
           </Accordion>
           {/* glazes section */}
-          <Accordion type="single" collapsible>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={overglaze || underglaze ? "glazes" : ""}
+          >
             <AccordionItem value="glazes">
               <AccordionTrigger>Glazes</AccordionTrigger>
               <AccordionContent>

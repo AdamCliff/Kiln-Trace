@@ -18,7 +18,7 @@ function PiecesList() {
 
   const shouldRun = useRef(true);
   useEffect(() => {
-    if (shouldRun) {
+    if (shouldRun.current) {
       shouldRun.current = false;
       const fetchData = async () => {
         try {
@@ -33,7 +33,8 @@ function PiecesList() {
 
       fetchData();
     }
-  }, [dispatch]);
+  }, [pieces]);
+  // ^was dispatch
 
   return (
     <>
@@ -62,7 +63,9 @@ function PiecesList() {
           {/* once piece data has loaded, map it */}
           <TableBody>
             {pieces &&
-              pieces.map((piece: Piece) => <PieceEntry piece={piece} />)}
+              pieces.map((piece: Piece) => (
+                <PieceEntry key={piece._id} piece={piece} />
+              ))}
           </TableBody>
         </Table>
       </div>

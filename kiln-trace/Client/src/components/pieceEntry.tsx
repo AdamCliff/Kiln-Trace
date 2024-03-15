@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { TableCell, TableRow } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { Piece } from "@/types/piece";
 import EditPiece from "./editPiece";
@@ -18,6 +12,8 @@ function PieceEntry({ piece }: { piece: Piece }) {
   const { dispatch } = usePieceContext();
 
   const [activePiece, setActivePiece] = useState<Piece>();
+  // dialog state variable
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -36,27 +32,6 @@ function PieceEntry({ piece }: { piece: Piece }) {
       console.log(error);
     }
   };
-
-  // const handleEdit = async (
-  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  //   id: String
-  // ) => {
-  //   e.preventDefault();
-
-  //   console.log(piece);
-  //   console.log(id);
-
-  //   try {
-  //     const res = await fetch(`http://localhost:3000/pieces/${id}`, {
-  //       method: "PUT",
-  //     });
-  //     const data = await res.json();
-
-  //     dispatch({ type: actionTypes.EDIT_PIECE, payload: data });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const getCurrentStage = (piece: Piece) => {
     if (piece.fired) return "Fired";
@@ -99,7 +74,7 @@ function PieceEntry({ piece }: { piece: Piece }) {
           {piece.notes}
         </TableCell>
         <TableCell className="text-black font-medium text-right">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger onClick={() => setActivePiece(piece)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +92,11 @@ function PieceEntry({ piece }: { piece: Piece }) {
               </svg>
             </DialogTrigger>
             <DialogContent>
-              <EditPiece piece={activePiece} _id={piece._id} />
+              <EditPiece
+                setOpen={setOpen}
+                piece={activePiece}
+                _id={piece._id}
+              />
             </DialogContent>
           </Dialog>
         </TableCell>

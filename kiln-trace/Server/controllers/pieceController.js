@@ -68,7 +68,9 @@ const createPiece = async (req, res) => {
 const editPiece = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedPiece = await Piece.findByIdAndUpdate(id, req.body);
+    const updatedPiece = await Piece.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     res.status(200).json(updatedPiece);
   } catch (error) {
     console.log(error);

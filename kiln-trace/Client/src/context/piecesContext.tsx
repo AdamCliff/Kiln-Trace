@@ -37,7 +37,6 @@ export const piecesReducer = (
   switch (action.type) {
     case actionTypes.LOAD_PIECES: {
       return {
-        ...state,
         pieces: action.payload,
       };
     }
@@ -56,12 +55,10 @@ export const piecesReducer = (
       };
     }
     case actionTypes.EDIT_PIECE: {
-      state.pieces[
-        state.pieces.findIndex((piece) => piece._id === action.payload._id)
-      ] = action.payload;
-      console.log(state.pieces);
       return {
-        pieces: state.pieces,
+        pieces: state.pieces.map((piece) =>
+          piece._id === action.payload._id ? action.payload : piece
+        ),
       };
     }
     default:

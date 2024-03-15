@@ -1,8 +1,13 @@
+import { useState } from "react";
+
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import NewPiece from "./newPiece";
 
 function PieceListHeader() {
+  // dialog open state
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
     <>
       <header
@@ -12,7 +17,7 @@ function PieceListHeader() {
         <h2 id="piece-list-title" className="text-3xl text-text">
           Pieces
         </h2>
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +35,7 @@ function PieceListHeader() {
             </svg>
           </DialogTrigger>
           <DialogContent>
-            <NewPiece />
+            <NewPiece setOpen={setOpen} />
           </DialogContent>
         </Dialog>
         <div
