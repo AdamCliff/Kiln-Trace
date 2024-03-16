@@ -16,6 +16,11 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    screens: {
+      mdb: { max: "1470px" },
+      md: "1470px",
+      lg: "1800px",
+    },
     extend: {
       colors: {
         /* base colors */

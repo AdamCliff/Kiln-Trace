@@ -31,7 +31,7 @@ function DatePicker({ newDate }: { newDate: Date | undefined }) {
           )}
         >
           <CalendarIcon className="w-4 h-4" />
-          {date ? format(date, "MM-dd-yy") : <span></span>}
+          {date ? format(date, "MM/dd/yy") : <span></span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

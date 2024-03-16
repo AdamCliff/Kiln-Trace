@@ -25,12 +25,24 @@ function EditPiece({
 }) {
   // piece object state variables
   const [title, setTitle] = useState<string>(piece.title);
-  const [date, setDate] = useState<Date>(piece.date);
   const [formed, setFormed] = useState<boolean>(piece.formed);
+  const [formedDate, setFormedDate] = useState<Date | undefined>(
+    piece.formedDate
+  );
   const [trimmed, setTrimmed] = useState<boolean>(piece.trimmed);
+  const [trimmedDate, setTrimmedDate] = useState<Date | undefined>(
+    piece.trimmedDate
+  );
   const [bisqued, setBisqued] = useState<boolean>(piece.bisqued);
+  const [bisquedDate, setBisquedDate] = useState<Date | undefined>(
+    piece.bisquedDate
+  );
   const [glazed, setGlazed] = useState<boolean>(piece.glazed);
+  const [glazedDate, setGlazedDate] = useState<Date | undefined>(
+    piece.glazedDate
+  );
   const [fired, setFired] = useState<boolean>(piece.fired);
+  const [firedDate, setFiredDate] = useState<Date | undefined>(piece.firedDate);
   const [method, setMethod] = useState<string>(piece.method);
   const [form, setForm] = useState<string>(piece.form);
   const [material, setMaterial] = useState<string>(piece.material);
@@ -143,15 +155,20 @@ function EditPiece({
                   name="formed"
                   id="formed-stage"
                   onChange={(e) => {
-                    setFormed(e.target.checked);
-                    // setDate(new Date());
+                    const isChecked = e.target.checked;
+                    setFormed(isChecked);
+                    setFormedDate(isChecked ? new Date() : undefined);
                   }}
                   checked={formed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="formed">Formed</label>
               </div>
-              <DatePicker /* newDate={date} */ />
+              {formed ? (
+                <DatePicker newDate={formedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -159,13 +176,21 @@ function EditPiece({
                   type="checkbox"
                   name="trimmed"
                   id="trimmed-stage"
-                  onChange={(e) => setTrimmed(e.target.checked)}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setTrimmed(isChecked);
+                    setTrimmedDate(isChecked ? new Date() : undefined);
+                  }}
                   checked={trimmed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="trimmed">Trimmed</label>
               </div>
-              <DatePicker />
+              {trimmed ? (
+                <DatePicker newDate={trimmedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -173,13 +198,21 @@ function EditPiece({
                   type="checkbox"
                   name="bisqued"
                   id="bisqued-stage"
-                  onChange={(e) => setBisqued(e.target.checked)}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setBisqued(isChecked);
+                    setBisquedDate(isChecked ? new Date() : undefined);
+                  }}
                   checked={bisqued}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="bisqued">Bisqued</label>
               </div>
-              <DatePicker />
+              {bisqued ? (
+                <DatePicker newDate={bisquedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -187,13 +220,21 @@ function EditPiece({
                   type="checkbox"
                   name="glazed"
                   id="glazed-stage"
-                  onChange={(e) => setFired(e.target.checked)}
-                  checked={fired}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setGlazed(isChecked);
+                    setGlazedDate(isChecked ? new Date() : undefined);
+                  }}
+                  checked={glazed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="glazed">Glazed</label>
               </div>
-              <DatePicker />
+              {glazed ? (
+                <DatePicker newDate={glazedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -201,13 +242,21 @@ function EditPiece({
                   type="checkbox"
                   name="fired"
                   id="fired-stage"
-                  onChange={(e) => setGlazed(e.target.checked)}
-                  checked={glazed}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setFired(isChecked);
+                    setFiredDate(isChecked ? new Date() : undefined);
+                  }}
+                  checked={fired}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="fired">Fired</label>
               </div>
-              <DatePicker />
+              {fired ? (
+                <DatePicker newDate={firedDate} />
+              ) : (
+                <DatePicker newDate={undefined} />
+              )}
             </div>
           </div>
           {/* details section */}
@@ -321,7 +370,7 @@ function EditPiece({
           <Accordion
             type="single"
             collapsible
-            defaultValue={overglaze || underglaze ? "glazes" : ""}
+            defaultValue={overglaze[0] || underglaze[0] ? "glazes" : ""}
           >
             <AccordionItem value="glazes">
               <AccordionTrigger>Glazes</AccordionTrigger>

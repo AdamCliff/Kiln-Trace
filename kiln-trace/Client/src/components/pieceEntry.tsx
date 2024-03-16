@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
 import EditPiece from "./editPiece";
@@ -42,38 +43,66 @@ function PieceEntry({ piece }: { piece: Piece }) {
     return "-";
   };
 
+  const getCurrentStageDate = (piece: Piece) => {
+    let date: Date | undefined = undefined;
+    if (piece.fired) date = new Date(piece.firedDate);
+    if (piece.glazed) date = new Date(piece.glazedDate);
+    if (piece.bisqued) date = new Date(piece.bisquedDate);
+    if (piece.trimmed) date = new Date(piece.trimmedDate);
+    if (piece.formed) date = new Date(piece.formedDate);
+    let formattedDate: String | undefined;
+    date
+      ? (formattedDate = format(date, "MM/dd/yy"))
+      : (formattedDate = undefined);
+    return formattedDate;
+  };
+
   return (
     <>
       <TableRow className="trow">
-        <TableCell className=" text-black font-medium">{piece.date}</TableCell>
-        <TableCell className=" text-black font-medium">{piece.title}</TableCell>
-        <TableCell className=" text-black font-medium">
+        <TableCell className=" text-black font-medium mdb:w-[100px] md:w-fit lg:w-[100px]">
+          {getCurrentStageDate(piece)
+            ? getCurrentStageDate(piece)
+            : "-- / -- / --"}
+        </TableCell>
+        <TableCell className=" text-black font-medium mdb:w-[100px] md:w-fit lg:w-[100px]">
+          {piece.title ? piece.title : "-"}
+        </TableCell>
+        <TableCell className="text-black font-medium text-left mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.artist ? piece.artist : "-"}
+        </TableCell>
+        <TableCell className=" text-black font-medium mdb:w-[100px] md:w-fit lg:w-[100px]">
           {getCurrentStage(piece)}
         </TableCell>
-        <TableCell className=" text-black font-medium">
-          {piece.method}
+        <TableCell className=" text-black font-medium mdb:w-[100px] md:w-fit lg:w-[100px]">
+          {piece.form ? piece.form : "-"}
         </TableCell>
-        <TableCell className=" text-black font-medium">{piece.form}</TableCell>
-        <TableCell className=" text-black font-medium">
-          {piece.weight && piece.weight.toString()}
+        <TableCell className=" text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.method ? piece.method : "-"}
         </TableCell>
-        <TableCell className=" text-black font-medium">
+        <TableCell className=" text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.material ? piece.material : "-"}
+        </TableCell>
+        <TableCell className=" text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.weight ? piece.weight.toString() : "-"}
+        </TableCell>
+        <TableCell className=" text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
           {piece.pieceLength ? piece.pieceLength : "-"}
           {" x "}
           {piece.width ? piece.width : "-"}
           {" x "}
           {piece.height ? piece.height : "-"}
         </TableCell>
-        <TableCell className=" text-black font-medium">
-          {piece.overglaze}
+        <TableCell className=" text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.overglaze[0] ? piece.overglaze : "-"}
         </TableCell>
-        <TableCell className="text-black font-medium">
-          {piece.underglaze}
+        <TableCell className="text-black font-medium mdb:hidden md:w-fit lg:w-[100px]">
+          {piece.underglaze[0] ? piece.underglaze : "-"}
         </TableCell>
         <TableCell className="text-black font-medium text-left">
-          {piece.notes}
+          {piece.notes ? piece.notes : "-"}
         </TableCell>
-        <TableCell className="text-black font-medium text-right">
+        <TableCell className="text-black font-medium text-center  md:w-fit lg:w-[100px]">
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger onClick={() => setActivePiece(piece)}>
               <svg
@@ -100,7 +129,7 @@ function PieceEntry({ piece }: { piece: Piece }) {
             </DialogContent>
           </Dialog>
         </TableCell>
-        <TableCell className="text-black font-medium text-right">
+        <TableCell className="text-black font-medium text-center md:w-fit lg:w-[100px]">
           <button
             onClick={(e) => {
               handleDelete(e, piece._id);

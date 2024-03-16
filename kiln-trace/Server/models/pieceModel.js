@@ -47,11 +47,15 @@ const PieceSchema = new Schema(
       type: Date,
       required: false,
     },
+    form: {
+      type: String,
+      required: false,
+    },
     method: {
       type: String,
       required: false,
     },
-    form: {
+    material: {
       type: String,
       required: false,
     },
