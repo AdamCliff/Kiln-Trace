@@ -23,7 +23,7 @@ function PieceEntry({ piece }: { piece: Piece }) {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3000/delete-piece/${id}`, {
+      const res = await fetch(`http://localhost:3000/pieces/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();

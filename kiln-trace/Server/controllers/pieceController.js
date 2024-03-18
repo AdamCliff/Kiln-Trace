@@ -6,10 +6,10 @@ const Piece = require("../models/pieceModel");
 const getPieces = async (req, res) => {
   try {
     const pieces = await Piece.find({});
-    // console.log(pieces);
     res.status(200).json(pieces);
   } catch (error) {
     console.log(error);
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -67,13 +67,13 @@ const createPiece = async (req, res) => {
       notes,
     });
     console.log(piece);
-    res.status(200).json(piece);
+    res.status(201).json(piece);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-// update piece
+// updates a piece in the database as specified by an id
 const editPiece = async (req, res) => {
   try {
     const { id } = req.params;
@@ -83,10 +83,11 @@ const editPiece = async (req, res) => {
     res.status(200).json(updatedPiece);
   } catch (error) {
     console.log(error);
+    res.status(400).json({ error: error.message });
   }
 };
 
-// delete piece
+// deletes a piece in the database as specified by an id
 const deletePiece = async (req, res) => {
   try {
     const { id } = req.params;
@@ -94,6 +95,7 @@ const deletePiece = async (req, res) => {
     res.status(200).json(deletedPiece);
   } catch (error) {
     console.log(error);
+    res.status(400).json({ error: error.message });
   }
 };
 

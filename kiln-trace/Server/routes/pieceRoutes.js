@@ -21,7 +21,7 @@ router.put("/pieces/:id", (req, res) => {
 });
 
 // delete a piece
-router.delete("/delete-piece/:id", (req, res) => {
+router.delete("/pieces/:id", (req, res) => {
   deletePiece(req, res);
 });
 
