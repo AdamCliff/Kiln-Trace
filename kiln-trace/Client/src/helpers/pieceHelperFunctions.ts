@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { Piece } from "@/types/piece";
+import { actionTypes } from "@/context/actionEnums";
 
 export const getCurrentStage = (piece: Piece) => {
   if (piece.fired) return "Fired";
@@ -22,4 +23,19 @@ export const getCurrentStageDate = (piece: Piece) => {
     ? (formattedDate = format(date, "MM/dd/yy"))
     : (formattedDate = undefined);
   return formattedDate;
+};
+
+export const handleDelete = async (
+  id: String,
+  dispatch: React.Dispatch<any>
+) => {
+  try {
+    const res = await fetch(`http://localhost:3000/pieces/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    dispatch({ type: actionTypes.REMOVE_PIECE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
 };

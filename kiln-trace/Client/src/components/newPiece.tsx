@@ -19,29 +19,29 @@ function NewPiece({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // state variables
-  const [title, setTitle] = useState<string>();
+  const [title, setTitle] = useState<string>("");
   const [formed, setFormed] = useState<boolean>(false);
-  const [formedDate, setFormedDate] = useState<Date>();
+  const [formedDate, setFormedDate] = useState<Date>(new Date(""));
   const [trimmed, setTrimmed] = useState<boolean>(false);
-  const [trimmedDate, setTrimmedDate] = useState<Date>();
+  const [trimmedDate, setTrimmedDate] = useState<Date>(new Date(""));
   const [bisqued, setBisqued] = useState<boolean>(false);
-  const [bisquedDate, setBisquedDate] = useState<Date>();
+  const [bisquedDate, setBisquedDate] = useState<Date>(new Date(""));
   const [glazed, setGlazed] = useState<boolean>(false);
-  const [glazedDate, setGlazedDate] = useState<Date>();
+  const [glazedDate, setGlazedDate] = useState<Date>(new Date(""));
   const [fired, setFired] = useState<boolean>(false);
-  const [firedDate, setFiredDate] = useState<Date>();
-  const [method, setMethod] = useState<string>();
-  const [form, setForm] = useState<string>();
-  const [material, setMaterial] = useState<string>();
-  const [weight, setWeight] = useState<number>();
-  const [height, setHeight] = useState<number>();
-  const [width, setWidth] = useState<number>();
-  const [pieceLength, setPieceLength] = useState<number>();
-  const [overglaze, setOverglaze] = useState<string[]>();
-  const [underglaze, setUnderglaze] = useState<string[]>();
-  const [photos, setPhotos] = useState<string>();
-  const [artist, setArtist] = useState<string>();
-  const [notes, setNotes] = useState<string>();
+  const [firedDate, setFiredDate] = useState<Date>(new Date(""));
+  const [method, setMethod] = useState<string>("");
+  const [form, setForm] = useState<string>("");
+  const [material, setMaterial] = useState<string>("");
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [width, setWidth] = useState<number>(0);
+  const [pieceLength, setPieceLength] = useState<number>(0);
+  const [overglaze, setOverglaze] = useState<string[]>([]);
+  const [underglaze, setUnderglaze] = useState<string[]>([]);
+  const [photos, setPhotos] = useState<string>("");
+  const [artist, setArtist] = useState<string>("");
+  const [notes, setNotes] = useState<string>("");
 
   const { dispatch } = usePieceContext();
 

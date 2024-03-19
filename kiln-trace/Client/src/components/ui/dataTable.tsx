@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   ColumnDef,
   flexRender,
@@ -14,6 +16,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import {
+  getCurrentStage,
+  getCurrentStageDate,
+  handleDelete,
+} from "@/helpers/pieceHelperFunctions";
+import { Piece } from "@/types/piece";
+import { usePieceContext } from "@/context/piecesContext";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: any;
@@ -24,14 +34,24 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const { dispatch } = usePieceContext();
+
+  // const [open, setOpen] = useState<boolean>(false);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      dispatch: dispatch,
+      // open: open,
+      // setOpen: setOpen,
+      getCurrentStage: (piece: Piece) => getCurrentStage(piece),
+      getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
+      handleDelete: (id: string, dispatch: React.Dispatch<any>) =>
+        handleDelete(id, dispatch),
+    },
   });
-
-  // console.log(data);
-  // console.log(columns);
 
   return (
     <div>
