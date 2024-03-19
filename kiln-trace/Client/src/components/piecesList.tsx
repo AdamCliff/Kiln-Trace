@@ -7,9 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DataTable } from "./ui/dataTable";
 
 import PieceEntry from "./pieceEntry";
 import { Piece } from "@/types/piece";
+import { pieceColumns } from "./pieceTableColumns";
 import { usePieceContext } from "@/context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
 
@@ -39,7 +41,16 @@ function PiecesList() {
   return (
     <>
       <div className="w-full h-full">
-        <Table className="table-auto">
+        <DataTable columns={pieceColumns} data={pieces} />
+      </div>
+    </>
+  );
+}
+
+export default PiecesList;
+
+{
+  /* <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="text-black mdb:w-[100px] md:w-fit lg:w-[100px]">
@@ -80,17 +91,11 @@ function PiecesList() {
               <TableHead className="text-black text-center  md:w-fit lg:w-[100px]"></TableHead>
             </TableRow>
           </TableHeader>
-          {/* once piece data has loaded, map it */}
           <TableBody>
             {pieces &&
               pieces.map((piece: Piece) => (
                 <PieceEntry key={piece._id} piece={piece} />
               ))}
           </TableBody>
-        </Table>
-      </div>
-    </>
-  );
+        </Table> */
 }
-
-export default PiecesList;

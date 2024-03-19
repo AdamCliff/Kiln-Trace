@@ -2,7 +2,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 
 import OptionsBar from "./optionsbar";
 import PieceData from "./pieceData";
-// import { PieceContextProvider } from "../context/piecesContext";
 
 function DataPanel() {
   return (
@@ -11,7 +10,6 @@ function DataPanel() {
         id="data-panel"
         className="flex items-center justify-start flex-col gap-6 w-[90%] h-full"
       >
-        {/* <PieceContextProvider> */}
         <section
           id="options-bar-section"
           className="flex items-center justify-center w-full h-[5%] bg-background rounded-xl"
@@ -34,7 +32,6 @@ function DataPanel() {
             <Route path="/schedules" />
           </Routes>
         </section>
-        {/* </PieceContextProvider> */}
       </div>
     </>
   );
