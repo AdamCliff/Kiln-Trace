@@ -30,8 +30,8 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  console.log(data);
-  console.log(columns);
+  // console.log(data);
+  // console.log(columns);
 
   return (
     <div>

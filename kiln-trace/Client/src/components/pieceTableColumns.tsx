@@ -1,12 +1,25 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Piece } from "@/types/piece";
-import { ReactNode } from "react";
+import {
+  getCurrentStage,
+  getCurrentStageDate,
+} from "@/helpers/pieceHelperFunctions";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "date",
     header: "Date",
+    cell: (entry) => {
+      return (
+        <span>
+          {" "}
+          {getCurrentStageDate(entry.row.original)
+            ? getCurrentStageDate(entry.row.original)
+            : "-- / -- / --"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "title",
@@ -19,6 +32,16 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "stage",
     header: "Stage",
+    cell: (entry) => {
+      return (
+        <span>
+          {" "}
+          {getCurrentStage(entry.row.original)
+            ? getCurrentStage(entry.row.original)
+            : "-"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "form",
@@ -39,6 +62,20 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "dimensions",
     header: "Dimensions",
+    cell: (entry) => {
+      return (
+        <span>
+          {" "}
+          {entry.row.original.pieceLength
+            ? entry.row.original.pieceLength
+            : "-"}
+          {" x "}
+          {entry.row.original.width ? entry.row.original.width : "-"}
+          {" x "}
+          {entry.row.original.height ? entry.row.original.height : "-"}
+        </span>
+      );
+    },
   },
   {
     accessorKey: "overglaze",
@@ -55,8 +92,8 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "edit",
     header: "",
-    cell: (row) => {
-      return <button onClick={() => console.log(row)}>btn</button>;
+    cell: (entry) => {
+      return <button onClick={() => console.log(entry)}>btn</button>;
       //   return <button onClick={() => handleEdit(row.row.original._id)}>btn</button>;
     },
   },
