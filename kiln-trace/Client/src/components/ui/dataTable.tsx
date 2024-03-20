@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   ColumnDef,
   flexRender,
@@ -20,6 +18,7 @@ import {
   getCurrentStage,
   getCurrentStageDate,
   handleDelete,
+  handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
@@ -27,7 +26,8 @@ import { usePieceContext } from "@/context/piecesContext";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: any;
-  //   was TData[]
+  // was TData[]
+  // when is it TData[], in piecesList.tsx, the data param throws an error
 }
 
 export function DataTable<TData, TValue>({
@@ -36,20 +36,18 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { dispatch } = usePieceContext();
 
-  // const [open, setOpen] = useState<boolean>(false);
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     meta: {
       dispatch: dispatch,
-      // open: open,
-      // setOpen: setOpen,
       getCurrentStage: (piece: Piece) => getCurrentStage(piece),
       getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
       handleDelete: (id: string, dispatch: React.Dispatch<any>) =>
         handleDelete(id, dispatch),
+      handleEditPiece: (piece: Piece, dispatch: React.Dispatch<any>) =>
+        handleEditPiece(piece, dispatch),
     },
   });
 

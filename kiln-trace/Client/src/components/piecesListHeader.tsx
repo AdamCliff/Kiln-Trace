@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
-import NewPiece from "./newPiece";
+import { handleNewPiece } from "@/helpers/pieceHelperFunctions";
+import PieceFormDialog from "./pieceFormDialog";
 
 function PieceListHeader() {
   // dialog open state
@@ -35,7 +36,11 @@ function PieceListHeader() {
             </svg>
           </DialogTrigger>
           <DialogContent>
-            <NewPiece setOpen={setOpen} />
+            <PieceFormDialog
+              setOpen={setOpen}
+              piece={undefined}
+              handleSubmit={handleNewPiece}
+            />
           </DialogContent>
         </Dialog>
         <div

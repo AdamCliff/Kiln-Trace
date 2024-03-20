@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Accordion,
   AccordionContent,
@@ -8,103 +10,95 @@ import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import DatePicker from "@/components/ui/datePicker";
 import { Button } from "@/components/ui/button";
 
-import { useState } from "react";
-
 import { usePieceContext } from "../context/piecesContext";
-import { actionTypes } from "@/context/actionEnums";
-import { handleNewPiece } from "@/helpers/pieceHelperFunctions";
+import { Piece } from "@/types/piece";
 
-function NewPiece({
+// change type later
+function PieceFormDialog({
   setOpen,
+  piece,
+  handleSubmit,
 }: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  piece: any;
+  handleSubmit: (piece: Piece, dispatch: React.Dispatch<any>) => Promise<any>;
 }) {
-  // state variables
-  const [title, setTitle] = useState<string>("");
-  const [formed, setFormed] = useState<boolean>(false);
-  const [formedDate, setFormedDate] = useState<Date>(new Date(""));
-  const [trimmed, setTrimmed] = useState<boolean>(false);
-  const [trimmedDate, setTrimmedDate] = useState<Date>(new Date(""));
-  const [bisqued, setBisqued] = useState<boolean>(false);
-  const [bisquedDate, setBisquedDate] = useState<Date>(new Date(""));
-  const [glazed, setGlazed] = useState<boolean>(false);
-  const [glazedDate, setGlazedDate] = useState<Date>(new Date(""));
-  const [fired, setFired] = useState<boolean>(false);
-  const [firedDate, setFiredDate] = useState<Date>(new Date(""));
-  const [method, setMethod] = useState<string>("");
-  const [form, setForm] = useState<string>("");
-  const [material, setMaterial] = useState<string>("");
-  const [weight, setWeight] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const [width, setWidth] = useState<number>(0);
-  const [pieceLength, setPieceLength] = useState<number>(0);
-  const [overglaze, setOverglaze] = useState<string[]>([]);
-  const [underglaze, setUnderglaze] = useState<string[]>([]);
-  const [photos, setPhotos] = useState<string>("");
-  const [artist, setArtist] = useState<string>("");
-  const [notes, setNotes] = useState<string>("");
+  // piece object state variables
+  const [title, setTitle] = useState<string>(piece?.title);
+  const [formed, setFormed] = useState<boolean>(piece?.formed);
+  const [formedDate, setFormedDate] = useState<Date>(
+    piece ? piece.formedDate : new Date("")
+  );
+  const [trimmed, setTrimmed] = useState<boolean>(piece?.trimmed);
+  const [trimmedDate, setTrimmedDate] = useState<Date>(
+    piece ? piece.trimmedDate : new Date("")
+  );
+  const [bisqued, setBisqued] = useState<boolean>(piece?.bisqued);
+  const [bisquedDate, setBisquedDate] = useState<Date>(
+    piece ? piece.bisquedDate : new Date("")
+  );
+  const [glazed, setGlazed] = useState<boolean>(piece?.glazed);
+  const [glazedDate, setGlazedDate] = useState<Date>(
+    piece ? piece.glazedDate : new Date("")
+  );
+  const [fired, setFired] = useState<boolean>(piece?.fired);
+  const [firedDate, setFiredDate] = useState<Date>(
+    piece ? piece.firedDate : new Date("")
+  );
+  const [method, setMethod] = useState<string>(piece?.method);
+  const [form, setForm] = useState<string>(piece?.form);
+  const [material, setMaterial] = useState<string>(piece?.material);
+  const [weight, setWeight] = useState<number>(piece?.weight);
+  const [height, setHeight] = useState<number>(piece?.height);
+  const [width, setWidth] = useState<number>(piece?.width);
+  const [pieceLength, setPieceLength] = useState<number>(piece?.pieceLength);
+  const [overglaze, setOverglaze] = useState<string[]>(piece?.overglaze);
+  const [underglaze, setUnderglaze] = useState<string[]>(piece?.underglaze);
+  const [photos, setPhotos] = useState<string>(piece?.photos);
+  const [artist, setArtist] = useState<string>(piece?.artist);
+  const [notes, setNotes] = useState<string>(piece?.notes);
+  const [_id, set_id] = useState<string>(piece?._id);
+  const [__v, set__v] = useState<number>(piece?.__v);
 
   const { dispatch } = usePieceContext();
 
-  // //submit handling
-  // const handleSubmit = async (e: any) => {
-  //   // prevent refresh
-  //   e.preventDefault();
-
-  //   // create piece object from form fields
-  //   const piece = {
-  //     title,
-  //     formed,
-  //     formedDate,
-  //     trimmed,
-  //     trimmedDate,
-  //     bisqued,
-  //     bisquedDate,
-  //     glazed,
-  //     glazedDate,
-  //     fired,
-  //     firedDate,
-  //     method,
-  //     form,
-  //     weight,
-  //     height,
-  //     width,
-  //     pieceLength,
-  //     overglaze,
-  //     underglaze,
-  //     photos,
-  //     artist,
-  //     notes,
-  //   };
-
-  //   try {
-  //     // try post new piece
-  //     const res = await fetch("http://localhost:3000/new-piece", {
-  //       method: "POST",
-  //       body: JSON.stringify(piece),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-
-  //     //   await response
-  //     const data = await res.json();
-
-  //     // dispatch new piece
-  //     dispatch({ type: actionTypes.ADD_PIECE, payload: data });
-  //     setOpen(false);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const pieceObject = {
+    title,
+    formed,
+    formedDate,
+    trimmed,
+    trimmedDate,
+    bisqued,
+    bisquedDate,
+    glazed,
+    glazedDate,
+    fired,
+    firedDate,
+    method,
+    form,
+    material,
+    weight,
+    height,
+    width,
+    pieceLength,
+    overglaze,
+    underglaze,
+    photos,
+    artist,
+    notes,
+    _id,
+    __v,
+  };
 
   return (
     <>
       <div id="new-piece-form" className="">
         <DialogHeader className="mb-4">
-          <DialogTitle>New Piece</DialogTitle>
+          <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>
         <form
-          action="/new-piece"
-          method="post"
+          action={`/pieces/${_id}`}
+          method="put"
           className="flex flex-col gap-6 w-full h-[95%]"
         >
           <div className="flex gap-2">
@@ -256,8 +250,12 @@ function NewPiece({
             </div>
           </div>
           {/* details section */}
-          <Accordion type="single" collapsible>
-            <AccordionItem value="about">
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={form || method || material ? "details" : ""}
+          >
+            <AccordionItem value="details">
               <AccordionTrigger>Form, Method, Material</AccordionTrigger>
               <AccordionContent>
                 <div className="flex gap-2">
@@ -299,7 +297,13 @@ function NewPiece({
             </AccordionItem>
           </Accordion>
           {/* dimensions section */}
-          <Accordion type="single" collapsible>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={
+              weight || height || pieceLength || width ? "dimensions" : ""
+            }
+          >
             <AccordionItem value="dimensions">
               <AccordionTrigger>Dimensions, Weight</AccordionTrigger>
               <AccordionContent>
@@ -353,7 +357,13 @@ function NewPiece({
             </AccordionItem>
           </Accordion>
           {/* glazes section */}
-          <Accordion type="single" collapsible>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={
+              piece?.overglaze[0] || piece?.underglaze[0] ? "glazes" : ""
+            }
+          >
             <AccordionItem value="glazes">
               <AccordionTrigger>Glazes</AccordionTrigger>
               <AccordionContent>
@@ -394,25 +404,23 @@ function NewPiece({
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
           </div>
-          {/* <DialogFooter> */}
           <DialogClose asChild>
             <Button
-              onClick={handleNewPiece}
+              onClick={() => {
+                handleSubmit(pieceObject, dispatch);
+                setOpen(false);
+              }}
               type="button"
               variant="secondary"
-              className="self-center bg-secondary text-background h-min w-min p-4 rounded-xl"
+              className="m-auto bg-secondary text-background h-min w-min p-4 rounded-xl"
             >
               Save
             </Button>
           </DialogClose>
-          {/* </DialogFooter> */}
         </form>
       </div>
     </>
   );
 }
 
-export default NewPiece;
-
-// DIALOG BOX NOT CLOSING ON SAVE BECAUSE OF HANDLE SUBMIT FUNCTION
-// REFER TO OPEN STATE PROP FOR POSSIBLE FIX
+export default PieceFormDialog;

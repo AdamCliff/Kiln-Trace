@@ -67,13 +67,17 @@ function EditPiece({
     const piece = {
       title,
       formed,
+      formedDate,
       trimmed,
+      trimmedDate,
       bisqued,
+      bisquedDate,
       glazed,
+      glazedDate,
       fired,
+      firedDate,
       method,
       form,
-      material,
       weight,
       height,
       width,
@@ -429,6 +433,3 @@ function EditPiece({
 }
 
 export default EditPiece;
-
-// DIALOG BOX NOT CLOSING ON SAVE BECAUSE OF HANDLE SUBMIT FUNCTION
-// REFER TO OPEN STATE PROP FOR POSSIBLE FIX

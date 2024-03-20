@@ -1,9 +1,10 @@
+import { useState } from "react";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { Piece } from "@/types/piece";
-import EditPiece from "./editPiece";
-import { useState } from "react";
+import PieceFormDialog from "./pieceFormDialog";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {
@@ -113,10 +114,10 @@ export const pieceColumns: ColumnDef<Piece>[] = [
             </svg>
           </DialogTrigger>
           <DialogContent>
-            <EditPiece
+            <PieceFormDialog
               setOpen={setOpen}
               piece={row.original}
-              _id={row.original._id}
+              handleSubmit={meta.handleEditPiece}
             />
           </DialogContent>
         </Dialog>
