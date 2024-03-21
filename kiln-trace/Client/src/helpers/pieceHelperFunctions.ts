@@ -25,7 +25,7 @@ export const getCurrentStageDate = (piece: Piece) => {
   return formattedDate;
 };
 
-export const handleDelete = async (
+export const handleDeletePiece = async (
   id: String,
   dispatch: React.Dispatch<any>
 ) => {

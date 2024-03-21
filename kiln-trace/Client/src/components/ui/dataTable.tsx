@@ -17,7 +17,7 @@ import {
 import {
   getCurrentStage,
   getCurrentStageDate,
-  handleDelete,
+  handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
 import { Piece } from "@/types/piece";
@@ -44,8 +44,8 @@ export function DataTable<TData, TValue>({
       dispatch: dispatch,
       getCurrentStage: (piece: Piece) => getCurrentStage(piece),
       getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
-      handleDelete: (id: string, dispatch: React.Dispatch<any>) =>
-        handleDelete(id, dispatch),
+      handleDeletePiece: (id: string, dispatch: React.Dispatch<any>) =>
+        handleDeletePiece(id, dispatch),
       handleEditPiece: (piece: Piece, dispatch: React.Dispatch<any>) =>
         handleEditPiece(piece, dispatch),
     },

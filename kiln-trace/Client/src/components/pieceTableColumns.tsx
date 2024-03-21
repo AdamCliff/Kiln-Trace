@@ -134,7 +134,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
             let meta;
             if (table.options.meta) meta = table.options.meta as any;
             e.preventDefault();
-            meta.handleDelete(row.original._id, meta.dispatch);
+            meta.handleDeletePiece(row.original._id, meta.dispatch);
           }}
         >
           <svg
