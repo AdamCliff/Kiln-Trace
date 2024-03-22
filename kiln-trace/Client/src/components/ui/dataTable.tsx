@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 import {
   ColumnDef,
@@ -52,13 +52,10 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { dispatch } = usePieceContext();
 
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
@@ -91,6 +88,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div id="options" className="flex items-center justify-center py-4">
+        {/* make the filter global- check tanstack global filtering */}
         <Input
           placeholder="Filter titles..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -99,6 +97,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <div className="mx-8">date range picker</div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

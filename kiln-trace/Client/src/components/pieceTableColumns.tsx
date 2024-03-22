@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
 import PieceFormDialog from "./pieceFormDialog";
@@ -42,33 +43,36 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "date",
-    header: "Date",
-    cell: ({ table, row }) => {
-      let meta;
-      if (table.options.meta) meta = table.options.meta as any;
-      return (
-        <span>
-          {meta.getCurrentStageDate(row.original)
-            ? meta.getCurrentStageDate(row.original)
-            : "-- / -- / --"}
-        </span>
-      );
-    },
-  },
-  {
-    accessorKey: "title",
-    // header: "Title",
+    // header: "Date",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Title
+          Date
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+    cell: ({ table, row }) => {
+      let meta;
+      if (table.options.meta) meta = table.options.meta as any;
+      const { formattedDate, date } = meta.getCurrentStageDate(row.original);
+      // format(date, "MM/dd/yy");
+      return (
+        <span>
+          {meta.getCurrentStageDate(row.original)
+            ? format(date, "MM/dd/yy")
+            : "-- / -- / --"}
+        </span>
+      );
+    },
+    sortingFn: "alphanumeric",
+  },
+  {
+    accessorKey: "title",
+    header: "Title",
   },
   {
     accessorKey: "artist",
