@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useEffect } from "react";
+"use client";
 
+import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
@@ -13,25 +13,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function DatePicker({ newDate }: { newDate: Date | undefined }) {
+export function DatePickerDemo() {
   const [date, setDate] = React.useState<Date>();
-
-  useEffect(() => {
-    newDate ? setDate(newDate) : setDate(undefined);
-  }, [newDate]);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          //   variant={"outline"}
-          //   removed class stylings: ,!date && "text-muted-foreground"
+          variant={"outline"}
           className={cn(
-            "flex justify-between gap-2 h-min w-full p-0 bg-background hover:bg-background text-left font-normal"
+            "w-[280px] justify-start text-left font-normal",
+            !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="w-4 h-4" />
-          {date ? format(date, "MM/dd/yy") : <span></span>}
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
@@ -45,5 +41,3 @@ function DatePicker({ newDate }: { newDate: Date | undefined }) {
     </Popover>
   );
 }
-
-export default DatePicker;

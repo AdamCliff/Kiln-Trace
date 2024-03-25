@@ -58,15 +58,8 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     cell: ({ table, row }) => {
       let meta;
       if (table.options.meta) meta = table.options.meta as any;
-      const { formattedDate, date } = meta.getCurrentStageDate(row.original);
-      // format(date, "MM/dd/yy");
-      return (
-        <span>
-          {meta.getCurrentStageDate(row.original)
-            ? format(date, "MM/dd/yy")
-            : "-- / -- / --"}
-        </span>
-      );
+      const { formattedDate } = meta.getCurrentStageDate(row.original);
+      return <span>{formattedDate ? formattedDate : "-- / -- / --"}</span>;
     },
     sortingFn: "alphanumeric",
   },

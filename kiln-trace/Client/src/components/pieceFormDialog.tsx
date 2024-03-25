@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Accordion,
@@ -7,8 +7,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import DatePicker from "@/components/ui/datePicker";
+import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 import { usePieceContext } from "../context/piecesContext";
 import { Piece } from "@/types/piece";
@@ -26,24 +27,24 @@ function PieceFormDialog({
   // piece object state variables
   const [title, setTitle] = useState<string>(piece?.title);
   const [formed, setFormed] = useState<boolean>(piece?.formed);
-  const [formedDate, setFormedDate] = useState<Date>(
-    piece ? piece.formedDate : new Date("")
+  const [formedDate, setFormedDate] = useState<Date | undefined>(
+    piece ? piece.formedDate : undefined
   );
   const [trimmed, setTrimmed] = useState<boolean>(piece?.trimmed);
-  const [trimmedDate, setTrimmedDate] = useState<Date>(
-    piece ? piece.trimmedDate : new Date("")
+  const [trimmedDate, setTrimmedDate] = useState<Date | undefined>(
+    piece ? piece.trimmedDate : undefined
   );
   const [bisqued, setBisqued] = useState<boolean>(piece?.bisqued);
-  const [bisquedDate, setBisquedDate] = useState<Date>(
-    piece ? piece.bisquedDate : new Date("")
+  const [bisquedDate, setBisquedDate] = useState<Date | undefined>(
+    piece ? piece.bisquedDate : undefined
   );
   const [glazed, setGlazed] = useState<boolean>(piece?.glazed);
-  const [glazedDate, setGlazedDate] = useState<Date>(
-    piece ? piece.glazedDate : new Date("")
+  const [glazedDate, setGlazedDate] = useState<Date | undefined>(
+    piece ? piece.glazedDate : undefined
   );
   const [fired, setFired] = useState<boolean>(piece?.fired);
-  const [firedDate, setFiredDate] = useState<Date>(
-    piece ? piece.firedDate : new Date("")
+  const [firedDate, setFiredDate] = useState<Date | undefined>(
+    piece ? piece.firedDate : undefined
   );
   const [method, setMethod] = useState<string>(piece?.method);
   const [form, setForm] = useState<string>(piece?.form);
@@ -89,6 +90,10 @@ function PieceFormDialog({
     _id,
     __v,
   };
+
+  useEffect(() => {
+    formedDate && !formed ? setFormed((formed) => !formed) : "";
+  }, [formedDate]);
 
   return (
     <>
@@ -147,19 +152,18 @@ function PieceFormDialog({
                   onChange={(e) => {
                     const isChecked = e.target.checked;
                     setFormed(isChecked);
-                    setFormedDate(isChecked ? new Date() : new Date(""));
+                    setFormedDate(isChecked ? new Date() : undefined);
                   }}
                   checked={formed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
                 />
                 <label htmlFor="formed">Formed</label>
               </div>
-              {formed ? (
-                <DatePicker newDate={formedDate} />
-              ) : (
-                <DatePicker newDate={undefined} />
-              )}
-              {/* <p>{formedDate.toDateString()}</p> */}
+              <StageDatePicker
+                isStageSelected={formed}
+                newDate={formedDate}
+                updateDate={setFormedDate}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -177,11 +181,11 @@ function PieceFormDialog({
                 />
                 <label htmlFor="trimmed">Trimmed</label>
               </div>
-              {trimmed ? (
-                <DatePicker newDate={trimmedDate} />
-              ) : (
-                <DatePicker newDate={undefined} />
-              )}
+              <StageDatePicker
+                isStageSelected={trimmed}
+                newDate={trimmedDate}
+                updateDate={setTrimmedDate}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -199,11 +203,11 @@ function PieceFormDialog({
                 />
                 <label htmlFor="bisqued">Bisqued</label>
               </div>
-              {bisqued ? (
-                <DatePicker newDate={bisquedDate} />
-              ) : (
-                <DatePicker newDate={undefined} />
-              )}
+              <StageDatePicker
+                isStageSelected={bisqued}
+                newDate={bisquedDate}
+                updateDate={setBisquedDate}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -221,11 +225,11 @@ function PieceFormDialog({
                 />
                 <label htmlFor="glazed">Glazed</label>
               </div>
-              {glazed ? (
-                <DatePicker newDate={glazedDate} />
-              ) : (
-                <DatePicker newDate={undefined} />
-              )}
+              <StageDatePicker
+                isStageSelected={glazed}
+                newDate={glazedDate}
+                updateDate={setGlazedDate}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between gap-2">
@@ -243,11 +247,11 @@ function PieceFormDialog({
                 />
                 <label htmlFor="fired">Fired</label>
               </div>
-              {fired ? (
-                <DatePicker newDate={firedDate} />
-              ) : (
-                <DatePicker newDate={undefined} />
-              )}
+              <StageDatePicker
+                isStageSelected={fired}
+                newDate={firedDate}
+                updateDate={setFiredDate}
+              />
             </div>
           </div>
           {/* details section */}

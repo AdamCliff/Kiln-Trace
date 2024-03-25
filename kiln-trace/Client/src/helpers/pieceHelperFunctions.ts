@@ -13,11 +13,11 @@ export const getCurrentStage = (piece: Piece) => {
 
 export const getCurrentStageDate = (piece: Piece) => {
   let date: Date | undefined = undefined;
-  if (piece.fired) date = new Date(piece.firedDate);
-  if (piece.glazed) date = new Date(piece.glazedDate);
-  if (piece.bisqued) date = new Date(piece.bisquedDate);
-  if (piece.trimmed) date = new Date(piece.trimmedDate);
-  if (piece.formed) date = new Date(piece.formedDate);
+  if (piece.formed && piece.formedDate) date = new Date(piece.formedDate);
+  if (piece.trimmed && piece.trimmedDate) date = new Date(piece.trimmedDate);
+  if (piece.bisqued && piece.bisquedDate) date = new Date(piece.bisquedDate);
+  if (piece.glazed && piece.glazedDate) date = new Date(piece.glazedDate);
+  if (piece.fired && piece.firedDate) date = new Date(piece.firedDate);
   let formattedDate: String | undefined;
   date
     ? (formattedDate = format(date, "MM/dd/yy"))

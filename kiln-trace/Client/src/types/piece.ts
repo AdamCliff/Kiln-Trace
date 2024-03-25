@@ -2,15 +2,15 @@
 export interface Piece {
   artist: string;
   formed: boolean;
-  formedDate: Date;
+  formedDate: Date | undefined;
   trimmed: boolean;
-  trimmedDate: Date;
+  trimmedDate: Date | undefined;
   bisqued: boolean;
-  bisquedDate: Date;
+  bisquedDate: Date | undefined;
   glazed: boolean;
-  glazedDate: Date;
+  glazedDate: Date | undefined;
   fired: boolean;
-  firedDate: Date;
+  firedDate: Date | undefined;
   form: string;
   method: string;
   material: string;
