@@ -9,7 +9,6 @@ import {
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
-import { Calendar as CalendarIcon } from "lucide-react";
 
 import { usePieceContext } from "../context/piecesContext";
 import { Piece } from "@/types/piece";
@@ -91,13 +90,26 @@ function PieceFormDialog({
     __v,
   };
 
+  // if a date for stage completion is chosen before the stage box is checked, automatically set the date to new Date and check stage box
   useEffect(() => {
     formedDate && !formed ? setFormed((formed) => !formed) : "";
   }, [formedDate]);
+  useEffect(() => {
+    trimmedDate && !trimmed ? setTrimmed((trimmed) => !trimmed) : "";
+  }, [trimmedDate]);
+  useEffect(() => {
+    bisquedDate && !bisqued ? setBisqued((bisqued) => !bisqued) : "";
+  }, [bisquedDate]);
+  useEffect(() => {
+    glazedDate && !glazed ? setGlazed((glazed) => !glazed) : "";
+  }, [glazedDate]);
+  useEffect(() => {
+    firedDate && !fired ? setFired((fired) => !fired) : "";
+  }, [firedDate]);
 
   return (
     <>
-      <div id="new-piece-form" className="">
+      <div id="new-piece-form">
         <DialogHeader className="mb-4">
           <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>

@@ -17,9 +17,8 @@ module.exports = {
       },
     },
     screens: {
-      mdb: { max: "1470px" },
-      md: "1470px",
-      lg: "1800px",
+      laptop: "1024px",
+      desktop: "1280px",
     },
     extend: {
       colors: {

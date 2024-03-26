@@ -20,28 +20,28 @@ import PieceFormDialog from "./pieceFormDialog";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   // COMMENTED OUT FOR TESTING OF CARD LAYOUT
-  // {
-  //   id: "select",
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && "indeterminate")
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "date",
     // header: "Date",
@@ -59,7 +59,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     cell: ({ table, row }) => {
       let meta;
       if (table.options.meta) meta = table.options.meta as any;
-      const { formattedDate } = meta.getCurrentStageDate(row.original);
+      const formattedDate = meta.getCurrentStageDate(row.original);
       return <span>{formattedDate ? formattedDate : "-- / -- / --"}</span>;
     },
     sortingFn: "alphanumeric",

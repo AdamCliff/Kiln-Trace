@@ -22,7 +22,7 @@ export const getCurrentStageDate = (piece: Piece) => {
   date
     ? (formattedDate = format(date, "MM/dd/yy"))
     : (formattedDate = undefined);
-  return { formattedDate, date };
+  return formattedDate;
 };
 
 export const handleDeletePiece = async (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ColumnDef,
@@ -38,6 +38,7 @@ import {
 } from "@/helpers/pieceHelperFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
+import DataTableCard from "@/components/dataTableCard";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,6 +59,7 @@ export function DataTableWithCards<TData, TValue>({
   const [rowSelection, setRowSelection] = useState({});
 
   const [pieceListType, setPieceListType] = useState<"rows" | "cards">("rows");
+  // const [rowVisibleColumns, setRowVisibleColumns] = useState<>();
 
   const table = useReactTable({
     data,
@@ -89,6 +91,36 @@ export function DataTableWithCards<TData, TValue>({
   {
     /* make the filter global- check tanstack global filtering */
   }
+
+  const toggleCardVisibileColumns = () => {
+    if (pieceListType === "cards") {
+      table
+        .getAllColumns()
+        .filter((column) => column.getCanHide())
+        .forEach((column) => {
+          if (
+            column.id !== "date" &&
+            column.id !== "stage" &&
+            column.id !== "title" &&
+            column.id !== "artist"
+          ) {
+            column.toggleVisibility(false);
+          }
+        });
+    }
+    if (pieceListType === "rows") {
+      table
+        .getAllColumns()
+        .filter((column) => column.getCanHide())
+        .forEach((column) => {
+          column.toggleVisibility(true);
+        });
+    }
+  };
+
+  useEffect(() => {
+    toggleCardVisibileColumns();
+  }, [pieceListType]);
 
   return (
     <div>
@@ -201,28 +233,14 @@ export function DataTableWithCards<TData, TValue>({
       )}
 
       {pieceListType === "cards" && (
-        <div id="cards" className="flex flex-wrap">
+        <div id="cards" className="flex flex-wrap gap-4">
           {table.getRowModel().rows.map((row) => (
-            <div
-              key={row.id}
-              className="flex flex-col gap-2 w-full max-w-xs border p-4"
-            >
-              {row.getVisibleCells().map((cell) => (
-                <div>
-                  <div key={cell.column.id}>
-                    {flexRender<any>(cell.column.columnDef.header, {})}
-                  </div>
-                  <div key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <DataTableCard key={row.id} row={row} table={table} />
           ))}
         </div>
       )}
 
-      {/* <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
@@ -242,7 +260,7 @@ export function DataTableWithCards<TData, TValue>({
         >
           Next
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 }
