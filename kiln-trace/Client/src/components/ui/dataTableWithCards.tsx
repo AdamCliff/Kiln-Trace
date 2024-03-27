@@ -29,6 +29,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/layoutSwitch";
 
 import {
   getCurrentStage,
@@ -58,7 +59,7 @@ export function DataTableWithCards<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const [pieceListType, setPieceListType] = useState<"rows" | "cards">("rows");
+  const [isRowListType, setIsRowListType] = useState<boolean>(true);
   // const [rowVisibleColumns, setRowVisibleColumns] = useState<>();
 
   const table = useReactTable({
@@ -93,7 +94,7 @@ export function DataTableWithCards<TData, TValue>({
   }
 
   const toggleCardVisibileColumns = () => {
-    if (pieceListType === "cards") {
+    if (!isRowListType) {
       table
         .getAllColumns()
         .filter((column) => column.getCanHide())
@@ -108,7 +109,7 @@ export function DataTableWithCards<TData, TValue>({
           }
         });
     }
-    if (pieceListType === "rows") {
+    if (isRowListType) {
       table
         .getAllColumns()
         .filter((column) => column.getCanHide())
@@ -120,68 +121,61 @@ export function DataTableWithCards<TData, TValue>({
 
   useEffect(() => {
     toggleCardVisibileColumns();
-  }, [pieceListType]);
+  }, [isRowListType]);
 
   return (
     <div>
-      {/* <div id="options" className="flex items-center justify-center py-4">
-        <Input
-          placeholder="Filter titles..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(e) =>
-            table.getColumn("title")?.setFilterValue(e.target.value)
-          }
-          className="max-w-sm"
-        />
-        <div className="mx-8">date range picker</div>
-        <button
-          onClick={() => {
-            pieceListType === "rows"
-              ? setPieceListType("cards")
-              : setPieceListType("rows");
+      <div id="options" className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-center gap-4">
+          <Input
+            placeholder="Filter titles..."
+            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+            onChange={(e) =>
+              table.getColumn("title")?.setFilterValue(e.target.value)
+            }
+            className="w-96"
+          />
+          <div>date range picker</div>
+        </div>
+
+        {isRowListType && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-background">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+        <Switch
+          className="justify-self-end bg-primary ml-4"
+          checked={!isRowListType}
+          onCheckedChange={() => {
+            setIsRowListType(!isRowListType);
           }}
-        >
-          cards/rows
-        </button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-background">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div> */}
+        />
+      </div>
 
-      <button
-        onClick={() => {
-          pieceListType === "rows"
-            ? setPieceListType("cards")
-            : setPieceListType("rows");
-        }}
-      >
-        cards/rows
-      </button>
-
-      {pieceListType === "rows" && (
+      {isRowListType && (
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -232,7 +226,7 @@ export function DataTableWithCards<TData, TValue>({
         </Table>
       )}
 
-      {pieceListType === "cards" && (
+      {!isRowListType && (
         <div id="cards" className="flex flex-wrap gap-4">
           {table.getRowModel().rows.map((row) => (
             <DataTableCard key={row.id} row={row} table={table} />
