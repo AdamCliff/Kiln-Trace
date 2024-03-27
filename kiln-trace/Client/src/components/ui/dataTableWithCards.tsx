@@ -93,36 +93,6 @@ export function DataTableWithCards<TData, TValue>({
     /* make the filter global- check tanstack global filtering */
   }
 
-  const toggleCardVisibileColumns = () => {
-    if (!isRowListType) {
-      table
-        .getAllColumns()
-        .filter((column) => column.getCanHide())
-        .forEach((column) => {
-          if (
-            column.id !== "date" &&
-            column.id !== "stage" &&
-            column.id !== "title" &&
-            column.id !== "artist"
-          ) {
-            column.toggleVisibility(false);
-          }
-        });
-    }
-    if (isRowListType) {
-      table
-        .getAllColumns()
-        .filter((column) => column.getCanHide())
-        .forEach((column) => {
-          column.toggleVisibility(true);
-        });
-    }
-  };
-
-  useEffect(() => {
-    toggleCardVisibileColumns();
-  }, [isRowListType]);
-
   return (
     <div>
       <div id="options" className="flex items-center justify-between py-4">
