@@ -197,14 +197,34 @@ export function DataTableWithCards<TData, TValue>({
       )}
 
       {!isRowListType && (
-        <div id="cards" className="flex flex-wrap gap-4">
-          {table.getRowModel().rows.map((row) => (
-            <DataTableCard key={row.id} row={row} table={table} />
-          ))}
+        <div>
+          <div id="cards" className="flex flex-wrap gap-4 px-4">
+            {table.getRowModel().rows.map((row) => (
+              <DataTableCard key={row.id} row={row} table={table} />
+            ))}
+          </div>
         </div>
       )}
 
-      <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
+        <span className="mr-4">
+          {table
+            .getHeaderGroups()
+            .map((headerGroup) => {
+              return headerGroup.headers.at(0)
+                ? headerGroup.headers.at(0)
+                : console.error("Error: Select header not found");
+            })
+            .map((header: any) => {
+              const { column, getContext } = header;
+              return (
+                <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4">
+                  {flexRender(column.columnDef.header, getContext())}
+                  <span className="font-semibold text-text">Select All</span>
+                </label>
+              );
+            })}
+        </span>
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>

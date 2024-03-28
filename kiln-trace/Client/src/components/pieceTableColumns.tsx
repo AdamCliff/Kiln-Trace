@@ -13,13 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
 import PieceFormDialog from "./pieceFormDialog";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
-  // COMMENTED OUT FOR TESTING OF CARD LAYOUT
   {
     id: "select",
     header: ({ table }) => (
@@ -37,6 +35,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
+        className="z-50"
       />
     ),
     enableSorting: false,

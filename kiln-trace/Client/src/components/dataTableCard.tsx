@@ -15,15 +15,16 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setOpen((open) => !open);
-        }}
-      >
-        <div className="relative flex flex-col justify-center border border-primary desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
-          <div className="absolute top-2 left-2">
-            {flexRender(select.column.columnDef.cell, select.getContext())}
-          </div>
+      <div className="relative flex flex-col justify-center border border-primary desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
+        <div className="absolute top-2 left-2">
+          {flexRender(select.column.columnDef.cell, select.getContext())}
+        </div>
+        <button
+          onClick={() => {
+            setOpen((open) => !open);
+          }}
+          className="w-full h-full"
+        >
           <div className="flex items-center justify-center p-1 h-[60%] border-b border-primary">
             placeholder
           </div>
@@ -35,8 +36,8 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
             </span>
             <span>{row.original.artist ? row.original.artist : "-"}</span>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <PieceFormDialog
