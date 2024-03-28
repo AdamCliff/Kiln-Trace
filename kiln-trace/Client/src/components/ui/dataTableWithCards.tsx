@@ -30,6 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/layoutSwitch";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import {
   getCurrentStage,
@@ -208,22 +209,19 @@ export function DataTableWithCards<TData, TValue>({
 
       <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
         <span className="mr-4">
-          {table
-            .getHeaderGroups()
-            .map((headerGroup) => {
-              return headerGroup.headers.at(0)
-                ? headerGroup.headers.at(0)
-                : console.error("Error: Select header not found");
-            })
-            .map((header: any) => {
-              const { column, getContext } = header;
-              return (
-                <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4">
-                  {flexRender(column.columnDef.header, getContext())}
-                  <span className="font-semibold text-text">Select All</span>
-                </label>
-              );
-            })}
+          <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4">
+            <Checkbox
+              checked={
+                table.getIsAllPageRowsSelected() ||
+                (table.getIsSomePageRowsSelected() && "indeterminate")
+              }
+              onCheckedChange={(value) =>
+                table.toggleAllPageRowsSelected(!!value)
+              }
+              aria-label="Select all"
+            />
+            <span className="font-semibold text-text">Select All</span>
+          </label>
         </span>
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
