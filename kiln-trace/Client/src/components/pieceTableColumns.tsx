@@ -15,8 +15,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Piece } from "@/types/piece";
-// import PieceFormDialog from "./pieceFormDialog";
 import PieceFormDialogContents from "./pieceFormDialogContents";
+import { fuzzyFilter, fuzzySort } from "@/helpers/tableFilterFunctions";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {
@@ -67,12 +67,14 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "title",
     header: "Title",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "artist",
     header: "Artist",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "stage",
@@ -88,22 +90,26 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </span>
       );
     },
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "form",
     header: "Form",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "method",
     header: "Method",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "material",
     header: "Material",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "weight",
@@ -127,12 +133,14 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "overglaze",
     header: "Overglaze",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "underglaze",
     header: "Underglaze",
-    filterFn: "includesString",
+    filterFn: "fuzzy",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "notes",

@@ -1,4 +1,4 @@
-import { /* useEffect, */ useState } from "react";
+import { /* useEffect, */ useEffect, useState } from "react";
 
 import {
   ColumnDef,
@@ -12,6 +12,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+
+import {
+  RankingInfo,
+  rankItem,
+  compareItems,
+} from "@tanstack/match-sorter-utils";
 
 import {
   Table,
@@ -39,11 +45,11 @@ import {
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
+import { fuzzyFilter, fuzzySort } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTableCard";
 import DataTableRow from "@/components/dataTableRow";
-// import PieceFormDialogContents from "../pieceFormDialogContents";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -60,6 +66,7 @@ export function DataTableWithCards<TData, TValue>({
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = useState("");
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
@@ -77,9 +84,13 @@ export function DataTableWithCards<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
       sorting,
       columnFilters,
+      globalFilter,
       columnVisibility,
       rowSelection,
     },
@@ -100,18 +111,32 @@ export function DataTableWithCards<TData, TValue>({
   // let meta: any;
   // if (table.options.meta) meta = table.options.meta as any;
 
+  useEffect(() => {
+    if (table.getState().columnFilters[0]?.id === "title") {
+      if (table.getState().sorting[0]?.id !== "title") {
+        table.setSorting([{ id: "title", desc: false }]);
+      }
+    }
+  }, [table.getState().columnFilters[0]?.id]);
+
   return (
     <div>
       <div id="options" className="flex items-center justify-between py-4">
         <div className="flex items-center justify-center gap-4">
           <Input
+            placeholder="Search all columns..."
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(String(e.target.value))}
+            className="w-96"
+          />
+          {/* <Input
             placeholder="Filter titles..."
             value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
             onChange={(e) =>
               table.getColumn("title")?.setFilterValue(e.target.value)
             }
             className="w-96"
-          />
+          /> */}
           <div>date range picker</div>
         </div>
 
