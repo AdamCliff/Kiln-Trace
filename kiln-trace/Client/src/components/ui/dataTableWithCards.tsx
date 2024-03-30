@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { /* useEffect, */ useState } from "react";
 
 import {
   ColumnDef,
@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/layoutSwitch";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+// import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import {
   getCurrentStage,
@@ -43,7 +43,7 @@ import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTableCard";
 import DataTableRow from "@/components/dataTableRow";
-import PieceFormDialogContents from "../pieceFormDialogContents";
+// import PieceFormDialogContents from "../pieceFormDialogContents";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,7 +64,7 @@ export function DataTableWithCards<TData, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
   // const [rowVisibleColumns, setRowVisibleColumns] = useState<>();
-  const [open, setOpen] = useState<boolean>(false);
+  // const [open, setOpen] = useState<boolean>(false);
 
   const table = useReactTable({
     data,
@@ -174,24 +174,11 @@ export function DataTableWithCards<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                // <TableRow
-                //   key={row.id}
-                //   data-state={row.getIsSelected() && "selected"}
-                //   onClick={() => setOpen(!open)}
-                //   className="cursor-pointer hover:bg-primary/50"
-                // >
-                //   {row.getVisibleCells().map((cell) => (
-                //     <TableCell key={cell.id}>
-                //       {flexRender(
-                //         cell.column.columnDef.cell,
-                //         cell.getContext()
-                //       )}
-                //     </TableCell>
-                //   ))}
-                // </TableRow>
-                <DataTableRow row={row} table={table} />
-              ))
+              table
+                .getRowModel()
+                .rows.map((row) => (
+                  <DataTableRow key={row.id} row={row} table={table} />
+                ))
             ) : (
               <TableRow>
                 <TableCell

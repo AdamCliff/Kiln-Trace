@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Piece } from "@/types/piece";
-import PieceFormDialog from "./pieceFormDialog";
+// import PieceFormDialog from "./pieceFormDialog";
 import PieceFormDialogContents from "./pieceFormDialogContents";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
@@ -67,10 +67,12 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "title",
     header: "Title",
+    filterFn: "includesString",
   },
   {
     accessorKey: "artist",
     header: "Artist",
+    filterFn: "includesString",
   },
   {
     accessorKey: "stage",
@@ -86,18 +88,22 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </span>
       );
     },
+    filterFn: "includesString",
   },
   {
     accessorKey: "form",
     header: "Form",
+    filterFn: "includesString",
   },
   {
     accessorKey: "method",
     header: "Method",
+    filterFn: "includesString",
   },
   {
     accessorKey: "material",
     header: "Material",
+    filterFn: "includesString",
   },
   {
     accessorKey: "weight",
@@ -121,10 +127,12 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "overglaze",
     header: "Overglaze",
+    filterFn: "includesString",
   },
   {
     accessorKey: "underglaze",
     header: "Underglaze",
+    filterFn: "includesString",
   },
   {
     accessorKey: "notes",

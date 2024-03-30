@@ -9,20 +9,23 @@ function DataTableRow({ row, table }: { row: any; table: any }) {
   const [open, setOpen] = useState<boolean>(false);
   const meta = table.options.meta;
 
-  useEffect(() => console.log(open), [open]);
+  //   useEffect(() => console.log(open), [open]);
+  //   error where dialog wont close by click outside window unless clicked and held
 
   return (
-    <TableRow
-      key={row.id}
-      data-state={row.getIsSelected() && "selected"}
-      onClick={() => setOpen(!open)}
-      className="cursor-pointer hover:bg-primary/50"
-    >
-      {row.getVisibleCells().map((cell: any) => (
-        <TableCell key={cell.id}>
-          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-        </TableCell>
-      ))}
+    <>
+      <TableRow
+        key={row.id}
+        data-state={row.getIsSelected() && "selected"}
+        onClick={() => setOpen(!open)}
+        className="cursor-pointer hover:bg-primary/50"
+      >
+        {row.getVisibleCells().map((cell: any) => (
+          <TableCell key={cell.id}>
+            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          </TableCell>
+        ))}
+      </TableRow>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <PieceFormDialogContents
@@ -32,7 +35,7 @@ function DataTableRow({ row, table }: { row: any; table: any }) {
           />
         </DialogContent>
       </Dialog>
-    </TableRow>
+    </>
   );
 }
 

@@ -18,7 +18,7 @@ export const getCurrentStageDate = (piece: Piece) => {
   if (piece.bisqued && piece.bisquedDate) date = new Date(piece.bisquedDate);
   if (piece.glazed && piece.glazedDate) date = new Date(piece.glazedDate);
   if (piece.fired && piece.firedDate) date = new Date(piece.firedDate);
-  let formattedDate: String | undefined;
+  let formattedDate: string | undefined;
   date
     ? (formattedDate = format(date, "MM/dd/yy"))
     : (formattedDate = undefined);
