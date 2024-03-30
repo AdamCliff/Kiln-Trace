@@ -5,13 +5,15 @@ import {
 } from "@/helpers/pieceHelperFunctions";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import PieceFormDialog from "./pieceFormDialog";
+import PieceFormDialogContents from "./pieceFormDialogContents";
 import { flexRender } from "@tanstack/react-table";
 
 function DataTableCard({ row, table }: { row: any; table: any }) {
   const [open, setOpen] = useState<boolean>(false);
   const meta = table.options.meta;
-  const [select] = row.getVisibleCells();
+  const cells = row.getVisibleCells();
+  const [select] = cells.filter((cell: any) => cell.column.id === "select");
+  const [actions] = cells.filter((cell: any) => cell.column.id === "actions");
 
   return (
     <div>
@@ -36,11 +38,14 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
             </span>
             <span>{row.original.artist ? row.original.artist : "-"}</span>
           </div>
+          <div className="absolute bottom-2 right-2">
+            {flexRender(actions.column.columnDef.cell, actions.getContext())}
+          </div>
         </button>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
-          <PieceFormDialog
+          <PieceFormDialogContents
             setOpen={setOpen}
             piece={row.original}
             handleSubmit={meta.handleEditPiece}

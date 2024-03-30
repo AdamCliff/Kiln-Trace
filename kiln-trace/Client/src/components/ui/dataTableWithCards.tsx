@@ -208,21 +208,19 @@ export function DataTableWithCards<TData, TValue>({
       )}
 
       <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
-        <span className="mr-4">
-          <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4">
-            <Checkbox
-              checked={
-                table.getIsAllPageRowsSelected() ||
-                (table.getIsSomePageRowsSelected() && "indeterminate")
-              }
-              onCheckedChange={(value) =>
-                table.toggleAllPageRowsSelected(!!value)
-              }
-              aria-label="Select all"
-            />
-            <span className="font-semibold text-text">Select All</span>
-          </label>
-        </span>
+        <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4 mr-4">
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+          <span className="font-semibold text-text">Select All</span>
+        </label>
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>

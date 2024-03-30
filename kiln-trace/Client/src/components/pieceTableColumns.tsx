@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
@@ -16,6 +16,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Piece } from "@/types/piece";
 import PieceFormDialog from "./pieceFormDialog";
+import PieceFormDialogContents from "./pieceFormDialogContents";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {
@@ -135,33 +136,11 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     cell: ({ table, row }) => {
       let meta;
       if (table.options.meta) meta = table.options.meta as any;
-      const [open, setOpen] = useState<boolean>(false);
       return (
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-              />
-            </svg>
-          </DialogTrigger>
-          <DialogContent>
-            <PieceFormDialog
-              setOpen={setOpen}
-              piece={row.original}
-              handleSubmit={meta.handleEditPiece}
-            />
-          </DialogContent>
-        </Dialog>
+        <PieceFormDialog
+          piece={row.original}
+          handleSubmit={meta.handleEditPiece}
+        />
       );
     },
   },
@@ -196,35 +175,49 @@ export const pieceColumns: ColumnDef<Piece>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: "actions",
-  //   header: "Actions",
-  //   cell: ({ row }) => {
-  //     const piece = row.original;
-
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <Button variant="ghost" className="h-8 w-8 p-0">
-  //             <span className="sr-only">Open menu</span>
-  //             <MoreHorizontal className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end" className=" bg-background">
-  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //           <DropdownMenuItem
-  //             onClick={() => {
-  //               navigator.clipboard.writeText(piece._id);
-  //             }}
-  //           >
-  //             Copy piece id
-  //           </DropdownMenuItem>
-  //           <DropdownMenuSeparator />
-  //           <DropdownMenuItem>View Piece</DropdownMenuItem>
-  //           <DropdownMenuItem>View piece details</DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     );
-  //   },
-  // },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ table, row }) => {
+      let meta;
+      if (table.options.meta) meta = table.options.meta as any;
+      const [open, setOpen] = useState<boolean>(false);
+      const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+      return (
+        <div>
+          <DropdownMenu open={open} onOpenChange={setOpen}>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className=" bg-background">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => {
+                  setDialogOpen(!dialogOpen);
+                  setOpen(!open);
+                }}
+              >
+                Edit Piece
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Delete Piece</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {/* outside of dropdown to keep open after selected- DialogContents loaded to allow for use of state var here */}
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogContent>
+              <PieceFormDialogContents
+                setOpen={setDialogOpen}
+                piece={row.original}
+                handleSubmit={meta.handleEditPiece}
+              />
+            </DialogContent>
+          </Dialog>
+        </div>
+      );
+    },
+  },
 ];
