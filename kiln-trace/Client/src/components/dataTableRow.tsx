@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import PieceFormDialogContents from "./pieceFormDialogContents";
-import { flexRender } from "@tanstack/react-table";
 import { TableCell, TableRow } from "./ui/table";
+import { flexRender } from "@tanstack/react-table";
+
+import PieceFormDialogContents from "./pieceFormDialogContents";
 
 function DataTableRow({ row, table }: { row: any; table: any }) {
   const [open, setOpen] = useState<boolean>(false);
   const meta = table.options.meta;
-
-  //   useEffect(() => console.log(open), [open]);
-  //   error where dialog wont close by click outside window unless clicked and held
 
   return (
     <>

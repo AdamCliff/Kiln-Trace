@@ -16,7 +16,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
   const [actions] = cells.filter((cell: any) => cell.column.id === "actions");
 
   return (
-    <div>
+    <>
       <div className="relative flex flex-col justify-center border border-primary desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
         <div className="absolute top-2 left-2">
           {flexRender(select.column.columnDef.cell, select.getContext())}
@@ -52,7 +52,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
           />
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }
 

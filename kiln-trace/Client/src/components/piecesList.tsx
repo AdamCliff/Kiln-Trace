@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { DataTable } from "./ui/dataTable";
-import { DataTableWithCards } from "./ui/dataTableWithCards";
+import PiecesDataTable from "./piecesDataTable";
 
 import { Piece } from "@/types/piece";
 import { pieceColumns } from "./pieceTableColumns";
@@ -34,8 +33,7 @@ function PiecesList() {
   return (
     <>
       <div className="w-full h-full">
-        {/* <DataTable columns={pieceColumns} data={pieces} /> */}
-        <DataTableWithCards columns={pieceColumns} data={pieces} />
+        <PiecesDataTable columns={pieceColumns} data={pieces} />
       </div>
     </>
   );

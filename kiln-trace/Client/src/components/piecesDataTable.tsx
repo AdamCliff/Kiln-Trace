@@ -1,4 +1,4 @@
-import { /* useEffect, */ useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   ColumnDef,
@@ -14,12 +14,6 @@ import {
 } from "@tanstack/react-table";
 
 import {
-  RankingInfo,
-  rankItem,
-  compareItems,
-} from "@tanstack/match-sorter-utils";
-
-import {
   Table,
   TableBody,
   TableCell,
@@ -27,17 +21,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/layoutSwitch";
 import { Checkbox } from "@/components/ui/checkbox";
-// import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import {
   getCurrentStage,
@@ -45,7 +38,7 @@ import {
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
-import { fuzzyFilter, fuzzySort } from "@/helpers/tableFilterFunctions";
+import { fuzzyFilter } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTableCard";
@@ -58,7 +51,7 @@ interface DataTableProps<TData, TValue> {
   // when is it TData[], in piecesList.tsx, the data param throws an error
 }
 
-export function DataTableWithCards<TData, TValue>({
+function PiecesDataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -70,8 +63,6 @@ export function DataTableWithCards<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
-  // const [rowVisibleColumns, setRowVisibleColumns] = useState<>();
-  // const [open, setOpen] = useState<boolean>(false);
 
   const table = useReactTable({
     data,
@@ -104,20 +95,6 @@ export function DataTableWithCards<TData, TValue>({
         handleEditPiece(piece, dispatch),
     },
   });
-  {
-    /* make the filter global- check tanstack global filtering */
-  }
-
-  // let meta: any;
-  // if (table.options.meta) meta = table.options.meta as any;
-
-  useEffect(() => {
-    if (table.getState().columnFilters[0]?.id === "title") {
-      if (table.getState().sorting[0]?.id !== "title") {
-        table.setSorting([{ id: "title", desc: false }]);
-      }
-    }
-  }, [table.getState().columnFilters[0]?.id]);
 
   return (
     <div>
@@ -129,14 +106,6 @@ export function DataTableWithCards<TData, TValue>({
             onChange={(e) => setGlobalFilter(String(e.target.value))}
             className="w-96"
           />
-          {/* <Input
-            placeholder="Filter titles..."
-            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-            onChange={(e) =>
-              table.getColumn("title")?.setFilterValue(e.target.value)
-            }
-            className="w-96"
-          /> */}
           <div>date range picker</div>
         </div>
 
@@ -265,3 +234,5 @@ export function DataTableWithCards<TData, TValue>({
     </div>
   );
 }
+
+export default PiecesDataTable;
