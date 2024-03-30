@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
@@ -7,28 +7,19 @@ import PieceFormDialogContents from "./pieceFormDialogContents";
 
 // change type later
 function PieceFormDialog({
-  // className = "",
   piece,
   handleSubmit,
 }: {
-  // className?: string;
   piece: any;
   handleSubmit: (piece: Piece, dispatch: React.Dispatch<any>) => Promise<any>;
 }) {
   const [open, setOpen] = useState<boolean>(false);
-  // const [cn, setCn] = useState<string>();
-
-  // useEffect(() => {
-  //   console.log(className);
-  //   setCn(className);
-  //   console.log(cn);
-  // }, []);
 
   return (
     <>
       <div id="new-piece-form">
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger /* className={cn} */>Edit Piece</DialogTrigger>
+          <DialogTrigger>Edit Piece</DialogTrigger>
           <DialogContent>
             <PieceFormDialogContents
               setOpen={setOpen}

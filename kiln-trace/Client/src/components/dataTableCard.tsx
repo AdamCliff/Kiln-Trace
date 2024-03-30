@@ -38,10 +38,10 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
             </span>
             <span>{row.original.artist ? row.original.artist : "-"}</span>
           </div>
-          <div className="absolute bottom-2 right-2">
-            {flexRender(actions.column.columnDef.cell, actions.getContext())}
-          </div>
         </button>
+        <div className="absolute bottom-2 right-2">
+          {flexRender(actions.column.columnDef.cell, actions.getContext())}
+        </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>

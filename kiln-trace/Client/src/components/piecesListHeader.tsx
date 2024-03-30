@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { handleNewPiece } from "@/helpers/pieceHelperFunctions";
-import PieceFormDialog from "./pieceFormDialogContents";
+import PieceFormDialogContents from "./pieceFormDialogContents";
 import { usePieceContext } from "@/context/piecesContext";
 
 function PieceListHeader() {
@@ -52,7 +52,7 @@ function PieceListHeader() {
               </svg>
             </DialogTrigger>
             <DialogContent>
-              <PieceFormDialog
+              <PieceFormDialogContents
                 setOpen={setOpen}
                 piece={undefined}
                 handleSubmit={handleNewPiece}

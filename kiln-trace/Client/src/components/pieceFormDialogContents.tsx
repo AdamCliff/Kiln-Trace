@@ -109,7 +109,7 @@ function PieceFormDialogContents({
 
   return (
     <>
-      <div id="new-piece-form">
+      <div id="piece-form">
         <DialogHeader className="mb-4">
           <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>
