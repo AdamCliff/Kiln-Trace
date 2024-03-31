@@ -47,14 +47,26 @@ const PieceSchema = new Schema(
       type: Date,
       required: false,
     },
+    // property additions, must be calculated somehow
+    // stage: {
+    //   type: String,
+    //   required: false,
+    // },
+    // date: {
+    //   type: Date,
+    //   required: false,
+    // },
+    // custom type for array
     form: {
       type: String,
       required: false,
     },
+    // custom type for array
     method: {
       type: String,
       required: false,
     },
+    // custom type for array
     material: {
       type: String,
       required: false,
@@ -75,6 +87,13 @@ const PieceSchema = new Schema(
       type: Number,
       required: false,
     },
+    // property additions, must be created somehow
+    // dimensions: {
+    //   type: String,
+    //   required: false,
+    // },
+    // custom type for in and out array of glazes on over and underglazes
+    // over and underglazes must be arrays of two types, in and out
     overglaze: {
       type: [String],
       required: false,
@@ -83,10 +102,16 @@ const PieceSchema = new Schema(
       type: [String],
       required: false,
     },
+    // slip: {
+    //   type: String,
+    //   required: false,
+    // },
+    // IMAGES MUST BE CHANGED TO HAVE THE PROPER DATA AND UPLOAD PROCESS
     photos: {
       type: String,
       required: false,
     },
+    // ??custom type for array??
     artist: {
       type: String,
       required: false,

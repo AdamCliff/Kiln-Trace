@@ -28,7 +28,6 @@ function PiecesList() {
       fetchData();
     }
   }, [pieces]);
-  // ^was dispatch
 
   return (
     <>
