@@ -52,8 +52,9 @@ function PieceFormDialogContents({
   const [height, setHeight] = useState<number>(piece?.height);
   const [width, setWidth] = useState<number>(piece?.width);
   const [pieceLength, setPieceLength] = useState<number>(piece?.pieceLength);
-  const [overglaze, setOverglaze] = useState<string[]>(piece?.overglaze);
+  const [glaze, setGlaze] = useState<string[]>(piece?.overglaze);
   const [underglaze, setUnderglaze] = useState<string[]>(piece?.underglaze);
+  const [slip, setSlip] = useState<string[]>(piece?.slip);
   const [photos, setPhotos] = useState<string>(piece?.photos);
   const [artist, setArtist] = useState<string>(piece?.artist);
   const [notes, setNotes] = useState<string>(piece?.notes);
@@ -81,8 +82,9 @@ function PieceFormDialogContents({
     height,
     width,
     pieceLength,
-    overglaze,
+    glaze,
     underglaze,
+    slip,
     photos,
     artist,
     notes,
@@ -386,13 +388,13 @@ function PieceFormDialogContents({
               <AccordionContent>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="overglaze">Overglaze</label>
+                    <label htmlFor="overglaze">Glaze</label>
                     <input
                       type="text"
                       name="overglaze"
                       id="overglaze"
-                      onChange={(e) => setOverglaze([e.target.value])}
-                      value={overglaze}
+                      onChange={(e) => setGlaze([e.target.value])}
+                      value={glaze}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -404,6 +406,17 @@ function PieceFormDialogContents({
                       id="underglaze"
                       onChange={(e) => setUnderglaze([e.target.value])}
                       value={underglaze}
+                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="slip">Slip</label>
+                    <input
+                      type="text"
+                      name="slip"
+                      id="slip"
+                      onChange={(e) => setSlip([e.target.value])}
+                      value={slip}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>

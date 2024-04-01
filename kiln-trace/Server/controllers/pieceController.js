@@ -34,8 +34,9 @@ const createPiece = async (req, res) => {
     height,
     width,
     pieceLength,
-    overglaze,
+    /* over */ glaze,
     underglaze,
+    slip,
     photos,
     artist,
     notes,
@@ -60,13 +61,13 @@ const createPiece = async (req, res) => {
       height,
       width,
       pieceLength,
-      overglaze,
+      /* over */ glaze,
       underglaze,
+      slip,
       photos,
       artist,
       notes,
     });
-    console.log(piece);
     res.status(201).json(piece);
   } catch (error) {
     res.status(400).json({ error: error.message });
