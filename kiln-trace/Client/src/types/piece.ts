@@ -13,6 +13,8 @@ export interface Piece {
   glazedDate: Date | undefined;
   fired: boolean;
   firedDate: Date | undefined;
+  stage?: string | undefined;
+  date?: string | undefined;
   form: string;
   method: string;
   material: string;
@@ -20,10 +22,16 @@ export interface Piece {
   height: number;
   pieceLength: number;
   width: number;
+  dimensions?: number | undefined;
   notes: string;
-  /* over */ glaze: string[];
-  underglaze: string[];
-  slip: string[];
+  glaze: GlazeLayer;
+  underglaze: GlazeLayer;
+  slip: GlazeLayer;
   __v: number;
   _id: string;
+}
+
+export interface GlazeLayer {
+  inner: string[];
+  outer: string[];
 }

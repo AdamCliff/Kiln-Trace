@@ -11,7 +11,7 @@ import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
 
 import { usePieceContext } from "../context/piecesContext";
-import { Piece } from "@/types/piece";
+import { Piece, GlazeLayer } from "@/types/piece";
 
 // change type later
 function PieceFormDialogContents({
@@ -24,7 +24,14 @@ function PieceFormDialogContents({
   handleSubmit: (piece: Piece, dispatch: React.Dispatch<any>) => Promise<any>;
 }) {
   // piece object state variables
+  // ----------------------------
+  // general info about the piece
   const [title, setTitle] = useState<string>(piece?.title);
+  const [artist, setArtist] = useState<string>(piece?.artist);
+  const [photos, setPhotos] = useState<string>(piece?.photos);
+  const [notes, setNotes] = useState<string>(piece?.notes);
+
+  // piece stage
   const [formed, setFormed] = useState<boolean>(piece?.formed);
   const [formedDate, setFormedDate] = useState<Date | undefined>(
     piece ? piece.formedDate : undefined
@@ -45,21 +52,52 @@ function PieceFormDialogContents({
   const [firedDate, setFiredDate] = useState<Date | undefined>(
     piece ? piece.firedDate : undefined
   );
+
+  // what the piece is
   const [method, setMethod] = useState<string>(piece?.method);
   const [form, setForm] = useState<string>(piece?.form);
   const [material, setMaterial] = useState<string>(piece?.material);
+
+  // measurements of the piece
   const [weight, setWeight] = useState<number>(piece?.weight);
   const [height, setHeight] = useState<number>(piece?.height);
   const [width, setWidth] = useState<number>(piece?.width);
   const [pieceLength, setPieceLength] = useState<number>(piece?.pieceLength);
-  const [glaze, setGlaze] = useState<string[]>(piece?.overglaze);
-  const [underglaze, setUnderglaze] = useState<string[]>(piece?.underglaze);
-  const [slip, setSlip] = useState<string[]>(piece?.slip);
-  const [photos, setPhotos] = useState<string>(piece?.photos);
-  const [artist, setArtist] = useState<string>(piece?.artist);
-  const [notes, setNotes] = useState<string>(piece?.notes);
+
+  // glazes used in the piece, divided between inner and outer
+  const [glazeInner, setGlazeInner] = useState<string[]>(piece?.glaze.inner);
+  const [glazeOuter, setGlazeOuter] = useState<string[]>(piece?.glaze.outer);
+  const [underglazeInner, setUnderglazeInner] = useState<string[]>(
+    piece?.underglaze.inner
+  );
+  const [underglazeOuter, setUnderglazeOuter] = useState<string[]>(
+    piece?.underglaze.outer
+  );
+  const [slipInner, setSlipInner] = useState<string[]>(piece?.slip.inner);
+  const [slipOuter, setSlipOuter] = useState<string[]>(piece?.slip.outer);
+
+  // piece identification
   const [_id, set_id] = useState<string>(piece?._id);
   const [__v, set__v] = useState<number>(piece?.__v);
+
+  // initial glaze states
+  const glazeState: GlazeLayer = {
+    inner: glazeInner,
+    outer: glazeOuter,
+  };
+  const underglazeState: GlazeLayer = {
+    inner: underglazeInner,
+    outer: underglazeOuter,
+  };
+  const slipState: GlazeLayer = {
+    inner: slipInner,
+    outer: slipOuter,
+  };
+
+  // glaze variables based on initial states
+  const [glaze, setGlaze] = useState<GlazeLayer>(glazeState);
+  const [underglaze, setUnderglaze] = useState<GlazeLayer>(underglazeState);
+  const [slip, setSlip] = useState<GlazeLayer>(slipState);
 
   const { dispatch } = usePieceContext();
 
@@ -108,6 +146,23 @@ function PieceFormDialogContents({
   useEffect(() => {
     firedDate && !fired ? setFired((fired) => !fired) : "";
   }, [firedDate]);
+
+  // when a glaze is changed, update state interfaces
+  useEffect(() => {
+    glazeState.inner = glazeInner;
+    glazeState.outer = glazeOuter;
+    setGlaze(glazeState);
+  }, [glazeInner, glazeOuter]);
+  useEffect(() => {
+    underglazeState.inner = underglazeInner;
+    underglazeState.outer = underglazeOuter;
+    setUnderglaze(underglazeState);
+  }, [underglazeInner, underglazeOuter]);
+  useEffect(() => {
+    slipState.inner = slipInner;
+    slipState.outer = slipOuter;
+    setSlip(slipState);
+  }, [slipInner, slipOuter]);
 
   return (
     <>
@@ -380,7 +435,14 @@ function PieceFormDialogContents({
             type="single"
             collapsible
             defaultValue={
-              piece?.overglaze[0] || piece?.underglaze[0] ? "glazes" : ""
+              piece?.glaze.inner[0] ||
+              piece?.glaze.outer[0] ||
+              piece?.underglaze.inner[0] ||
+              piece?.underglaze.outer[0] ||
+              piece?.slip.inner[0] ||
+              piece?.slip.outer[0]
+                ? "glazes"
+                : ""
             }
           >
             <AccordionItem value="glazes">
@@ -388,35 +450,70 @@ function PieceFormDialogContents({
               <AccordionContent>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="overglaze">Glaze</label>
+                    <label htmlFor="glazeInner">Inner Glaze</label>
                     <input
                       type="text"
-                      name="overglaze"
-                      id="overglaze"
-                      onChange={(e) => setGlaze([e.target.value])}
-                      value={glaze}
+                      name="glazeInner"
+                      id="glazeInner"
+                      onChange={(e) => setGlazeInner([e.target.value])}
+                      value={glazeInner}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="underglaze">Underglaze</label>
+                    <label htmlFor="underglazeInner">Inner Underglaze</label>
                     <input
                       type="text"
-                      name="underglaze"
-                      id="underglaze"
-                      onChange={(e) => setUnderglaze([e.target.value])}
-                      value={underglaze}
+                      name="underglazeInner"
+                      id="underglazeInner"
+                      onChange={(e) => setUnderglazeInner([e.target.value])}
+                      value={underglazeInner}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="slip">Slip</label>
+                    <label htmlFor="slipInner">Inner Slip</label>
                     <input
                       type="text"
-                      name="slip"
-                      id="slip"
-                      onChange={(e) => setSlip([e.target.value])}
-                      value={slip}
+                      name="slipInner"
+                      id="slipInner"
+                      onChange={(e) => setSlipInner([e.target.value])}
+                      value={slipInner}
+                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="glazeOuter">Outer Glaze</label>
+                    <input
+                      type="text"
+                      name="glazeOuter"
+                      id="glazeOuter"
+                      onChange={(e) => setGlazeOuter([e.target.value])}
+                      value={glazeOuter}
+                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="underglazeOuter">Outer Underglaze</label>
+                    <input
+                      type="text"
+                      name="underglazeOuter"
+                      id="underglazeOuter"
+                      onChange={(e) => setUnderglazeOuter([e.target.value])}
+                      value={underglazeOuter}
+                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="slipOuter">Outer Slip</label>
+                    <input
+                      type="text"
+                      name="slipOuter"
+                      id="slipOuter"
+                      onChange={(e) => setSlipOuter([e.target.value])}
+                      value={slipOuter}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>

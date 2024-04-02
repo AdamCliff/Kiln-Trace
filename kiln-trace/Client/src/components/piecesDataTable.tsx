@@ -33,8 +33,8 @@ import { Switch } from "@/components/ui/layoutSwitch";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import {
-  getCurrentStage,
-  getCurrentStageDate,
+  // getCurrentStage,
+  // getCurrentStageDate,
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
@@ -87,8 +87,8 @@ function PiecesDataTable<TData, TValue>({
     },
     meta: {
       dispatch: dispatch,
-      getCurrentStage: (piece: Piece) => getCurrentStage(piece),
-      getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
+      // getCurrentStage: (piece: Piece) => getCurrentStage(piece),
+      // getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
       handleDeletePiece: (id: string, dispatch: React.Dispatch<any>) =>
         handleDeletePiece(id, dispatch),
       handleEditPiece: (piece: Piece, dispatch: React.Dispatch<any>) =>

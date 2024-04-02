@@ -1,9 +1,6 @@
 import { useState } from "react";
-import {
-  getCurrentStage,
-  getCurrentStageDate,
-} from "@/helpers/pieceHelperFunctions";
 
+import { format } from "date-fns";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import PieceFormDialogContents from "./pieceFormDialogContents";
 import { flexRender } from "@tanstack/react-table";
@@ -33,8 +30,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
           <div className="flex flex-col items-start justify-around p-2 h-[35%]">
             <span>{row.original.title}</span>
             <span>
-              {getCurrentStage(row.original)} -{" "}
-              {getCurrentStageDate(row.original)}
+              {`${row.original.stage} - ${format(row.original.date, "MM/dd/yy")}`}
             </span>
             <span>{row.original.artist ? row.original.artist : "-"}</span>
           </div>

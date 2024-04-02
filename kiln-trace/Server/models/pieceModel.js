@@ -6,143 +6,269 @@ const PieceSchema = new Schema(
     title: {
       type: String,
       required: false,
+      default: () => {
+        return "Untitled";
+      },
     },
     formed: {
       type: Boolean,
       required: false,
+      default: () => {
+        return false;
+      },
     },
     formedDate: {
       type: Date,
       required: false,
+      default: () => {
+        return undefined;
+      },
     },
     trimmed: {
       type: Boolean,
       required: false,
+      default: () => {
+        return false;
+      },
     },
     trimmedDate: {
       type: Date,
       required: false,
+      default: () => {
+        return undefined;
+      },
     },
     bisqued: {
       type: Boolean,
       required: false,
+      default: () => {
+        return false;
+      },
     },
     bisquedDate: {
       type: Date,
       required: false,
+      default: () => {
+        return undefined;
+      },
     },
     glazed: {
       type: Boolean,
       required: false,
+      default: () => {
+        return false;
+      },
     },
     glazedDate: {
       type: Date,
       required: false,
+      default: () => {
+        return undefined;
+      },
     },
     fired: {
       type: Boolean,
       required: false,
+      default: () => {
+        return false;
+      },
     },
     firedDate: {
       type: Date,
       required: false,
-    },
-    stage: {
-      type: String,
-      required: false,
-    },
-    date: {
-      type: Date,
-      required: false,
+      default: () => {
+        return undefined;
+      },
     },
     form: {
       type: String,
       required: false,
+      default: () => {
+        return "";
+      },
     },
     method: {
       type: String,
       required: false,
+      default: () => {
+        return "";
+      },
     },
     material: {
       type: String,
       required: false,
+      default: () => {
+        return "";
+      },
     },
     width: {
       type: Number,
       required: false,
+      default: () => {
+        return 0;
+      },
     },
     pieceLength: {
       type: Number,
       required: false,
+      default: () => {
+        return 0;
+      },
     },
     height: {
       type: Number,
       required: false,
+      default: () => {
+        return 0;
+      },
     },
     weight: {
       type: Number,
       required: false,
-    },
-    dimensions: {
-      type: String,
-      required: false,
+      default: () => {
+        return "";
+      },
     },
     // custom type for in and out array of glazes on over and underglazes
     // over and underglazes must be arrays of two types, in and out
-    /* over */ glaze: {
-      type: [String],
-      required: false,
+    // glaze: {
+    //   type: [String],
+    //   required: false,
+    //   // default: () => {
+    //   //   return [];
+    //   // },
+    // },
+    // glaze: {
+    //   type: GlazeLayerSchema,
+    //   required: false,
+    //   // default: () => {
+    //   //   return [];
+    //   // },
+    // },
+    glaze: {
+      inner: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
+      outer: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
     },
+
+    // underglaze: {
+    //   type: [String],
+    //   required: false,
+    //   default: () => {
+    //     return [];
+    //   },
+    // },
     underglaze: {
-      type: [String],
-      required: false,
+      inner: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
+      outer: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
     },
+    // slip: {
+    //   type: [String],
+    //   required: false,
+    //   default: () => {
+    //     return [];
+    //   },
+    // },
     slip: {
-      type: [String],
-      required: false,
+      inner: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
+      outer: {
+        type: [String],
+        required: false,
+        default: () => {
+          return [];
+        },
+      },
     },
     // IMAGES MUST BE CHANGED TO HAVE THE PROPER DATA AND UPLOAD PROCESS
     photos: {
       type: String,
       required: false,
     },
-    // ??custom type for array??
     artist: {
       type: String,
       required: false,
+      default: () => {
+        return "";
+      },
     },
     notes: {
       type: String,
       required: false,
+      default: () => {
+        return "";
+      },
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+// const GlazeLayerSchema = new Schema({
+//   inner: {
+//     type: [String],
+//     required: false,
+//   },
+//   outer: {
+//     type: [String],
+//     required: false,
+//   },
+// });
+
 // dimensions field calculation
-PieceSchema.pre("save", (next) => {
-  this.dimensions = `${this.pieceLength} x ${this.width} x ${this.height}`;
-  next();
+PieceSchema.virtual("dimensions").get(function () {
+  return `${
+    this.pieceLength > 0 ? this.pieceLength : "-"
+  } x ${this.width > 0 ? this.width : "-"} x ${this.height > 0 ? this.height : "-"}`;
 });
 
 // stage field calculation
-PieceSchema.pre("save", (next) => {
-  if (this.formed) this.stage = "Formed";
-  if (this.trimmed) this.stage = "Trimmed";
-  if (this.bisqued) this.stage = "Bisqued";
-  if (this.glazed) this.stage = "Glazed";
-  if (this.fired) this.stage = "Fired";
-  next();
+PieceSchema.virtual("stage").get(function () {
+  let stage;
+  if (this.formed) stage = "Formed";
+  if (this.trimmed) stage = "Trimmed";
+  if (this.bisqued) stage = "Bisqued";
+  if (this.glazed) stage = "Glazed";
+  if (this.fired) stage = "Fired";
+  return stage;
 });
 
-// date field calculation
-PieceSchema.pre("save", (next) => {
-  if (this.formed) this.date = formedDate;
-  if (this.trimmed) this.date = trimmedDate;
-  if (this.bisqued) this.date = bisquedDate;
-  if (this.glazed) this.date = glazedDate;
-  if (this.fired) this.date = firedDate;
-  next();
+// stage field calculation
+PieceSchema.virtual("date").get(function () {
+  let date;
+  if (this.formed) date = this.formedDate;
+  if (this.trimmed) date = this.trimmedDate;
+  if (this.bisqued) date = this.bisquedDate;
+  if (this.glazed) date = this.glazedDate;
+  if (this.fired) date = this.firedDate;
+  return date;
 });
 
 const Piece = mongoose.model("piece", PieceSchema);

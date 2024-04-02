@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
 import PieceFormDialogContents from "./pieceFormDialogContents";
@@ -43,7 +44,6 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "date",
-    // header: "Date",
     header: ({ column }) => {
       return (
         <Button
@@ -55,13 +55,10 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </Button>
       );
     },
-    cell: ({ table, row }) => {
-      let meta;
-      if (table.options.meta) meta = table.options.meta as any;
-      const formattedDate = meta.getCurrentStageDate(row.original);
-      return <span>{formattedDate ? formattedDate : "-- / -- / --"}</span>;
+    cell: ({ row }) => {
+      return <>{row.original.date && format(row.original.date, "MM/dd/yy")}</>;
     },
-    sortingFn: "alphanumeric",
+    sortingFn: "datetime",
   },
   {
     accessorKey: "title",
@@ -78,16 +75,8 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "stage",
     header: "Stage",
-    cell: ({ table, row }) => {
-      let meta;
-      if (table.options.meta) meta = table.options.meta as any;
-      return (
-        <span>
-          {meta.getCurrentStage(row.original)
-            ? meta.getCurrentStage(row.original)
-            : "-"}
-        </span>
-      );
+    cell: ({ row }) => {
+      return <>{row.original.stage}</>;
     },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
@@ -118,26 +107,24 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     accessorKey: "dimensions",
     header: "Dimensions",
     cell: ({ row }) => {
-      return (
-        <span>
-          {row.original.pieceLength ? row.original.pieceLength : "-"}
-          {" x "}
-          {row.original.width ? row.original.width : "-"}
-          {" x "}
-          {row.original.height ? row.original.height : "-"}
-        </span>
-      );
+      return <>{row.original.dimensions}</>;
     },
   },
   {
-    accessorKey: "overglaze",
-    header: "Overglaze",
+    accessorKey: "glaze",
+    header: "Glaze",
+    cell: ({ row }) => {
+      return <>{row.original.glaze.inner}</>;
+    },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
   },
   {
     accessorKey: "underglaze",
     header: "Underglaze",
+    cell: ({ row }) => {
+      return <>{row.original.underglaze.inner}</>;
+    },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
   },
