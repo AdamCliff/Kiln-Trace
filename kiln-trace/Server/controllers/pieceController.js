@@ -6,7 +6,6 @@ const Piece = require("../models/pieceModel");
 const getPieces = async (req, res) => {
   try {
     const pieces = await Piece.find({}).select("+dimensions");
-    console.log(pieces);
     res.status(200).json(pieces);
   } catch (error) {
     console.log(error);

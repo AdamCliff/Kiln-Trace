@@ -1,29 +1,5 @@
-// import { format } from "date-fns";
 import { Piece } from "@/types/piece";
 import { actionTypes } from "@/context/actionEnums";
-
-// export const getCurrentStage = (piece: Piece) => {
-//   if (piece.fired) return "Fired";
-//   if (piece.glazed) return "Glazed";
-//   if (piece.bisqued) return "Bisqued";
-//   if (piece.trimmed) return "Trimmed";
-//   if (piece.formed) return "Formed";
-//   return "-";
-// };
-
-// export const getCurrentStageDate = (piece: Piece) => {
-//   let date: Date | undefined = undefined;
-//   if (piece.formed && piece.formedDate) date = new Date(piece.formedDate);
-//   if (piece.trimmed && piece.trimmedDate) date = new Date(piece.trimmedDate);
-//   if (piece.bisqued && piece.bisquedDate) date = new Date(piece.bisquedDate);
-//   if (piece.glazed && piece.glazedDate) date = new Date(piece.glazedDate);
-//   if (piece.fired && piece.firedDate) date = new Date(piece.firedDate);
-//   let formattedDate: string | undefined;
-//   date
-//     ? (formattedDate = format(date, "MM/dd/yy"))
-//     : (formattedDate = undefined);
-//   return formattedDate;
-// };
 
 export const handleDeletePiece = async (
   id: String,

@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const PieceRoutes = require("./routes/pieceRoutes");
+const PresetRoutes = require("./routes/presetRoutes");
 
 // express app
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routing
 app.use("/", PieceRoutes);
+app.use("/", PresetRoutes);
 
 // connect to db
 mongoose

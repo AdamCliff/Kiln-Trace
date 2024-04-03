@@ -6,6 +6,10 @@ import { Piece } from "@/types/piece";
 import { pieceColumns } from "./pieceTableColumns";
 import { usePieceContext } from "@/context/piecesContext";
 import { actionTypes } from "@/context/actionEnums";
+import {
+  handleGetPresets,
+  handleSetDefaultPresets,
+} from "@/helpers/presetHelperFunctions";
 
 function PiecesList() {
   const { pieces, dispatch } = usePieceContext();
@@ -26,6 +30,39 @@ function PiecesList() {
       };
 
       fetchData();
+    }
+  }, [pieces]);
+
+  const shouldRun2 = useRef(true);
+  useEffect(() => {
+    if (shouldRun2.current) {
+      shouldRun2.current = false;
+      const setData = async () => {
+        try {
+          await handleSetDefaultPresets();
+        } catch (error) {
+          console.error(`Failed to set default presets: ${error}`);
+        }
+      };
+
+      setData();
+    }
+  }, [pieces]);
+
+  const shouldRun3 = useRef(true);
+  useEffect(() => {
+    if (shouldRun3.current) {
+      shouldRun3.current = false;
+      const setData = async () => {
+        try {
+          const [presets] = await handleGetPresets();
+          console.log(presets);
+        } catch (error) {
+          console.error(`Failed to get presets: ${error}`);
+        }
+      };
+
+      setData();
     }
   }, [pieces]);
 
