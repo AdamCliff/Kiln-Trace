@@ -2,34 +2,6 @@ const mongoose = require("mongoose");
 
 const PieceDataPresets = require("../models/pieceDataPresetsModel");
 
-// // initialize default presets in the db
-// const setDefaultPresets = async (req, res) => {
-//   try {
-//     // check if presets exist
-//     const piecePresets = await PieceDataPresets.find({});
-//     if (!piecePresets[0]) {
-//       const presets = new PieceDataPresets();
-//       await presets.save();
-//       res.status(200).json(presets);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
-// // gets a list of all presets from the db
-// const getPiecePresets = async (req, res) => {
-//   try {
-//     const piecePresets = await PieceDataPresets.find({});
-//     console.log(piecePresets);
-//     res.status(200).json(piecePresets);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
 const loadPiecePresets = async (req, res) => {
   try {
     // check if presets exist
@@ -40,6 +12,11 @@ const loadPiecePresets = async (req, res) => {
       await presets.save();
       piecePresets = await PieceDataPresets.find({});
       res.status(200).json(piecePresets);
+    } else if (piecePresets.length > 1) {
+      // if multiple preset objects return, throw error
+      const error = new Error("Multiple preset objects found");
+      console.error(error);
+      res.status(409).json(error);
     } else {
       // if presets to exist, return
       res.status(200).json(piecePresets);

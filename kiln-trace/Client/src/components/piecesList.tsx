@@ -35,23 +35,6 @@ function PiecesList() {
     }
   }, [pieces]);
 
-  // // set presets if they havent been set
-  // const shouldRun2 = useRef(true);
-  // useEffect(() => {
-  //   if (shouldRun2.current) {
-  //     shouldRun2.current = false;
-  //     const setData = async () => {
-  //       try {
-  //         await handleSetDefaultPresets();
-  //       } catch (error) {
-  //         console.error(`Failed to set default presets: ${error}`);
-  //       }
-  //     };
-
-  //     setData();
-  //   }
-  // }, []);
-
   // laod presets
   const shouldRun3 = useRef(true);
   useEffect(() => {
