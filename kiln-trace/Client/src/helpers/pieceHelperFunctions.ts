@@ -1,6 +1,17 @@
 import { Piece } from "@/types/piece";
 import { actionTypes } from "@/context/pieceActionEnums";
 
+export const handleLoadPieces = async (dispatch: React.Dispatch<any>) => {
+  try {
+    const res: Response = await fetch("http://localhost:3000/pieces");
+    const data: Piece[] | undefined = await res.json();
+
+    dispatch({ type: actionTypes.LOAD_PIECES, payload: data });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const handleDeletePiece = async (
   id: String,
   dispatch: React.Dispatch<any>

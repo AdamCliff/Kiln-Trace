@@ -5,16 +5,17 @@ const router = express.Router();
 const {
   setDefaultPresets,
   getPiecePresets,
+  loadPiecePresets,
 } = require("../controllers/pieceDataPresetsController");
 
 // set defaults initially
-router.post("/presets-new", setDefaultPresets);
+// router.post("/presets-new", setDefaultPresets);
 
 // create a new piece
 // router.post("/presets", createPiece);
 
 // get list of pieces
-router.get("/presets", getPiecePresets);
+router.get("/presets", loadPiecePresets);
 
 // update a piece
 // router.put("/pieces/:id", (req, res) => {

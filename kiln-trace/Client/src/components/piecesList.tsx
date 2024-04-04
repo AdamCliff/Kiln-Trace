@@ -10,23 +10,22 @@ import { actionTypes } from "@/context/pieceActionEnums";
 import { presetActionTypes } from "@/context/presetActionEnums";
 import {
   handleGetPresets,
-  handleSetDefaultPresets,
+  // handleSetDefaultPresets,
 } from "@/helpers/presetHelperFunctions";
+import { handleLoadPieces } from "@/helpers/pieceHelperFunctions";
 
 function PiecesList() {
   const { pieces, dispatch } = usePieceContext();
   const { presets, dispatch: presetsDispatch } = usePresetsContext();
 
+  // load pieces
   const shouldRun = useRef(true);
   useEffect(() => {
     if (shouldRun.current) {
       shouldRun.current = false;
       const fetchData = async () => {
         try {
-          const res: Response = await fetch("http://localhost:3000/pieces");
-          const data: Piece[] | undefined = await res.json();
-
-          dispatch({ type: actionTypes.LOAD_PIECES, payload: data });
+          await handleLoadPieces(dispatch);
         } catch (error) {
           console.error(`Failed to fetch piece list: ${error}`);
         }
@@ -36,22 +35,24 @@ function PiecesList() {
     }
   }, [pieces]);
 
-  const shouldRun2 = useRef(true);
-  useEffect(() => {
-    if (shouldRun2.current) {
-      shouldRun2.current = false;
-      const setData = async () => {
-        try {
-          await handleSetDefaultPresets();
-        } catch (error) {
-          console.error(`Failed to set default presets: ${error}`);
-        }
-      };
+  // // set presets if they havent been set
+  // const shouldRun2 = useRef(true);
+  // useEffect(() => {
+  //   if (shouldRun2.current) {
+  //     shouldRun2.current = false;
+  //     const setData = async () => {
+  //       try {
+  //         await handleSetDefaultPresets();
+  //       } catch (error) {
+  //         console.error(`Failed to set default presets: ${error}`);
+  //       }
+  //     };
 
-      setData();
-    }
-  }, [pieces]);
+  //     setData();
+  //   }
+  // }, []);
 
+  // laod presets
   const shouldRun3 = useRef(true);
   useEffect(() => {
     if (shouldRun3.current) {
@@ -59,12 +60,10 @@ function PiecesList() {
       const setData = async () => {
         try {
           const [presets] = await handleGetPresets();
-          console.log(presets);
           presetsDispatch({
             type: presetActionTypes.LOAD_PRESETS,
             payload: presets,
           });
-          console.log(presets);
         } catch (error) {
           console.error(`Failed to get presets: ${error}`);
         }
@@ -72,7 +71,7 @@ function PiecesList() {
 
       setData();
     }
-  }, [pieces]);
+  }, [presets]);
 
   return (
     <>
