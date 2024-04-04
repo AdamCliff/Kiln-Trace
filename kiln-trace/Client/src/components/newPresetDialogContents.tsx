@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { DialogClose } from "@/components/ui/dialog";
 
+import { handleNewPreset } from "@/helpers/presetHelperFunctions";
+
 function NewPresetDialogContents({
   setIsOpen,
   presetName,
@@ -15,7 +17,6 @@ function NewPresetDialogContents({
     <>
       <div>
         <form action="#" className="flex flex-col gap-2">
-          {/* <label htmlFor="preset">{"a preset name"}</label> */}
           <input
             type="text"
             placeholder={"New " + presetName + " name..."}
