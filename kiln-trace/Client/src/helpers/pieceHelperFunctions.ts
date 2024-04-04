@@ -1,5 +1,5 @@
 import { Piece } from "@/types/piece";
-import { actionTypes } from "@/context/actionEnums";
+import { actionTypes } from "@/context/pieceActionEnums";
 
 export const handleDeletePiece = async (
   id: String,

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, ReactNode, useReducer } from "react";
 
-import { actionTypes, actions } from "./actionEnums";
+import { actionTypes, actions } from "./pieceActionEnums";
 import { Piece } from "@/types/piece";
 
 const initialState = {

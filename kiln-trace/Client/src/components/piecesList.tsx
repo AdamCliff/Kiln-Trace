@@ -5,7 +5,9 @@ import PiecesDataTable from "./piecesDataTable";
 import { Piece } from "@/types/piece";
 import { pieceColumns } from "./pieceTableColumns";
 import { usePieceContext } from "@/context/piecesContext";
-import { actionTypes } from "@/context/actionEnums";
+import { usePresetsContext } from "@/context/presetsContext";
+import { actionTypes } from "@/context/pieceActionEnums";
+import { presetActionTypes } from "@/context/presetActionEnums";
 import {
   handleGetPresets,
   handleSetDefaultPresets,
@@ -13,6 +15,7 @@ import {
 
 function PiecesList() {
   const { pieces, dispatch } = usePieceContext();
+  const { presets, dispatch: presetsDispatch } = usePresetsContext();
 
   const shouldRun = useRef(true);
   useEffect(() => {
@@ -56,6 +59,11 @@ function PiecesList() {
       const setData = async () => {
         try {
           const [presets] = await handleGetPresets();
+          console.log(presets);
+          presetsDispatch({
+            type: presetActionTypes.LOAD_PRESETS,
+            payload: presets,
+          });
           console.log(presets);
         } catch (error) {
           console.error(`Failed to get presets: ${error}`);

@@ -6,11 +6,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectLabel,
+  SelectGroup,
+  SelectSeparator,
+} from "@/components/ui/select";
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
 
 import { usePieceContext } from "../context/piecesContext";
+import { usePresetsContext } from "@/context/presetsContext";
 import { Piece, GlazeLayer } from "@/types/piece";
 
 // change type later
@@ -100,6 +111,7 @@ function PieceFormDialogContents({
   const [slip, setSlip] = useState<GlazeLayer>(slipState);
 
   const { dispatch } = usePieceContext();
+  const { presets } = usePresetsContext();
 
   const pieceObject = {
     title,
@@ -335,36 +347,99 @@ function PieceFormDialogContents({
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="form">Form</label>
-                    <input
+                    {/* <input
                       type="text"
                       name="form"
                       id="form"
                       onChange={(e) => setForm(e.target.value)}
                       value={form}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
+                    /> */}
+                    <Select
+                      onValueChange={(value) => setForm(value)}
+                      value={form}
+                    >
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select a form" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {presets?.formPresets.map((form) => {
+                          return (
+                            <SelectItem
+                              key={form}
+                              value={form}
+                              className="capitalize"
+                            >
+                              {form}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="method">Method</label>
-                    <input
+                    {/* <input
                       type="text"
                       name="method"
                       id="pinch-made"
                       onChange={(e) => setMethod(e.target.value)}
                       value={method}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
+                    /> */}
+                    <Select
+                      onValueChange={(value) => setMethod(value)}
+                      value={method}
+                    >
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select a method" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {presets?.methodPresets.map((method) => {
+                          return (
+                            <SelectItem
+                              key={method}
+                              value={method}
+                              className="capitalize"
+                            >
+                              {method}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="material">Material</label>
-                    <input
+                    {/* <input
                       type="text"
                       name="material"
                       id="material"
                       onChange={(e) => setMaterial(e.target.value)}
                       value={material}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
+                    /> */}
+                    <Select
+                      onValueChange={(value) => setMaterial(value)}
+                      value={material}
+                    >
+                      <SelectTrigger className="w-40">
+                        <SelectValue placeholder="Select a material" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {presets?.materialPresets.map((material) => {
+                          return (
+                            <SelectItem
+                              key={material}
+                              value={material}
+                              className="capitalize"
+                            >
+                              {material}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </AccordionContent>
