@@ -36,10 +36,10 @@ function PiecesList() {
   }, [pieces]);
 
   // laod presets
-  const shouldRun3 = useRef(true);
+  const shouldRun2 = useRef(true);
   useEffect(() => {
-    if (shouldRun3.current) {
-      shouldRun3.current = false;
+    if (shouldRun2.current) {
+      shouldRun2.current = false;
       const setData = async () => {
         try {
           const [presets] = await handleGetPresets();

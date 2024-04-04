@@ -16,13 +16,21 @@ import {
   SelectGroup,
   SelectSeparator,
 } from "@/components/ui/select";
-import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import {
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+  Dialog,
+} from "@/components/ui/dialog";
 import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
 
 import { usePieceContext } from "../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
 import { Piece, GlazeLayer } from "@/types/piece";
+import NewPresetDialogContents from "./newPresetDialogContents";
+import NewPresetDialog from "./newPresetDialog";
+import { DialogContent, DialogTrigger } from "@radix-ui/react-dialog";
 
 // change type later
 function PieceFormDialogContents({
@@ -438,6 +446,10 @@ function PieceFormDialogContents({
                             </SelectItem>
                           );
                         })}
+                        <SelectSeparator className="border-b mx-auto w-[95%]" />
+                        <div className="flex items-center justify-center">
+                          <NewPresetDialog presetName={"material"} />
+                        </div>
                       </SelectContent>
                     </Select>
                   </div>
