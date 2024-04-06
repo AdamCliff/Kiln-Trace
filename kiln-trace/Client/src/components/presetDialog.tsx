@@ -7,9 +7,20 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 
-import NewPresetDialogContents from "./newPresetDialogContents";
+import PresetDialogContents from "./presetDialogContents";
 
-function NewPresetDialog({ presetName }: { presetName: string }) {
+function PresetDialog({
+  presetName,
+  presetCategory,
+  handleSubmit,
+}: {
+  presetName: string;
+  presetCategory: string;
+  handleSubmit: (
+    presetName: string | undefined,
+    presetCategory: string
+  ) => Promise<void>;
+}) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -21,9 +32,11 @@ function NewPresetDialog({ presetName }: { presetName: string }) {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>{"Enter new " + presetName}</DialogHeader>
-            <NewPresetDialogContents
+            <PresetDialogContents
               setIsOpen={setIsOpen}
               presetName={presetName}
+              presetCategory={presetCategory}
+              handleSubmit={handleSubmit}
             />
           </DialogContent>
         </Dialog>
@@ -32,4 +45,4 @@ function NewPresetDialog({ presetName }: { presetName: string }) {
   );
 }
 
-export default NewPresetDialog;
+export default PresetDialog;

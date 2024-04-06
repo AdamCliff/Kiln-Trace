@@ -27,8 +27,23 @@ const loadPiecePresets = async (req, res) => {
   }
 };
 
+// create new piece preset in specified category
+const createPiecePreset = async (req, res) => {
+  try {
+    const { presetName, presetCategory } = req.body;
+
+    const [presets] = await PieceDataPresets.find({});
+    presets[presetCategory].push(presetName);
+    const [newPresets] = await presets.save();
+
+    res.status(200).json(newPresets);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // updates a specified list of presets in the db
-const editPiecePresets = async (req, res) => {
+const editPiecePreset = async (req, res) => {
   try {
     //   const { id } = req.params;
     //   const updatedPiece = await Piece.findByIdAndUpdate(id, req.body, {
@@ -41,9 +56,17 @@ const editPiecePresets = async (req, res) => {
   }
 };
 
+// removes a specified preset in specified category
+const removePiecePreset = async (req, res) => {
+  try {
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   // getPiecePresets,
-  editPiecePresets,
-  // setDefaultPresets,
   loadPiecePresets,
+  createPiecePreset,
+  editPiecePreset,
 };

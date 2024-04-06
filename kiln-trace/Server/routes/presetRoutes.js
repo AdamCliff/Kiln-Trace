@@ -3,16 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  setDefaultPresets,
-  getPiecePresets,
   loadPiecePresets,
+  createPiecePreset,
 } = require("../controllers/pieceDataPresetsController");
 
 // set defaults initially
 // router.post("/presets-new", setDefaultPresets);
 
 // create a new piece
-// router.post("/presets", createPiece);
+router.post("/presets", createPiecePreset);
 
 // get list of pieces
 router.get("/presets", loadPiecePresets);

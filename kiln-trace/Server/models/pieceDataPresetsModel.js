@@ -58,6 +58,17 @@ const PieceDataPresetsSchema = new Schema({
   artist: { type: [String], required: false },
 });
 
+// const Preset = new Schema({
+//   preset: {
+//     type: String,
+//     required: true,
+//   },
+//   id: {
+//     type: String,
+//     required: true,
+//   },
+// });
+
 const PieceDataPresets = mongoose.model(
   "pieceDataPresets",
   PieceDataPresetsSchema

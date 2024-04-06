@@ -4,12 +4,19 @@ import { DialogClose } from "@/components/ui/dialog";
 
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
-function NewPresetDialogContents({
+function presetDialogContents({
   setIsOpen,
   presetName,
+  presetCategory,
+  handleSubmit,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   presetName: string;
+  presetCategory: string;
+  handleSubmit: (
+    preset: string | undefined,
+    presetCategory: string
+  ) => Promise<void>;
 }) {
   const [preset, setPreset] = useState<string>();
 
@@ -28,7 +35,10 @@ function NewPresetDialogContents({
           />
           <DialogClose asChild>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                handleSubmit(preset, presetCategory);
+                setIsOpen(false);
+              }}
               className="m-auto bg-secondary text-background h-min w-min py-2 px-4 mt-4 rounded-xl"
             >
               Save
@@ -40,4 +50,4 @@ function NewPresetDialogContents({
   );
 }
 
-export default NewPresetDialogContents;
+export default presetDialogContents;

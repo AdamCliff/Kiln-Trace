@@ -28,9 +28,9 @@ import { Button } from "@/components/ui/button";
 import { usePieceContext } from "../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
 import { Piece, GlazeLayer } from "@/types/piece";
-import NewPresetDialogContents from "./newPresetDialogContents";
-import NewPresetDialog from "./newPresetDialog";
-import { DialogContent, DialogTrigger } from "@radix-ui/react-dialog";
+// import NewPresetDialogContents from "./presetDialogContents";
+import PresetDialog from "./presetDialog";
+import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
 // change type later
 function PieceFormDialogContents({
@@ -448,7 +448,11 @@ function PieceFormDialogContents({
                         })}
                         <SelectSeparator className="border-b mx-auto w-[95%]" />
                         <div className="flex items-center justify-center">
-                          <NewPresetDialog presetName={"material"} />
+                          <PresetDialog
+                            presetName={"material"}
+                            presetCategory={"materialPresets"}
+                            handleSubmit={handleNewPreset}
+                          />
                         </div>
                       </SelectContent>
                     </Select>
