@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
+  DialogClose,
 } from "@/components/ui/dialog";
 
 import PresetDialogContents from "./presetDialogContents";
@@ -13,34 +14,44 @@ function PresetDialog({
   presetName,
   presetCategory,
   handleSubmit,
+  dispatch,
 }: {
   presetName: string;
   presetCategory: string;
   handleSubmit: (
     presetName: string | undefined,
-    presetCategory: string
+    presetCategory: string,
+    dispatch: React.Dispatch<any>
   ) => Promise<void>;
+  dispatch: React.Dispatch<any>;
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full h-full">
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger className="w-full h-full hover:bg-accent">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }}
+          className="w-full h-full"
+        >
+          <DialogTrigger className="w-full h-full px-2 hover:bg-accent">
             +
           </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>{"Enter new " + presetName}</DialogHeader>
-            <PresetDialogContents
-              setIsOpen={setIsOpen}
-              presetName={presetName}
-              presetCategory={presetCategory}
-              handleSubmit={handleSubmit}
-            />
-          </DialogContent>
-        </Dialog>
-      </button>
+        </button>
+        <DialogContent>
+          <DialogHeader>{"Enter new " + presetName}</DialogHeader>
+          <PresetDialogContents
+            setIsOpen={setIsOpen}
+            presetName={presetName}
+            presetCategory={presetCategory}
+            handleSubmit={handleSubmit}
+            dispatch={dispatch}
+          />
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -21,6 +21,8 @@ import {
   DialogTitle,
   DialogClose,
   Dialog,
+  DialogTrigger,
+  DialogContent,
 } from "@/components/ui/dialog";
 import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
@@ -28,7 +30,7 @@ import { Button } from "@/components/ui/button";
 import { usePieceContext } from "../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
 import { Piece, GlazeLayer } from "@/types/piece";
-// import NewPresetDialogContents from "./presetDialogContents";
+import PresetDialogContents from "./presetDialogContents";
 import PresetDialog from "./presetDialog";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
@@ -119,7 +121,7 @@ function PieceFormDialogContents({
   const [slip, setSlip] = useState<GlazeLayer>(slipState);
 
   const { dispatch } = usePieceContext();
-  const { presets } = usePresetsContext();
+  const { presets, dispatch: presetsDispatch } = usePresetsContext();
 
   const pieceObject = {
     title,
@@ -355,15 +357,15 @@ function PieceFormDialogContents({
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="form">Form</label>
-                    {/* <input
+                    <input
                       type="text"
                       name="form"
                       id="form"
                       onChange={(e) => setForm(e.target.value)}
                       value={form}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    /> */}
-                    <Select
+                    />
+                    {/* <Select
                       onValueChange={(value) => setForm(value)}
                       value={form}
                     >
@@ -383,19 +385,19 @@ function PieceFormDialogContents({
                           );
                         })}
                       </SelectContent>
-                    </Select>
+                    </Select> */}
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="method">Method</label>
-                    {/* <input
+                    <input
                       type="text"
                       name="method"
                       id="pinch-made"
                       onChange={(e) => setMethod(e.target.value)}
                       value={method}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    /> */}
-                    <Select
+                    />
+                    {/* <Select
                       onValueChange={(value) => setMethod(value)}
                       value={method}
                     >
@@ -415,18 +417,18 @@ function PieceFormDialogContents({
                           );
                         })}
                       </SelectContent>
-                    </Select>
+                    </Select> */}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="material">Material</label>
-                    {/* <input
-                      type="text"
-                      name="material"
-                      id="material"
-                      onChange={(e) => setMaterial(e.target.value)}
-                      value={material}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    /> */}
+                    <div className="flex items-center justify-start gap-2 h-full w-min">
+                      <label htmlFor="material">Material</label>
+                      <PresetDialog
+                        presetName={"material"}
+                        presetCategory={"materialPresets"}
+                        handleSubmit={handleNewPreset}
+                        dispatch={presetsDispatch}
+                      />
+                    </div>
                     <Select
                       onValueChange={(value) => setMaterial(value)}
                       value={material}
@@ -434,26 +436,16 @@ function PieceFormDialogContents({
                       <SelectTrigger className="w-40">
                         <SelectValue placeholder="Select a material" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent
+                        onCloseAutoFocus={(e) => e.preventDefault()}
+                      >
                         {presets?.materialPresets.map((material) => {
                           return (
-                            <SelectItem
-                              key={material}
-                              value={material}
-                              className="capitalize"
-                            >
+                            <SelectItem key={material} value={material}>
                               {material}
                             </SelectItem>
                           );
                         })}
-                        <SelectSeparator className="border-b mx-auto w-[95%]" />
-                        <div className="flex items-center justify-center">
-                          <PresetDialog
-                            presetName={"material"}
-                            presetCategory={"materialPresets"}
-                            handleSubmit={handleNewPreset}
-                          />
-                        </div>
                       </SelectContent>
                     </Select>
                   </div>

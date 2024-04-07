@@ -1,53 +1,54 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { DialogClose } from "@/components/ui/dialog";
-
-import { handleNewPreset } from "@/helpers/presetHelperFunctions";
-
-function presetDialogContents({
+function PresetDialogContents({
   setIsOpen,
   presetName,
   presetCategory,
   handleSubmit,
+  dispatch,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   presetName: string;
   presetCategory: string;
   handleSubmit: (
     preset: string | undefined,
-    presetCategory: string
+    presetCategory: string,
+    dispatch: React.Dispatch<any>
   ) => Promise<void>;
+  dispatch: React.Dispatch<any>;
 }) {
-  const [preset, setPreset] = useState<string>();
+  const [preset, setPreset] = useState<string>("");
 
   return (
     <>
       <div>
-        <form action="#" className="flex flex-col gap-2">
+        <form action="/presets" method="POST" className="flex flex-col gap-2">
           <input
             type="text"
             placeholder={"New " + presetName + " name..."}
             name="preset"
             id="preset"
-            onChange={(e) => setPreset(e.target.value)}
+            onChange={(e) => {
+              e.stopPropagation();
+              setPreset(e.target.value);
+            }}
             value={preset}
             className="p-2"
           />
-          <DialogClose asChild>
-            <button
-              onClick={() => {
-                handleSubmit(preset, presetCategory);
-                setIsOpen(false);
-              }}
-              className="m-auto bg-secondary text-background h-min w-min py-2 px-4 mt-4 rounded-xl"
-            >
-              Save
-            </button>
-          </DialogClose>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleSubmit(preset, presetCategory, dispatch);
+              setIsOpen(false);
+            }}
+            className="m-auto bg-secondary text-background h-min w-min py-2 px-4 mt-4 rounded-xl"
+          >
+            Save
+          </button>
         </form>
       </div>
     </>
   );
 }
 
-export default presetDialogContents;
+export default PresetDialogContents;

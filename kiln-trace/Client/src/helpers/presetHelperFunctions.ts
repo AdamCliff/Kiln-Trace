@@ -1,12 +1,17 @@
 import { PiecePresets } from "@/types/piecePresets";
+import { presetActionTypes } from "@/context/presetActionEnums";
+import React from "react";
 
-export const handleGetPresets = async () => {
+export const handleLoadPresets = async (dispatch: React.Dispatch<any>) => {
   try {
     const req = await fetch("http://localhost:3000/presets", {
       method: "GET",
     });
-    const res = await req.json();
-    return res;
+    const [res] = await req.json();
+    dispatch({
+      type: presetActionTypes.LOAD_PRESETS,
+      payload: res,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -14,7 +19,8 @@ export const handleGetPresets = async () => {
 
 export const handleNewPreset = async (
   presetName: string | undefined,
-  presetCategory: string
+  presetCategory: string,
+  dispatch: React.Dispatch<any>
 ) => {
   try {
     const req = await fetch("http://localhost:3000/presets", {
@@ -23,7 +29,7 @@ export const handleNewPreset = async (
       headers: { "Content-Type": "application/json" },
     });
     const res = await req.json();
-    console.log(res.message);
+    dispatch({ type: presetActionTypes.ADD_PRESET, payload: res });
   } catch (error) {
     console.error(error);
   }

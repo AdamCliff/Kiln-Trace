@@ -9,7 +9,7 @@ import { usePresetsContext } from "@/context/presetsContext";
 import { actionTypes } from "@/context/pieceActionEnums";
 import { presetActionTypes } from "@/context/presetActionEnums";
 import {
-  handleGetPresets,
+  handleLoadPresets,
   // handleSetDefaultPresets,
 } from "@/helpers/presetHelperFunctions";
 import { handleLoadPieces } from "@/helpers/pieceHelperFunctions";
@@ -42,11 +42,7 @@ function PiecesList() {
       shouldRun2.current = false;
       const setData = async () => {
         try {
-          const [presets] = await handleGetPresets();
-          presetsDispatch({
-            type: presetActionTypes.LOAD_PRESETS,
-            payload: presets,
-          });
+          await handleLoadPresets(presetsDispatch);
         } catch (error) {
           console.error(`Failed to get presets: ${error}`);
         }

@@ -1,22 +1,33 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// const Preset = new Schema({
+//   preset: {
+//     type: String,
+//     required: true,
+//   },
+//   id: {
+//     type: Number,
+//     required: true,
+//   },
+// });
+
 const PieceDataPresetsSchema = new Schema({
   formPresets: {
     type: [String],
     required: true,
     default: () => {
       return [
-        "bowl",
-        "coffee cup",
-        "jar",
-        "mug",
-        "planter",
-        "plate",
-        "platter",
-        "tea cup",
-        "test tile",
-        "vase",
+        "Bowl",
+        "Coffee Cup",
+        "Jar",
+        "Mug",
+        "Planter",
+        "Plate",
+        "Platter",
+        "Tea Cup",
+        "Test Tile",
+        "Vase",
       ];
     },
   },
@@ -25,20 +36,26 @@ const PieceDataPresetsSchema = new Schema({
     required: true,
     default: () => {
       return [
-        "mold formed",
-        "pinched",
-        "slab built",
-        "slip cast",
-        "thrown and altered",
-        "wheel thrown",
+        "Mold Formed",
+        "Pinched",
+        "Slab Built",
+        "Slip Cast",
+        "Thrown and Altered",
+        "Wheel Thrown",
       ];
     },
   },
   materialPresets: {
-    type: [String],
+    type: [/* Preset */ String],
     required: true,
     default: () => {
-      return ["terracotta", "ball clay", "earthenware", "stoneware"];
+      return ["Terracotta", "Ball Clay", "Earthenware", "Stoneware"];
+      // return [
+      //   { preset: "terracotta", id: 0 },
+      //   { preset: "ball clay", id: 1 },
+      //   { preset: "earthenware", id: 2 },
+      //   { preset: "stoneware", id: 3 },
+      // ];
     },
   },
   glazePresets: {
@@ -49,25 +66,21 @@ const PieceDataPresetsSchema = new Schema({
     },
   },
   slipPresets: {
-    type: [String],
+    type: [/* Preset */ String],
     rquired: true,
     default: () => {
       return ["slip1", "slip2", "slip3", "slip4", "slip5"];
+      // return [
+      //   { preset: "slip1", id: 0 },
+      //   { preset: "slip2", id: 1 },
+      //   { preset: "slip3", id: 2 },
+      //   { preset: "slip4", id: 3 },
+      //   { preset: "slip5", id: 4 },
+      // ];
     },
   },
   artist: { type: [String], required: false },
 });
-
-// const Preset = new Schema({
-//   preset: {
-//     type: String,
-//     required: true,
-//   },
-//   id: {
-//     type: String,
-//     required: true,
-//   },
-// });
 
 const PieceDataPresets = mongoose.model(
   "pieceDataPresets",

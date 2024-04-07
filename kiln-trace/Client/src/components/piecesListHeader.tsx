@@ -4,7 +4,9 @@ import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { handleNewPiece } from "@/helpers/pieceHelperFunctions";
 import PieceFormDialogContents from "./pieceFormDialogContents";
+import PresetDialog from "./presetDialog";
 import { usePieceContext } from "@/context/piecesContext";
+import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
 function PieceListHeader() {
   const { pieces, dispatch } = usePieceContext();
@@ -60,6 +62,11 @@ function PieceListHeader() {
             </DialogContent>
           </Dialog>
         </div>
+        {/* <PresetDialog
+          presetName="material"
+          presetCategory="materialPresets"
+          handleSubmit={handleNewPreset}
+        /> */}
         <div
           id="piece-counters"
           className="flex items-center justify-center divide-x divide-secondary"

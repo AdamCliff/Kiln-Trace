@@ -45,7 +45,7 @@ export const presetsReducer = (
     case presetActionTypes.ADD_PRESET: {
       if (!state.presets) return new Error("state.presets is undefined");
       return {
-        // presets: [...state.presets, action.payload],
+        presets: action.payload,
       };
     }
     case presetActionTypes.REMOVE_PRESET: {
