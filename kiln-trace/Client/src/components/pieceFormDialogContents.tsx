@@ -32,6 +32,7 @@ import { usePresetsContext } from "@/context/presetsContext";
 import { Piece, GlazeLayer } from "@/types/piece";
 import PresetDialogContents from "./presetDialogContents";
 import PresetDialog from "./presetDialog";
+import PresetSelectMenu from "./presetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
 // change type later
@@ -353,103 +354,56 @@ function PieceFormDialogContents({
           >
             <AccordionItem value="details">
               <AccordionTrigger>Form, Method, Material</AccordionTrigger>
-              <AccordionContent>
-                <div className="flex gap-2">
-                  <div className="flex flex-col gap-2">
+              <AccordionContent className="flex gap-2">
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-start gap-2 h-full w-min">
                     <label htmlFor="form">Form</label>
-                    <input
-                      type="text"
-                      name="form"
-                      id="form"
-                      onChange={(e) => setForm(e.target.value)}
-                      value={form}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                    <PresetDialog
+                      presetName="form"
+                      presetCategory="formPresets"
+                      handleSubmit={handleNewPreset}
+                      dispatch={presetsDispatch}
                     />
-                    {/* <Select
-                      onValueChange={(value) => setForm(value)}
-                      value={form}
-                    >
-                      <SelectTrigger className="w-40">
-                        <SelectValue placeholder="Select a form" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {presets?.formPresets.map((form) => {
-                          return (
-                            <SelectItem
-                              key={form}
-                              value={form}
-                              className="capitalize"
-                            >
-                              {form}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select> */}
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="method">Method</label>
-                    <input
-                      type="text"
-                      name="method"
-                      id="pinch-made"
-                      onChange={(e) => setMethod(e.target.value)}
-                      value={method}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
-                    {/* <Select
-                      onValueChange={(value) => setMethod(value)}
-                      value={method}
-                    >
-                      <SelectTrigger className="w-40">
-                        <SelectValue placeholder="Select a method" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {presets?.methodPresets.map((method) => {
-                          return (
-                            <SelectItem
-                              key={method}
-                              value={method}
-                              className="capitalize"
-                            >
-                              {method}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select> */}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-start gap-2 h-full w-min">
-                      <label htmlFor="material">Material</label>
-                      <PresetDialog
-                        presetName={"material"}
-                        presetCategory={"materialPresets"}
-                        handleSubmit={handleNewPreset}
-                        dispatch={presetsDispatch}
-                      />
-                    </div>
-                    <Select
-                      onValueChange={(value) => setMaterial(value)}
-                      value={material}
-                    >
-                      <SelectTrigger className="w-40">
-                        <SelectValue placeholder="Select a material" />
-                      </SelectTrigger>
-                      <SelectContent
-                        onCloseAutoFocus={(e) => e.preventDefault()}
-                      >
-                        {presets?.materialPresets.map((material) => {
-                          return (
-                            <SelectItem key={material} value={material}>
-                              {material}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <PresetSelectMenu
+                    preset={form}
+                    setPreset={setForm}
+                    presetList={presets?.formPresets}
+                  />
                 </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-start gap-2 h-full w-min">
+                    <label htmlFor="method">Method</label>
+                    <PresetDialog
+                      presetName="method"
+                      presetCategory="methodPresets"
+                      handleSubmit={handleNewPreset}
+                      dispatch={presetsDispatch}
+                    />
+                  </div>
+                  <PresetSelectMenu
+                    preset={method}
+                    setPreset={setMethod}
+                    presetList={presets?.methodPresets}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-start gap-2 h-full w-min">
+                    <label htmlFor="material">Material</label>
+                    <PresetDialog
+                      presetName="material"
+                      presetCategory="materialPresets"
+                      handleSubmit={handleNewPreset}
+                      dispatch={presetsDispatch}
+                    />
+                  </div>
+                  <PresetSelectMenu
+                    preset={material}
+                    setPreset={setMaterial}
+                    presetList={presets?.materialPresets}
+                  />
+                </div>
+                {/* </div> */}
               </AccordionContent>
             </AccordionItem>
           </Accordion>
