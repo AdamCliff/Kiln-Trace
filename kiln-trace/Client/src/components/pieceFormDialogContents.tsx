@@ -194,8 +194,8 @@ function PieceFormDialogContents({
           <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>
         <form
-          action={`/pieces/${_id}`}
-          method="put"
+          action={`/pieces${_id ? "/" + _id : ""}`}
+          method={piece ? "put" : "post"}
           className="flex flex-col gap-6 w-full h-[95%]"
         >
           <div className="flex gap-2">
@@ -368,6 +368,7 @@ function PieceFormDialogContents({
                   <PresetSelectMenu
                     preset={form}
                     setPreset={setForm}
+                    presetName="form"
                     presetList={presets?.formPresets}
                   />
                 </div>
@@ -384,6 +385,7 @@ function PieceFormDialogContents({
                   <PresetSelectMenu
                     preset={method}
                     setPreset={setMethod}
+                    presetName="method"
                     presetList={presets?.methodPresets}
                   />
                 </div>
@@ -400,6 +402,7 @@ function PieceFormDialogContents({
                   <PresetSelectMenu
                     preset={material}
                     setPreset={setMaterial}
+                    presetName="material"
                     presetList={presets?.materialPresets}
                   />
                 </div>
@@ -417,52 +420,50 @@ function PieceFormDialogContents({
           >
             <AccordionItem value="dimensions">
               <AccordionTrigger>Dimensions, Weight</AccordionTrigger>
-              <AccordionContent>
-                <div className="flex gap-2">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="width">Width</label>
-                    <input
-                      type="text"
-                      name="width"
-                      id="width"
-                      onChange={(e) => setWidth(+e.target.value)}
-                      value={width}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="length">Length</label>
-                    <input
-                      type="text"
-                      name="length"
-                      id="length"
-                      onChange={(e) => setPieceLength(+e.target.value)}
-                      value={pieceLength}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="height">Height</label>
-                    <input
-                      type="text"
-                      name="height"
-                      id="height"
-                      onChange={(e) => setHeight(+e.target.value)}
-                      value={height}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="weight">Weight</label>
-                    <input
-                      type="text"
-                      name="weight"
-                      id="weight"
-                      onChange={(e) => setWeight(+e.target.value)}
-                      value={weight}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
-                  </div>
+              <AccordionContent className="flex gap-2">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="width">Width</label>
+                  <input
+                    type="text"
+                    name="width"
+                    id="width"
+                    onChange={(e) => setWidth(+e.target.value)}
+                    value={width}
+                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="length">Length</label>
+                  <input
+                    type="text"
+                    name="length"
+                    id="length"
+                    onChange={(e) => setPieceLength(+e.target.value)}
+                    value={pieceLength}
+                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="height">Height</label>
+                  <input
+                    type="text"
+                    name="height"
+                    id="height"
+                    onChange={(e) => setHeight(+e.target.value)}
+                    value={height}
+                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="weight">Weight</label>
+                  <input
+                    type="text"
+                    name="weight"
+                    id="weight"
+                    onChange={(e) => setWeight(+e.target.value)}
+                    value={weight}
+                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                  />
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -487,15 +488,28 @@ function PieceFormDialogContents({
               <AccordionContent>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="glazeInner">Inner Glaze</label>
-                    <input
-                      type="text"
-                      name="glazeInner"
-                      id="glazeInner"
-                      onChange={(e) => setGlazeInner([e.target.value])}
-                      value={glazeInner}
-                      className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                    />
+                    <div className="flex items-center justify-start gap-2 h-full w-min">
+                      <label htmlFor="glazeInner" className="whitespace-nowrap">
+                        Inner Glaze
+                      </label>
+                      <PresetDialog
+                        presetName="glaze"
+                        presetCategory="glazePresets"
+                        handleSubmit={handleNewPreset}
+                        dispatch={presetsDispatch}
+                      />
+                    </div>
+                    {/* <PresetSelectMenu
+                      // temporarily setting in array by index to circumvent type error
+                      preset={
+                        glazeInner
+                          ? glazeInner[glazeInner.length - 1]
+                          : glazeInner
+                      }
+                      setPreset={setGlazeInner}
+                      presetName="glaze"
+                      presetList={presets?.glazePresets}
+                    /> */}
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="underglazeInner">Inner Underglaze</label>
