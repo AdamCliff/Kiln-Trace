@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { TableCell, TableRow } from "./ui/table";
+import { TableCell, TableRow } from "../../ui/table";
 import { flexRender } from "@tanstack/react-table";
 
-import PieceFormDialogContents from "./pieceFormDialogContents";
+import PieceFormDialogContents from "../../dialogs/pieceForm/pieceFormDialogContents";
 
 function DataTableRow({ row, table }: { row: any; table: any }) {
   const [open, setOpen] = useState<boolean>(false);

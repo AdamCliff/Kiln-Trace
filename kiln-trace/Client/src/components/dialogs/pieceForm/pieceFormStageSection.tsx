@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { Piece } from "@/types/piece";
-import StageDatePicker from "../ui/stageDatePicker";
+import StageDatePicker from "../../ui/stageDatePicker";
 
 function PieceFormStageSection({
   piece,

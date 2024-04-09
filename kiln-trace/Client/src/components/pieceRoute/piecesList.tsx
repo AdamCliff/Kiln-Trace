@@ -1,17 +1,11 @@
 import { useEffect, useRef } from "react";
 
-import PiecesDataTable from "./piecesDataTable";
+import PiecesDataTable from "../dataTable/pieceData/piecesDataTable";
 
-import { Piece } from "@/types/piece";
-import { pieceColumns } from "./pieceTableColumns";
+import { pieceColumns } from "../dataTable/pieceData/pieceTableColumns";
 import { usePieceContext } from "@/context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
-import { actionTypes } from "@/context/pieceActionEnums";
-import { presetActionTypes } from "@/context/presetActionEnums";
-import {
-  handleLoadPresets,
-  // handleSetDefaultPresets,
-} from "@/helpers/presetHelperFunctions";
+import { handleLoadPresets } from "@/helpers/presetHelperFunctions";
 import { handleLoadPieces } from "@/helpers/pieceHelperFunctions";
 
 function PiecesList() {

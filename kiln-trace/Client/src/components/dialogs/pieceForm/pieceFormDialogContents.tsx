@@ -19,15 +19,15 @@ import {
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { usePieceContext } from "../context/piecesContext";
+import { usePieceContext } from "../../../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import { Piece } from "@/types/piece";
-import PresetDialog from "./presetDialog";
+import PresetDialog from "../presetForm/presetDialog";
 import usePieceState from "@/hooks/usePieceState";
-import PieceFormStageSection from "./pieceForm/pieceFormStageSection";
-import PieceFormDetailsSection from "./pieceForm/pieceFormDetailsSection";
-import PieceFormDimensionsSection from "./pieceForm/pieceFormDimensionsSection";
+import PieceFormStageSection from "./pieceFormStageSection";
+import PieceFormDetailsSection from "./pieceFormDetailsSection";
+import PieceFormDimensionsSection from "./pieceFormDimensionsSection";
 
 // change type later
 function PieceFormDialogContents({

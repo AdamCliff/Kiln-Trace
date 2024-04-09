@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
-  DialogClose,
 } from "@/components/ui/dialog";
 
 import PresetDialogContents from "./presetDialogContents";

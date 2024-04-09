@@ -33,16 +33,14 @@ import { Switch } from "@/components/ui/layoutSwitch";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import {
-  // getCurrentStage,
-  // getCurrentStageDate,
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
 import { fuzzyFilter } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
-import DataTableCard from "@/components/dataTableCard";
-import DataTableRow from "@/components/dataTableRow";
+import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
+import DataTableRow from "@/components/dataTable/pieceData/dataTableRow";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

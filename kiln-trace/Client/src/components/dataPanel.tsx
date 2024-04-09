@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import PieceData from "./pieceData";
+import PieceData from "./pieceRoute/pieceData";
 
 function DataPanel() {
   return (

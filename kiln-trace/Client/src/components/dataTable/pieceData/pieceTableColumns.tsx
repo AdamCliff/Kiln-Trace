@@ -16,7 +16,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
-import PieceFormDialogContents from "./pieceFormDialogContentsOLD";
+import PieceFormDialogContents from "../../dialogs/pieceForm/pieceFormDialogContents";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {

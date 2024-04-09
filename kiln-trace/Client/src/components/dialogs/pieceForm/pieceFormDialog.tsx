@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { Piece } from "@/types/piece";
-import PieceFormDialogContents from "./pieceFormDialogContentsOLD";
+import PieceFormDialogContents from "./pieceFormDialogContents";
 
 // change type later
 function PieceFormDialog({

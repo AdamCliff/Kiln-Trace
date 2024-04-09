@@ -1,5 +1,5 @@
-import { PieceContextProvider } from "../context/piecesContext";
-import { PresetsContextProvider } from "../context/presetsContext";
+import { PieceContextProvider } from "../../context/piecesContext";
+import { PresetsContextProvider } from "../../context/presetsContext";
 import PiecesList from "./piecesList";
 import PiecesListHeader from "./piecesListHeader";
 

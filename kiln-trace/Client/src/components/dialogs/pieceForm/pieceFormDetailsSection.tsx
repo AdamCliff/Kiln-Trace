@@ -6,8 +6,8 @@ import {
 } from "@/components/ui/accordion";
 
 import { Piece } from "@/types/piece";
-import PresetDialog from "../presetDialog";
-import PresetSelectMenu from "../presetSelectMenu";
+import PresetDialog from "../presetForm/presetDialog";
+import PresetSelectMenu from "../../pieceRoute/presetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 
 function PieceFormDetailsSection({
