@@ -85,8 +85,6 @@ function PiecesDataTable<TData, TValue>({
     },
     meta: {
       dispatch: dispatch,
-      // getCurrentStage: (piece: Piece) => getCurrentStage(piece),
-      // getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
       handleDeletePiece: (id: string, dispatch: React.Dispatch<any>) =>
         handleDeletePiece(id, dispatch),
       handleEditPiece: (piece: Piece, dispatch: React.Dispatch<any>) =>

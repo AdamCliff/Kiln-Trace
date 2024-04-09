@@ -27,9 +27,6 @@ export interface Piece {
   glaze: { inner?: string[]; outer?: string[] };
   underglaze: { inner?: string[]; outer?: string[] };
   slip: { inner?: string[]; outer?: string[] };
-  // glaze: GlazeLayer;
-  // underglaze: GlazeLayer;
-  // slip: GlazeLayer;
   __v: number;
   _id: string;
 }

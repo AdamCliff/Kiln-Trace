@@ -60,11 +60,6 @@ function PieceListHeader() {
             </DialogContent>
           </Dialog>
         </div>
-        {/* <PresetDialog
-          presetName="material"
-          presetCategory="materialPresets"
-          handleSubmit={handleNewPreset}
-        /> */}
         <div
           id="piece-counters"
           className="flex items-center justify-center divide-x divide-secondary"
