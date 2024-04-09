@@ -13,20 +13,24 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { Piece } from "@/types/piece";
+
 function StageDatePicker({
   isStageSelected,
-  newDate,
+  stageDate,
+  stageDateName,
   updateDate,
 }: {
   isStageSelected: boolean;
-  newDate: Date | undefined;
-  updateDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  stageDate: Date | undefined;
+  stageDateName: string;
+  updateDate: (updatedPiece: Partial<Piece>) => void;
 }) {
   const [date, setDate] = React.useState<Date | undefined>();
 
   useEffect(() => {
-    newDate ? setDate(newDate) : setDate(undefined);
-  }, [newDate]);
+    stageDate ? setDate(stageDate) : setDate(undefined);
+  }, [stageDate]);
 
   useEffect(() => {
     isStageSelected === false ? setDate(undefined) : "";
@@ -42,7 +46,7 @@ function StageDatePicker({
           onClick={() => {
             const tempDate = new Date();
             setDate(tempDate);
-            updateDate(tempDate);
+            updateDate({ [stageDateName]: tempDate });
           }}
         >
           <CalendarIcon className="w-4 h-4" />
@@ -53,10 +57,12 @@ function StageDatePicker({
         <Calendar
           mode="single"
           selected={date}
-          onSelect={(date) => {
-            date ? setDate(date) : console.error("Date could not be selected");
+          onSelect={(selectedDate) => {
             date
-              ? updateDate(date)
+              ? setDate(selectedDate)
+              : console.error("Date could not be selected");
+            date
+              ? updateDate({ [stageDateName]: selectedDate })
               : console.error("Date could not be selected");
           }}
           initialFocus
@@ -67,3 +73,59 @@ function StageDatePicker({
 }
 
 export default StageDatePicker;
+
+// OLD CODE BEFORE CHANGE TO HOW PIECES ARE HANDLED IN PIECE FORM
+
+// function StageDatePicker({
+//   isStageSelected,
+//   stageDate,
+//   updateDate,
+// }: {
+//   isStageSelected: boolean;
+//   stageDate: Date | undefined;
+//   updateDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+//   // updateDate: (updatedPiece: Partial<Piece>) => void;
+// }) {
+//   const [date, setDate] = React.useState<Date | undefined>();
+
+//   useEffect(() => {
+//     stageDate ? setDate(stageDate) : setDate(undefined);
+//   }, [stageDate]);
+
+//   useEffect(() => {
+//     isStageSelected === false ? setDate(undefined) : "";
+//   }, [isStageSelected]);
+
+//   return (
+//     <Popover>
+//       <PopoverTrigger asChild>
+//         <Button
+//           className={cn(
+//             "flex justify-between gap-2 h-min w-full p-0 bg-background hover:bg-background text-left font-normal"
+//           )}
+//           onClick={() => {
+//             const tempDate = new Date();
+//             setDate(tempDate);
+//             updateDate(tempDate);
+//           }}
+//         >
+//           <CalendarIcon className="w-4 h-4" />
+//           {date && isStageSelected ? format(date, "MM/dd/yy") : ""}
+//         </Button>
+//       </PopoverTrigger>
+//       <PopoverContent className="w-auto p-0">
+//         <Calendar
+//           mode="single"
+//           selected={date}
+//           onSelect={(date) => {
+//             date ? setDate(date) : console.error("Date could not be selected");
+//             date
+//               ? updateDate(date)
+//               : console.error("Date could not be selected");
+//           }}
+//           initialFocus
+//         />
+//       </PopoverContent>
+//     </Popover>
+//   );
+// }

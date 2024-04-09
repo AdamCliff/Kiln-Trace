@@ -6,6 +6,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { Piece } from "@/types/piece";
+
 function PresetSelectMenu({
   preset,
   setPreset,
@@ -19,13 +21,18 @@ function PresetSelectMenu({
   // setPreset: React.Dispatch<
   //   React.SetStateAction<string> | React.SetStateAction<string[]>
   // >;
-  setPreset: React.Dispatch<React.SetStateAction<string>>;
+  // setPreset: React.Dispatch<React.SetStateAction<string>>;
+  setPreset: (updatedPiece: Partial<Piece>) => void;
   presetName: string;
   presetList: string[] | undefined;
 }) {
   return (
     <>
-      <Select onValueChange={(value) => setPreset(value)} value={preset}>
+      <Select
+        onValueChange={(value) => setPreset({ [presetName]: value })}
+        value={preset}
+      >
+        {/* <Select onValueChange={(value) => setPreset(value)} value={preset}> */}
         <SelectTrigger className="w-40">
           <SelectValue placeholder={`Select a ${presetName}`} />
         </SelectTrigger>

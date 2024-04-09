@@ -24,9 +24,12 @@ export interface Piece {
   width: number;
   dimensions?: number | undefined;
   notes: string;
-  glaze: GlazeLayer;
-  underglaze: GlazeLayer;
-  slip: GlazeLayer;
+  glaze: { inner?: string[]; outer?: string[] };
+  underglaze: { inner?: string[]; outer?: string[] };
+  slip: { inner?: string[]; outer?: string[] };
+  // glaze: GlazeLayer;
+  // underglaze: GlazeLayer;
+  // slip: GlazeLayer;
   __v: number;
   _id: string;
 }
