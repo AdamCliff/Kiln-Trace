@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import {
   Accordion,
@@ -6,29 +6,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectLabel,
-  SelectGroup,
-  SelectSeparator,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+//   SelectLabel,
+//   SelectGroup,
+//   SelectSeparator,
+// } from "@/components/ui/select";
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
 
 import { usePieceContext } from "../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
-import { Piece } from "@/types/piece";
-import PresetDialogContents from "./presetDialogContents";
-import PresetDialog from "./presetDialog";
-import PresetSelectMenu from "./presetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
+import { Piece } from "@/types/piece";
+import PresetDialog from "./presetDialog";
 import usePieceState from "@/hooks/usePieceState";
 import PieceFormStageSection from "./pieceForm/pieceFormStageSection";
+import PieceFormDetailsSection from "./pieceForm/pieceFormDetailsSection";
+import PieceFormDimensionsSection from "./pieceForm/pieceFormDimensionsSection";
 
 // change type later
 function PieceFormDialogContents({
@@ -45,33 +44,8 @@ function PieceFormDialogContents({
 
   const { piece: pieceState, updatePiece } = usePieceState(piece);
 
-  const {
-    title,
-    formed,
-    formedDate,
-    trimmed,
-    trimmedDate,
-    bisqued,
-    bisquedDate,
-    glazed,
-    glazedDate,
-    fired,
-    firedDate,
-    method,
-    form,
-    material,
-    weight,
-    height,
-    width,
-    pieceLength,
-    glaze,
-    underglaze,
-    slip,
-    photos,
-    artist,
-    notes,
-    _id,
-  } = pieceState;
+  const { title, artist, photos, glaze, underglaze, slip, notes, _id } =
+    pieceState;
 
   return (
     <>
@@ -122,129 +96,17 @@ function PieceFormDialogContents({
           {/* stage section */}
           <PieceFormStageSection piece={pieceState} updatePiece={updatePiece} />
           {/* details section */}
-          <Accordion
-            type="single"
-            collapsible
-            defaultValue={form || method || material ? "details" : ""}
-          >
-            <AccordionItem value="details">
-              <AccordionTrigger>Form, Method, Material</AccordionTrigger>
-              <AccordionContent className="flex gap-2">
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-start gap-2 h-full w-min">
-                    <label htmlFor="form">Form</label>
-                    <PresetDialog
-                      presetName="form"
-                      presetCategory="formPresets"
-                      handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
-                    />
-                  </div>
-                  <PresetSelectMenu
-                    preset={form}
-                    setPreset={updatePiece}
-                    presetName="form"
-                    presetList={presets?.formPresets}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-start gap-2 h-full w-min">
-                    <label htmlFor="method">Method</label>
-                    <PresetDialog
-                      presetName="method"
-                      presetCategory="methodPresets"
-                      handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
-                    />
-                  </div>
-                  <PresetSelectMenu
-                    preset={method}
-                    setPreset={updatePiece}
-                    presetName="method"
-                    presetList={presets?.methodPresets}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-start gap-2 h-full w-min">
-                    <label htmlFor="material">Material</label>
-                    <PresetDialog
-                      presetName="material"
-                      presetCategory="materialPresets"
-                      handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
-                    />
-                  </div>
-                  <PresetSelectMenu
-                    preset={material}
-                    setPreset={updatePiece}
-                    presetName="material"
-                    presetList={presets?.materialPresets}
-                  />
-                </div>
-                {/* </div> */}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <PieceFormDetailsSection
+            piece={pieceState}
+            updatePiece={updatePiece}
+            presets={presets}
+            presetDispatch={presetDispatch}
+          />
           {/* dimensions section */}
-          <Accordion
-            type="single"
-            collapsible
-            defaultValue={
-              weight || height || pieceLength || width ? "dimensions" : ""
-            }
-          >
-            <AccordionItem value="dimensions">
-              <AccordionTrigger>Dimensions, Weight</AccordionTrigger>
-              <AccordionContent className="flex gap-2">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="width">Width</label>
-                  <input
-                    type="text"
-                    name="width"
-                    id="width"
-                    onChange={(e) => updatePiece({ width: +e.target.value })}
-                    value={width}
-                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="length">Length</label>
-                  <input
-                    type="text"
-                    name="length"
-                    id="length"
-                    onChange={(e) =>
-                      updatePiece({ pieceLength: +e.target.value })
-                    }
-                    value={pieceLength}
-                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="height">Height</label>
-                  <input
-                    type="text"
-                    name="height"
-                    id="height"
-                    onChange={(e) => updatePiece({ height: +e.target.value })}
-                    value={height}
-                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="weight">Weight</label>
-                  <input
-                    type="text"
-                    name="weight"
-                    id="weight"
-                    onChange={(e) => updatePiece({ weight: +e.target.value })}
-                    value={weight}
-                    className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                  />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <PieceFormDimensionsSection
+            piece={pieceState}
+            updatePiece={updatePiece}
+          />
           {/* glazes section */}
           <Accordion
             type="single"
