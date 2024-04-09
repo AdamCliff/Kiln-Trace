@@ -16,18 +16,24 @@ import {
   SelectGroup,
   SelectSeparator,
 } from "@/components/ui/select";
-import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import {
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from "@/components/ui/dialog";
 import StageDatePicker from "@/components/ui/stageDatePicker";
 import { Button } from "@/components/ui/button";
 
 import { usePieceContext } from "../context/piecesContext";
 import { usePresetsContext } from "@/context/presetsContext";
-import { Piece } from "@/types/piece";
+import { Piece, GlazeLayer } from "@/types/piece";
 import PresetDialogContents from "./presetDialogContents";
 import PresetDialog from "./presetDialog";
 import PresetSelectMenu from "./presetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
-import usePieceState from "@/hooks/usePieceState";
 
 // change type later
 function PieceFormDialogContents({
@@ -39,12 +45,86 @@ function PieceFormDialogContents({
   piece: any;
   handleSubmit: (piece: Piece, dispatch: React.Dispatch<any>) => Promise<any>;
 }) {
-  const { dispatch: pieceDispatch } = usePieceContext();
-  const { presets, dispatch: presetDispatch } = usePresetsContext();
+  // piece object state variables
+  // ----------------------------
+  // general info about the piece
+  const [title, setTitle] = useState<string>(piece?.title);
+  const [artist, setArtist] = useState<string>(piece?.artist);
+  const [photos, setPhotos] = useState<string>(piece?.photos);
+  const [notes, setNotes] = useState<string>(piece?.notes);
 
-  const { piece: pieceState, updatePiece } = usePieceState(piece);
+  // piece stage
+  const [formed, setFormed] = useState<boolean>(piece?.formed);
+  const [formedDate, setFormedDate] = useState<Date | undefined>(
+    piece ? piece.formedDate : undefined
+  );
+  const [trimmed, setTrimmed] = useState<boolean>(piece?.trimmed);
+  const [trimmedDate, setTrimmedDate] = useState<Date | undefined>(
+    piece ? piece.trimmedDate : undefined
+  );
+  const [bisqued, setBisqued] = useState<boolean>(piece?.bisqued);
+  const [bisquedDate, setBisquedDate] = useState<Date | undefined>(
+    piece ? piece.bisquedDate : undefined
+  );
+  const [glazed, setGlazed] = useState<boolean>(piece?.glazed);
+  const [glazedDate, setGlazedDate] = useState<Date | undefined>(
+    piece ? piece.glazedDate : undefined
+  );
+  const [fired, setFired] = useState<boolean>(piece?.fired);
+  const [firedDate, setFiredDate] = useState<Date | undefined>(
+    piece ? piece.firedDate : undefined
+  );
 
-  const {
+  // what the piece is
+  const [method, setMethod] = useState<string>(piece?.method);
+  const [form, setForm] = useState<string>(piece?.form);
+  const [material, setMaterial] = useState<string>(piece?.material);
+
+  // measurements of the piece
+  const [weight, setWeight] = useState<number>(piece?.weight);
+  const [height, setHeight] = useState<number>(piece?.height);
+  const [width, setWidth] = useState<number>(piece?.width);
+  const [pieceLength, setPieceLength] = useState<number>(piece?.pieceLength);
+
+  // glazes used in the piece, divided between inner and outer
+  const [glazeInner, setGlazeInner] = useState<string[]>(piece?.glaze.inner);
+  const [glazeOuter, setGlazeOuter] = useState<string[]>(piece?.glaze.outer);
+  const [underglazeInner, setUnderglazeInner] = useState<string[]>(
+    piece?.underglaze.inner
+  );
+  const [underglazeOuter, setUnderglazeOuter] = useState<string[]>(
+    piece?.underglaze.outer
+  );
+  const [slipInner, setSlipInner] = useState<string[]>(piece?.slip.inner);
+  const [slipOuter, setSlipOuter] = useState<string[]>(piece?.slip.outer);
+
+  // piece identification
+  const [_id, set_id] = useState<string>(piece?._id);
+  const [__v, set__v] = useState<number>(piece?.__v);
+
+  // initial glaze states
+  const glazeState: GlazeLayer = {
+    inner: glazeInner,
+    outer: glazeOuter,
+  };
+  const underglazeState: GlazeLayer = {
+    inner: underglazeInner,
+    outer: underglazeOuter,
+  };
+  const slipState: GlazeLayer = {
+    inner: slipInner,
+    outer: slipOuter,
+  };
+
+  // glaze variables based on initial states
+  const [glaze, setGlaze] = useState<GlazeLayer>(glazeState);
+  const [underglaze, setUnderglaze] = useState<GlazeLayer>(underglazeState);
+  const [slip, setSlip] = useState<GlazeLayer>(slipState);
+
+  const { dispatch } = usePieceContext();
+  const { presets, dispatch: presetsDispatch } = usePresetsContext();
+
+  const pieceObject = {
     title,
     formed,
     formedDate,
@@ -70,24 +150,42 @@ function PieceFormDialogContents({
     artist,
     notes,
     _id,
-  } = pieceState;
+    __v,
+  };
 
   // if a date for stage completion is chosen before the stage box is checked, automatically set the date to new Date and check stage box
   useEffect(() => {
-    formedDate && !formed ? updatePiece({ formed: !formed }) : "";
+    formedDate && !formed ? setFormed((formed) => !formed) : "";
   }, [formedDate]);
   useEffect(() => {
-    trimmedDate && !trimmed ? updatePiece({ trimmed: !trimmed }) : "";
+    trimmedDate && !trimmed ? setTrimmed((trimmed) => !trimmed) : "";
   }, [trimmedDate]);
   useEffect(() => {
-    bisquedDate && !bisqued ? updatePiece({ bisqued: !bisqued }) : "";
+    bisquedDate && !bisqued ? setBisqued((bisqued) => !bisqued) : "";
   }, [bisquedDate]);
   useEffect(() => {
-    glazedDate && !glazed ? updatePiece({ glazed: !glazed }) : "";
+    glazedDate && !glazed ? setGlazed((glazed) => !glazed) : "";
   }, [glazedDate]);
   useEffect(() => {
-    firedDate && !fired ? updatePiece({ fired: !fired }) : "";
+    firedDate && !fired ? setFired((fired) => !fired) : "";
   }, [firedDate]);
+
+  // when a glaze is changed, update state interfaces
+  useEffect(() => {
+    glazeState.inner = glazeInner;
+    glazeState.outer = glazeOuter;
+    setGlaze(glazeState);
+  }, [glazeInner, glazeOuter]);
+  useEffect(() => {
+    underglazeState.inner = underglazeInner;
+    underglazeState.outer = underglazeOuter;
+    setUnderglaze(underglazeState);
+  }, [underglazeInner, underglazeOuter]);
+  useEffect(() => {
+    slipState.inner = slipInner;
+    slipState.outer = slipOuter;
+    setSlip(slipState);
+  }, [slipInner, slipOuter]);
 
   return (
     <>
@@ -107,7 +205,7 @@ function PieceFormDialogContents({
               <input
                 type="text"
                 name="title"
-                onChange={(e) => updatePiece({ title: e.target.value })}
+                onChange={(e) => setTitle(e.target.value)}
                 value={title}
                 className="border border-secondary rounded-[6px] px-2 py-1"
               />
@@ -118,7 +216,7 @@ function PieceFormDialogContents({
                 type="text"
                 name="artist"
                 id="artist"
-                onChange={(e) => updatePiece({ artist: e.target.value })}
+                onChange={(e) => setArtist(e.target.value)}
                 value={artist}
                 className="border border-secondary rounded-[6px] px-2 py-1"
               />
@@ -129,7 +227,7 @@ function PieceFormDialogContents({
                 type="file"
                 name="photos"
                 id="photos"
-                onChange={(e) => updatePiece({ photos: e.target.value })}
+                onChange={(e) => setPhotos(e.target.value)}
                 value={photos}
                 className="w-[100px] overflow-hidden"
               />
@@ -145,10 +243,8 @@ function PieceFormDialogContents({
                   id="formed-stage"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
-                    updatePiece({ formed: isChecked });
-                    updatePiece({
-                      formedDate: isChecked ? new Date() : undefined,
-                    });
+                    setFormed(isChecked);
+                    setFormedDate(isChecked ? new Date() : undefined);
                   }}
                   checked={formed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
@@ -157,9 +253,8 @@ function PieceFormDialogContents({
               </div>
               <StageDatePicker
                 isStageSelected={formed}
-                stageDate={formedDate}
-                stageDateName={"formedDate"}
-                updateDate={updatePiece}
+                newDate={formedDate}
+                updateDate={setFormedDate}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -170,10 +265,8 @@ function PieceFormDialogContents({
                   id="trimmed-stage"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
-                    updatePiece({ trimmed: isChecked });
-                    updatePiece({
-                      trimmedDate: isChecked ? new Date() : undefined,
-                    });
+                    setTrimmed(isChecked);
+                    setTrimmedDate(isChecked ? new Date() : new Date(""));
                   }}
                   checked={trimmed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
@@ -182,9 +275,8 @@ function PieceFormDialogContents({
               </div>
               <StageDatePicker
                 isStageSelected={trimmed}
-                stageDate={trimmedDate}
-                stageDateName="trimmedDate"
-                updateDate={updatePiece}
+                newDate={trimmedDate}
+                updateDate={setTrimmedDate}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -195,10 +287,8 @@ function PieceFormDialogContents({
                   id="bisqued-stage"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
-                    updatePiece({ bisqued: isChecked });
-                    updatePiece({
-                      bisquedDate: isChecked ? new Date() : undefined,
-                    });
+                    setBisqued(isChecked);
+                    setBisquedDate(isChecked ? new Date() : new Date(""));
                   }}
                   checked={bisqued}
                   className="border border-secondary rounded-[6px] px-2 py-1"
@@ -207,9 +297,8 @@ function PieceFormDialogContents({
               </div>
               <StageDatePicker
                 isStageSelected={bisqued}
-                stageDate={bisquedDate}
-                stageDateName="bisquedDate"
-                updateDate={updatePiece}
+                newDate={bisquedDate}
+                updateDate={setBisquedDate}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -220,10 +309,8 @@ function PieceFormDialogContents({
                   id="glazed-stage"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
-                    updatePiece({ glazed: isChecked });
-                    updatePiece({
-                      glazedDate: isChecked ? new Date() : undefined,
-                    });
+                    setGlazed(isChecked);
+                    setGlazedDate(isChecked ? new Date() : new Date(""));
                   }}
                   checked={glazed}
                   className="border border-secondary rounded-[6px] px-2 py-1"
@@ -232,9 +319,8 @@ function PieceFormDialogContents({
               </div>
               <StageDatePicker
                 isStageSelected={glazed}
-                stageDate={glazedDate}
-                stageDateName="glazedDate"
-                updateDate={updatePiece}
+                newDate={glazedDate}
+                updateDate={setGlazedDate}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -245,10 +331,8 @@ function PieceFormDialogContents({
                   id="fired-stage"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
-                    updatePiece({ fired: isChecked });
-                    updatePiece({
-                      firedDate: isChecked ? new Date() : undefined,
-                    });
+                    setFired(isChecked);
+                    setFiredDate(isChecked ? new Date() : new Date(""));
                   }}
                   checked={fired}
                   className="border border-secondary rounded-[6px] px-2 py-1"
@@ -257,9 +341,8 @@ function PieceFormDialogContents({
               </div>
               <StageDatePicker
                 isStageSelected={fired}
-                stageDate={firedDate}
-                stageDateName="firedDate"
-                updateDate={updatePiece}
+                newDate={firedDate}
+                updateDate={setFiredDate}
               />
             </div>
           </div>
@@ -279,12 +362,12 @@ function PieceFormDialogContents({
                       presetName="form"
                       presetCategory="formPresets"
                       handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
+                      dispatch={presetsDispatch}
                     />
                   </div>
                   <PresetSelectMenu
                     preset={form}
-                    setPreset={updatePiece}
+                    setPreset={setForm}
                     presetName="form"
                     presetList={presets?.formPresets}
                   />
@@ -296,12 +379,12 @@ function PieceFormDialogContents({
                       presetName="method"
                       presetCategory="methodPresets"
                       handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
+                      dispatch={presetsDispatch}
                     />
                   </div>
                   <PresetSelectMenu
                     preset={method}
-                    setPreset={updatePiece}
+                    setPreset={setMethod}
                     presetName="method"
                     presetList={presets?.methodPresets}
                   />
@@ -313,12 +396,12 @@ function PieceFormDialogContents({
                       presetName="material"
                       presetCategory="materialPresets"
                       handleSubmit={handleNewPreset}
-                      dispatch={presetDispatch}
+                      dispatch={presetsDispatch}
                     />
                   </div>
                   <PresetSelectMenu
                     preset={material}
-                    setPreset={updatePiece}
+                    setPreset={setMaterial}
                     presetName="material"
                     presetList={presets?.materialPresets}
                   />
@@ -344,7 +427,7 @@ function PieceFormDialogContents({
                     type="text"
                     name="width"
                     id="width"
-                    onChange={(e) => updatePiece({ width: +e.target.value })}
+                    onChange={(e) => setWidth(+e.target.value)}
                     value={width}
                     className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                   />
@@ -355,9 +438,7 @@ function PieceFormDialogContents({
                     type="text"
                     name="length"
                     id="length"
-                    onChange={(e) =>
-                      updatePiece({ pieceLength: +e.target.value })
-                    }
+                    onChange={(e) => setPieceLength(+e.target.value)}
                     value={pieceLength}
                     className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                   />
@@ -368,7 +449,7 @@ function PieceFormDialogContents({
                     type="text"
                     name="height"
                     id="height"
-                    onChange={(e) => updatePiece({ height: +e.target.value })}
+                    onChange={(e) => setHeight(+e.target.value)}
                     value={height}
                     className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                   />
@@ -379,7 +460,7 @@ function PieceFormDialogContents({
                     type="text"
                     name="weight"
                     id="weight"
-                    onChange={(e) => updatePiece({ weight: +e.target.value })}
+                    onChange={(e) => setWeight(+e.target.value)}
                     value={weight}
                     className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                   />
@@ -415,7 +496,7 @@ function PieceFormDialogContents({
                         presetName="glaze"
                         presetCategory="glazePresets"
                         handleSubmit={handleNewPreset}
-                        dispatch={presetDispatch}
+                        dispatch={presetsDispatch}
                       />
                     </div>
                     {/* <PresetSelectMenu
@@ -436,10 +517,8 @@ function PieceFormDialogContents({
                       type="text"
                       name="underglazeInner"
                       id="underglazeInner"
-                      onChange={(e) =>
-                        updatePiece({ underglaze: { inner: [e.target.value] } })
-                      }
-                      value={underglaze.inner}
+                      onChange={(e) => setUnderglazeInner([e.target.value])}
+                      value={underglazeInner}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -449,10 +528,8 @@ function PieceFormDialogContents({
                       type="text"
                       name="slipInner"
                       id="slipInner"
-                      onChange={(e) =>
-                        updatePiece({ slip: { inner: [e.target.value] } })
-                      }
-                      value={slip.inner}
+                      onChange={(e) => setSlipInner([e.target.value])}
+                      value={slipInner}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -464,10 +541,8 @@ function PieceFormDialogContents({
                       type="text"
                       name="glazeOuter"
                       id="glazeOuter"
-                      onChange={(e) =>
-                        updatePiece({ glaze: { outer: [e.target.value] } })
-                      }
-                      value={glaze.outer}
+                      onChange={(e) => setGlazeOuter([e.target.value])}
+                      value={glazeOuter}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -477,10 +552,8 @@ function PieceFormDialogContents({
                       type="text"
                       name="underglazeOuter"
                       id="underglazeOuter"
-                      onChange={(e) =>
-                        updatePiece({ underglaze: { outer: [e.target.value] } })
-                      }
-                      value={underglaze.outer}
+                      onChange={(e) => setUnderglazeOuter([e.target.value])}
+                      value={underglazeOuter}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -490,10 +563,8 @@ function PieceFormDialogContents({
                       type="text"
                       name="slipOuter"
                       id="slipOuter"
-                      onChange={(e) =>
-                        updatePiece({ slip: { outer: [e.target.value] } })
-                      }
-                      value={slip.outer}
+                      onChange={(e) => setSlipOuter([e.target.value])}
+                      value={slipOuter}
                       className="border border-secondary rounded-[6px] px-2 py-1 w-full"
                     />
                   </div>
@@ -506,7 +577,7 @@ function PieceFormDialogContents({
             <textarea
               name="notes"
               id="notes"
-              onChange={(e) => updatePiece({ notes: e.target.value })}
+              onChange={(e) => setNotes(e.target.value)}
               value={notes}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
@@ -514,7 +585,7 @@ function PieceFormDialogContents({
           <DialogClose asChild>
             <Button
               onClick={() => {
-                handleSubmit(pieceState, pieceDispatch);
+                handleSubmit(pieceObject, dispatch);
                 setOpen(false);
               }}
               type="button"

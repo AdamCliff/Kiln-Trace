@@ -5,7 +5,6 @@ import { TableCell, TableRow } from "./ui/table";
 import { flexRender } from "@tanstack/react-table";
 
 import PieceFormDialogContents from "./pieceFormDialogContents";
-import PieceFormDialogContentsState from "./pieceFormDialogContentsState";
 
 function DataTableRow({ row, table }: { row: any; table: any }) {
   const [open, setOpen] = useState<boolean>(false);
@@ -27,16 +26,11 @@ function DataTableRow({ row, table }: { row: any; table: any }) {
       </TableRow>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
-          <PieceFormDialogContentsState
+          <PieceFormDialogContents
             setOpen={setOpen}
             piece={row.original}
             handleSubmit={meta.handleEditPiece}
           />
-          {/* <PieceFormDialogContents
-            setOpen={setOpen}
-            piece={row.original}
-            handleSubmit={meta.handleEditPiece}
-          /> */}
         </DialogContent>
       </Dialog>
     </>

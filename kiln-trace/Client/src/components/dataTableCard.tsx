@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { format } from "date-fns";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import PieceFormDialogContents from "./pieceFormDialogContents";
+import PieceFormDialogContents from "./pieceFormDialogContentsOLD";
 import { flexRender } from "@tanstack/react-table";
 
 function DataTableCard({ row, table }: { row: any; table: any }) {

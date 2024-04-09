@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { handleNewPiece } from "@/helpers/pieceHelperFunctions";
-import PieceFormDialogContents from "./pieceFormDialogContents";
+import PieceFormDialogContents from "./pieceFormDialogContentsOLD";
 import PresetDialog from "./presetDialog";
 import { usePieceContext } from "@/context/piecesContext";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
