@@ -21,7 +21,12 @@ function PieceFormGlazeSection({
   presets: any;
   presetDispatch: React.Dispatch<any>;
 }) {
+  //   const { glaze, underglaze, slip } = presets;
+  const { glazePresets, slipPresets } = presets;
   const { glaze, underglaze, slip } = piece;
+
+  console.log(glazePresets);
+  console.log(slipPresets);
 
   return (
     <>
@@ -56,17 +61,13 @@ function PieceFormGlazeSection({
                     dispatch={presetDispatch}
                   />
                 </div>
-                {/* <PresetSelectMenu
-                      // temporarily setting in array by index to circumvent type error
-                      preset={
-                        glazeInner
-                          ? glazeInner[glazeInner.length - 1]
-                          : glazeInner
-                      }
-                      setPreset={setGlazeInner}
-                      presetName="glaze"
-                      presetList={presets?.glazePresets}
-                    /> */}
+                <PresetSelectMenu
+                  // testing set up- MUST CHANGE
+                  preset={glaze.inner?.[0] && glaze.inner?.[0]}
+                  setPreset={updatePiece}
+                  presetName="glaze"
+                  presetList={presets?.glazePresets}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="underglazeInner">Inner Underglaze</label>
