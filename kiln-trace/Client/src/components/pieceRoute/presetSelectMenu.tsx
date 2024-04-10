@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/select";
 
 import { Piece } from "@/types/piece";
+import { PresetType } from "@/types/piecePresets";
 
 function PresetSelectMenu({
   preset,
@@ -15,32 +16,26 @@ function PresetSelectMenu({
   presetList,
 }: {
   preset: string;
-  //   setPreset:
-  //     | React.Dispatch<React.SetStateAction<string>>
-  //     | React.Dispatch<React.SetStateAction<string[]>>;
-  // setPreset: React.Dispatch<
-  //   React.SetStateAction<string> | React.SetStateAction<string[]>
-  // >;
-  // setPreset: React.Dispatch<React.SetStateAction<string>>;
   setPreset: (updatedPiece: Partial<Piece>) => void;
   presetName: string;
-  presetList: string[] | undefined;
+  presetList: PresetType;
 }) {
+  const { presets } = presetList;
   return (
     <>
       <Select
         onValueChange={(value) => setPreset({ [presetName]: value })}
         value={preset}
       >
-        {/* <Select onValueChange={(value) => setPreset(value)} value={preset}> */}
         <SelectTrigger className="w-40">
           <SelectValue placeholder={`Select a ${presetName}`} />
         </SelectTrigger>
         <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
-          {presetList?.map((preset) => {
+          {presets.map((preset) => {
+            const { preset: presetValue } = preset;
             return (
-              <SelectItem key={preset} value={preset}>
-                {preset}
+              <SelectItem key={preset._id} value={presetValue}>
+                {presetValue}
               </SelectItem>
             );
           })}

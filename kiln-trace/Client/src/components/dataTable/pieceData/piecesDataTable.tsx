@@ -164,11 +164,9 @@ function PiecesDataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table
-                .getRowModel()
-                .rows.map((row) => (
-                  <DataTableRow key={row.id} row={row} table={table} />
-                ))
+              table.getRowModel().rows.map((row) => {
+                return <DataTableRow key={row.id} row={row} table={table} />;
+              })
             ) : (
               <TableRow>
                 <TableCell

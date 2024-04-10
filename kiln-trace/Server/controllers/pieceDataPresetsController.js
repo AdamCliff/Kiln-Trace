@@ -9,6 +9,7 @@ const loadPiecePresets = async (req, res) => {
     if (!piecePresets[0]) {
       // if presets don't exist, create defaults, refind, and return
       const presets = new PieceDataPresets();
+      console.log(presets);
       await presets.save();
       piecePresets = await PieceDataPresets.find({});
       res.status(200).json(piecePresets);
@@ -68,6 +69,7 @@ const editPiecePreset = async (req, res) => {
 // removes a specified preset in specified category
 const removePiecePreset = async (req, res) => {
   try {
+    const { preset, presetName } = req.params;
   } catch (error) {
     console.error(error);
   }

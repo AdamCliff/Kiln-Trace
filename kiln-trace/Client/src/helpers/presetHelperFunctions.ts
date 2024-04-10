@@ -8,6 +8,7 @@ export const handleLoadPresets = async (dispatch: React.Dispatch<any>) => {
       method: "GET",
     });
     const [res] = await req.json();
+    console.log(res);
     dispatch({
       type: presetActionTypes.LOAD_PRESETS,
       payload: res,
@@ -35,8 +36,19 @@ export const handleNewPreset = async (
   }
 };
 
-export const handleDeletePreset = async () => {
+export const handleRemovePreset = async (
+  preset: string,
+  presetName: string,
+  dispatch: React.Dispatch<any>
+) => {
   try {
+    const req = await fetch("http://localhost:3000/presets", {
+      method: "DELETE",
+      body: JSON.stringify({ preset: preset, presetName: presetName }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const res = await req.json();
+    dispatch({ type: presetActionTypes.REMOVE_PRESET, payload: res });
   } catch (error) {
     console.error(error);
   }

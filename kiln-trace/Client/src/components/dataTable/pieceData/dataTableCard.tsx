@@ -30,7 +30,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
           <div className="flex flex-col items-start justify-around p-2 h-[35%]">
             <span>{row.original.title}</span>
             <span>
-              {`${row.original.stage} - ${format(row.original.date, "MM/dd/yy")}`}
+              {`${row.original.stage} - ${row.original.date ? format(row.original.date, "MM/dd/yy") : "--/--/--"}`}
             </span>
             <span>{row.original.artist ? row.original.artist : "-"}</span>
           </div>

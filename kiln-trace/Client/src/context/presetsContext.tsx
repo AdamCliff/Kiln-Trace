@@ -51,9 +51,7 @@ export const presetsReducer = (
     case presetActionTypes.REMOVE_PRESET: {
       if (!state.presets) return new Error("state.presets is undefined");
       return {
-        // presets: state.presets.filter(
-        //   (piece) => piece._id !== action.payload._id
-        // ),
+        presets: action.payload,
       };
     }
     case presetActionTypes.EDIT_PRESET: {

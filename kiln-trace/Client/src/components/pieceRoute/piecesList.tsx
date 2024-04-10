@@ -15,18 +15,20 @@ function PiecesList() {
   // load pieces
   const shouldRun = useRef(true);
   useEffect(() => {
-    if (shouldRun.current) {
-      shouldRun.current = false;
-      const fetchData = async () => {
-        try {
-          await handleLoadPieces(dispatch);
-        } catch (error) {
-          console.error(`Failed to fetch piece list: ${error}`);
-        }
-      };
+    (async () => {
+      if (shouldRun.current) {
+        shouldRun.current = false;
+        const fetchData = async () => {
+          try {
+            await handleLoadPieces(dispatch);
+          } catch (error) {
+            console.error(`Failed to fetch piece list: ${error}`);
+          }
+        };
 
-      fetchData();
-    }
+        await fetchData();
+      }
+    })();
   }, [pieces]);
 
   // laod presets

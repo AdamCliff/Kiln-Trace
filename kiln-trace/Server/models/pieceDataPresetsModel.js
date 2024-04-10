@@ -1,85 +1,104 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// const Preset = new Schema({
-//   preset: {
-//     type: String,
-//     required: true,
-//   },
-//   id: {
-//     type: Number,
-//     required: true,
-//   },
-// });
+const PresetSchema = new Schema({
+  preset: {
+    type: {},
+    required: true,
+  },
+});
+
+const Preset = mongoose.model("preset", PresetSchema);
+
+const PresetTypeSchema = new Schema({
+  presets: {
+    type: [PresetSchema],
+    required: false,
+  },
+});
 
 const PieceDataPresetsSchema = new Schema({
   formPresets: {
-    type: [String],
+    type: PresetTypeSchema,
     required: true,
     default: () => {
-      return [
-        "Bowl",
-        "Coffee Cup",
-        "Jar",
-        "Mug",
-        "Planter",
-        "Plate",
-        "Platter",
-        "Tea Cup",
-        "Test Tile",
-        "Vase",
-      ];
+      return {
+        presets: [
+          new Preset({ preset: "bowl" }),
+          new Preset({ preset: "Coffee Cup" }),
+          new Preset({ preset: "Jar" }),
+          new Preset({ preset: "Mug" }),
+          new Preset({ preset: "Planter" }),
+          new Preset({ preset: "Plate" }),
+          new Preset({ preset: "Platter" }),
+          new Preset({ preset: "Tea Cup" }),
+          new Preset({ preset: "Test Tile" }),
+          new Preset({ preset: "Vase" }),
+        ],
+      };
     },
   },
   methodPresets: {
-    type: [String],
+    type: PresetTypeSchema,
     required: true,
     default: () => {
-      return [
-        "Mold Formed",
-        "Pinched",
-        "Slab Built",
-        "Slip Cast",
-        "Thrown and Altered",
-        "Wheel Thrown",
-      ];
+      return {
+        presets: [
+          new Preset({ preset: "Mold Formed" }),
+          new Preset({ preset: "Pinched" }),
+          new Preset({ preset: "Slab Built" }),
+          new Preset({ preset: "Slip Cast" }),
+          new Preset({ preset: "Thrown and Altered" }),
+          new Preset({ preset: "Wheel Thrown" }),
+        ],
+      };
     },
   },
   materialPresets: {
-    type: [/* Preset */ String],
+    type: PresetTypeSchema,
     required: true,
     default: () => {
-      return ["Terracotta", "Ball Clay", "Earthenware", "Stoneware"];
-      // return [
-      //   { preset: "terracotta", id: 0 },
-      //   { preset: "ball clay", id: 1 },
-      //   { preset: "earthenware", id: 2 },
-      //   { preset: "stoneware", id: 3 },
-      // ];
+      return {
+        presets: [
+          new Preset({ preset: "Terracotta" }),
+          new Preset({ preset: "Ball Clay" }),
+          new Preset({ preset: "Earthenware" }),
+          new Preset({ preset: "Stoneware" }),
+        ],
+      };
     },
   },
   glazePresets: {
-    type: [String],
+    type: PresetTypeSchema,
     required: true,
     default: () => {
-      return ["glaze1", "glaze2", "glaze3", "glaze4", "glaze5"];
+      return {
+        presets: [
+          new Preset({ preset: "glaze1" }),
+          new Preset({ preset: "glaze2" }),
+          new Preset({ preset: "glaze3" }),
+          new Preset({ preset: "glaze4" }),
+          new Preset({ preset: "glaze5" }),
+        ],
+      };
     },
   },
   slipPresets: {
-    type: [/* Preset */ String],
+    type: PresetTypeSchema,
     rquired: true,
     default: () => {
-      return ["slip1", "slip2", "slip3", "slip4", "slip5"];
-      // return [
-      //   { preset: "slip1", id: 0 },
-      //   { preset: "slip2", id: 1 },
-      //   { preset: "slip3", id: 2 },
-      //   { preset: "slip4", id: 3 },
-      //   { preset: "slip5", id: 4 },
-      // ];
+      return {
+        presets: [
+          new Preset({ preset: "slip1" }),
+          new Preset({ preset: "slip2" }),
+          new Preset({ preset: "slip3" }),
+          new Preset({ preset: "slip4" }),
+          new Preset({ preset: "slip5" }),
+        ],
+      };
     },
   },
-  artist: { type: [String], required: false },
+  artist: { type: PresetTypeSchema, required: false },
 });
 
 const PieceDataPresets = mongoose.model(
