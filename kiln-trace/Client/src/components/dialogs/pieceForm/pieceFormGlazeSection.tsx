@@ -10,6 +10,7 @@ import PresetDialog from "../presetForm/presetDialog";
 // import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
+import { useEffect } from "react";
 
 function PieceFormGlazeSection({
   piece,
@@ -23,7 +24,7 @@ function PieceFormGlazeSection({
   presetDispatch: React.Dispatch<any>;
 }) {
   //   const { glaze, underglaze, slip } = presets;
-  const { glazePresets, slipPresets } = presets;
+  // const { glazePresets, slipPresets } = presets;
   const {
     innerGlaze,
     innerUnderglaze,
@@ -33,8 +34,10 @@ function PieceFormGlazeSection({
     outerSlip,
   } = piece;
 
-  console.log(glazePresets);
-  console.log(slipPresets);
+  // console.log(glazePresets);
+  // console.log(slipPresets);
+
+  useEffect(() => console.log(piece), [piece]);
 
   return (
     <>
@@ -56,12 +59,10 @@ function PieceFormGlazeSection({
         <AccordionItem value="glazes">
           <AccordionTrigger>Glazes</AccordionTrigger>
           <AccordionContent>
-            <div className="flex gap-2">
+            <div className="flex items-start gap-2">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label htmlFor="glazeInner" className="whitespace-nowrap">
-                    Inner Glaze
-                  </label>
+                  <label className="whitespace-nowrap">Inner Glaze</label>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -70,7 +71,6 @@ function PieceFormGlazeSection({
                   />
                 </div>
                 <GlazeSelectionCollapsible
-                  index={0}
                   presets={innerGlaze}
                   updatePiece={updatePiece}
                   presetName="innerGlaze"
@@ -78,71 +78,91 @@ function PieceFormGlazeSection({
                 />
               </div>
               <div className="flex flex-col gap-2">
-                {/* <label htmlFor="underglazeInner">Inner Underglaze</label> */}
-                {/* <input
-                  type="text"
-                  name="underglazeInner"
-                  id="underglazeInner"
-                  onChange={(e) =>
-                    updatePiece({ underglaze: { inner: [e.target.value] } })
-                  }
-                  value={underglaze.inner}
-                  className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                /> */}
+                <div className="flex items-center justify-start gap-2 h-full w-min">
+                  <label className="whitespace-nowrap">Inner Underglaze</label>
+                  <PresetDialog
+                    presetName="glaze"
+                    presetCategory="glazePresets"
+                    handleSubmit={handleNewPreset}
+                    dispatch={presetDispatch}
+                  />
+                </div>
+                <GlazeSelectionCollapsible
+                  presets={innerUnderglaze}
+                  updatePiece={updatePiece}
+                  presetName="innerUnderglaze"
+                  presetList={presets?.glazePresets}
+                />
               </div>
               <div className="flex flex-col gap-2">
-                {/* <label htmlFor="slipInner">Inner Slip</label> */}
-                {/* <input
-                  type="text"
-                  name="slipInner"
-                  id="slipInner"
-                  onChange={(e) =>
-                    updatePiece({ slip: { inner: [e.target.value] } })
-                  }
-                  value={slip.inner}
-                  className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                /> */}
+                <div className="flex items-center justify-start gap-2 h-full w-min">
+                  <label className="whitespace-nowrap">Inner Slip</label>
+                  <PresetDialog
+                    presetName="slip"
+                    presetCategory="slipPresets"
+                    handleSubmit={handleNewPreset}
+                    dispatch={presetDispatch}
+                  />
+                </div>
+                <GlazeSelectionCollapsible
+                  presets={innerSlip}
+                  updatePiece={updatePiece}
+                  presetName="innerSlip"
+                  presetList={presets?.glazePresets}
+                />
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-start gap-2">
               <div className="flex flex-col gap-2">
-                {/* <label htmlFor="glazeOuter">Outer Glaze</label> */}
-                {/* <input
-                  type="text"
-                  name="glazeOuter"
-                  id="glazeOuter"
-                  onChange={(e) =>
-                    updatePiece({ glaze: { outer: [e.target.value] } })
-                  }
-                  value={glaze.outer}
-                  className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                /> */}
+                <div className="flex items-center justify-start gap-2 h-full w-min">
+                  <label className="whitespace-nowrap">Outer Glaze</label>
+                  <PresetDialog
+                    presetName="glaze"
+                    presetCategory="glazePresets"
+                    handleSubmit={handleNewPreset}
+                    dispatch={presetDispatch}
+                  />
+                </div>
+                <GlazeSelectionCollapsible
+                  presets={outerGlaze}
+                  updatePiece={updatePiece}
+                  presetName="outerGlaze"
+                  presetList={presets?.glazePresets}
+                />
               </div>
               <div className="flex flex-col gap-2">
-                {/* <label htmlFor="underglazeOuter">Outer Underglaze</label> */}
-                {/* <input
-                  type="text"
-                  name="underglazeOuter"
-                  id="underglazeOuter"
-                  onChange={(e) =>
-                    updatePiece({ underglaze: { outer: [e.target.value] } })
-                  }
-                  value={underglaze.outer}
-                  className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                /> */}
+                <div className="flex items-center justify-start gap-2 h-full w-min">
+                  <label className="whitespace-nowrap">Outer Underglaze</label>
+                  <PresetDialog
+                    presetName="glaze"
+                    presetCategory="glazePresets"
+                    handleSubmit={handleNewPreset}
+                    dispatch={presetDispatch}
+                  />
+                </div>
+                <GlazeSelectionCollapsible
+                  presets={outerUnderglaze}
+                  updatePiece={updatePiece}
+                  presetName="outerUnderglaze"
+                  presetList={presets?.glazePresets}
+                />
               </div>
               <div className="flex flex-col gap-2">
-                {/* <label htmlFor="slipOuter">Outer Slip</label> */}
-                {/* <input
-                  type="text"
-                  name="slipOuter"
-                  id="slipOuter"
-                  onChange={(e) =>
-                    updatePiece({ slip: { outer: [e.target.value] } })
-                  }
-                  value={slip.outer}
-                  className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                /> */}
+                <div className="flex items-center justify-start gap-2 h-full w-min">
+                  <label className="whitespace-nowrap">Outer Slip</label>
+                  <PresetDialog
+                    presetName="slip"
+                    presetCategory="slipPresets"
+                    handleSubmit={handleNewPreset}
+                    dispatch={presetDispatch}
+                  />
+                </div>
+                <GlazeSelectionCollapsible
+                  presets={outerSlip}
+                  updatePiece={updatePiece}
+                  presetName="outerSlip"
+                  presetList={presets?.glazePresets}
+                />
               </div>
             </div>
           </AccordionContent>

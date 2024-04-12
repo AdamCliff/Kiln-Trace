@@ -21,32 +21,30 @@ function PresetDialogContents({
 
   return (
     <>
-      <div>
-        <form action="/presets" method="POST" className="flex flex-col gap-2">
-          <input
-            type="text"
-            placeholder={"New " + presetName + " name..."}
-            name="preset"
-            id="preset"
-            onChange={(e) => {
-              e.stopPropagation();
-              setPreset(e.target.value);
-            }}
-            value={preset}
-            className="p-2"
-          />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleSubmit(preset, presetCategory, dispatch);
-              setIsOpen(false);
-            }}
-            className="m-auto bg-secondary text-background h-min w-min py-2 px-4 mt-4 rounded-xl"
-          >
-            Save
-          </button>
-        </form>
-      </div>
+      <form action="/presets" method="POST" className="flex flex-col gap-2">
+        <input
+          type="text"
+          placeholder={"New " + presetName + " name..."}
+          name="preset"
+          id="preset"
+          onChange={(e) => {
+            e.stopPropagation();
+            setPreset(e.target.value);
+          }}
+          value={preset}
+          className="p-2"
+        />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleSubmit(preset, presetCategory, dispatch);
+            setIsOpen(false);
+          }}
+          className="m-auto bg-secondary text-background h-min w-min py-2 px-4 mt-4 rounded-xl"
+        >
+          Save
+        </button>
+      </form>
     </>
   );
 }

@@ -36,7 +36,7 @@ function PresetDialog({
           }}
           className="w-full h-full"
         >
-          <DialogTrigger className="w-full h-full px-2 hover:bg-accent">
+          <DialogTrigger className="w-min h-min px-2 hover:bg-accent">
             +
           </DialogTrigger>
         </button>

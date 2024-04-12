@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Select,
   SelectContent,
@@ -30,10 +32,6 @@ function GlazePresetSelectMenu({
 }) {
   const { presets: presetsList } = presetList;
 
-  console.log(presetsList);
-  console.log(presets);
-  console.log(presetName);
-
   return (
     <>
       <Select
@@ -45,7 +43,7 @@ function GlazePresetSelectMenu({
         value={presets[index]}
       >
         <SelectTrigger className="w-40">
-          <SelectValue placeholder={`Select a ${presetName}`} />
+          <SelectValue placeholder={"Add layer"} />
         </SelectTrigger>
         <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
           {presetsList.map((preset) => {

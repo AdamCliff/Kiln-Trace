@@ -14,13 +14,11 @@ import { Piece } from "@/types/piece";
 import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 
 function GlazeSelectionCollapsible({
-  index,
   presets,
   updatePiece,
   presetName,
   presetList,
 }: {
-  index: number;
   presets: string[];
   updatePiece: (updatedPiece: Partial<Piece>) => void;
   presetName:
@@ -32,47 +30,50 @@ function GlazeSelectionCollapsible({
     | "outerSlip";
   presetList: Presets;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(presets.length > 0);
 
   return (
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="w-[350px] space-y-2"
+      className="w-min space-y-2"
     >
-      <div className="flex items-center justify-between space-x-4 w-min">
-        <CollapsibleTrigger asChild>
-          <>
-            <GlazePresetSelectMenu
-              index={index}
-              presets={presets}
-              updatePiece={updatePiece}
-              presetName={presetName}
-              presetList={presetList}
-            />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-9 p-0"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsOpen(!isOpen);
-              }}
-            >
-              <ChevronsUpDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          </>
-        </CollapsibleTrigger>
-      </div>
-      <CollapsibleContent className="space-y-2">
+      <div className="flex items-center justify-between space-x-2 w-min">
         <GlazePresetSelectMenu
-          index={index}
+          index={0}
           presets={presets}
           updatePiece={updatePiece}
           presetName={presetName}
           presetList={presetList}
         />
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-9 p-0"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }}
+        >
+          <ChevronsUpDown className="h-4 w-4" />
+          <span className="sr-only">Toggle</span>
+        </Button>
+      </div>
+      <CollapsibleContent className="space-y-2">
+        {presets.length &&
+          presets.map((_, index) => {
+            if (index < presets.length && index + 1 < 5) {
+              return (
+                <GlazePresetSelectMenu
+                  index={index + 1}
+                  presets={presets}
+                  updatePiece={updatePiece}
+                  presetName={presetName}
+                  presetList={presetList}
+                />
+              );
+            }
+          })}
       </CollapsibleContent>
     </Collapsible>
   );
