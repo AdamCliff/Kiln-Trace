@@ -3,7 +3,7 @@ export interface Preset {
   _id: string;
 }
 
-export interface PresetType {
+export interface Presets {
   presets: Preset[];
 }
 
@@ -14,10 +14,10 @@ export interface PiecePresets {
   // glazePresets: string[];
   // slipPresets: string[];
   // artistPrests: string[];
-  formPresets: { [presetName: string]: PresetType };
-  methodPresets: { [presetName: string]: PresetType };
-  materialPresets: { [presetName: string]: PresetType };
-  glazePresets: { [presetName: string]: PresetType };
-  slipPresets: { [presetName: string]: PresetType };
-  artistPresets: { [presetName: string]: PresetType };
+  formPresets: { [presetName: string]: Presets };
+  methodPresets: { [presetName: string]: Presets };
+  materialPresets: { [presetName: string]: Presets };
+  glazePresets: { [presetName: string]: Presets };
+  slipPresets: { [presetName: string]: Presets };
+  artistPresets: { [presetName: string]: Presets };
 }

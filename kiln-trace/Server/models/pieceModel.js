@@ -1,46 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Preset = require("./pieceDataPresetsModel");
-
-const GlazeLayerSchema = new Schema({
-  glaze1: {
-    type: Preset,
-    required: false,
-    default: () => {
-      return new Preset();
-    },
-  },
-  glaze2: {
-    type: Preset,
-    required: false,
-    default: () => {
-      return new Preset();
-    },
-  },
-  glaze3: {
-    type: Preset,
-    required: false,
-    default: () => {
-      return new Preset();
-    },
-  },
-  glaze4: {
-    type: Preset,
-    required: false,
-    default: () => {
-      return new Preset();
-    },
-  },
-  glaze5: {
-    type: Preset,
-    required: false,
-    default: () => {
-      return new Preset();
-    },
-  },
-});
-
 const PieceSchema = new Schema(
   {
     title: {
@@ -170,45 +130,45 @@ const PieceSchema = new Schema(
       },
     },
     innerGlaze: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     innerUnderglaze: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     innerSlip: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     outerGlaze: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     outerUnderglaze: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     outerSlip: {
-      type: GlazeLayerSchema,
+      type: [String],
       required: false,
       default: () => {
-        return new GlazeLayerSchema();
+        return [];
       },
     },
     // glaze: {

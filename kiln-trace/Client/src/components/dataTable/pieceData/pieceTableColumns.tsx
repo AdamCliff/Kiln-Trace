@@ -114,7 +114,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     accessorKey: "glaze",
     header: "Glaze",
     cell: ({ row }) => {
-      return <>{row.original.glaze.inner}</>;
+      return <>{row.original.innerGlaze?.[0]}</>;
     },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
@@ -123,7 +123,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     accessorKey: "underglaze",
     header: "Underglaze",
     cell: ({ row }) => {
-      return <>{row.original.underglaze.inner}</>;
+      return <>{row.original.innerUnderglaze?.[0]}</>;
     },
     filterFn: "fuzzy",
     enableGlobalFilter: true,

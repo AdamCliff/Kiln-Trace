@@ -1,3 +1,5 @@
+import { Presets } from "./piecePresets";
+
 // piece interface
 export interface Piece {
   title: string;
@@ -24,9 +26,15 @@ export interface Piece {
   width: number;
   dimensions?: number | undefined;
   notes: string;
-  glaze: { inner?: string[]; outer?: string[] };
-  underglaze: { inner?: string[]; outer?: string[] };
-  slip: { inner?: string[]; outer?: string[] };
+  // glaze: { inner?: string[]; outer?: string[] };
+  // underglaze: { inner?: string[]; outer?: string[] };
+  // slip: { inner?: string[]; outer?: string[] };
+  innerGlaze: /* Presets */ string[];
+  innerUnderglaze: /* Presets */ string[];
+  innerSlip: /* Presets */ string[];
+  outerGlaze: /* Presets */ string[];
+  outerUnderglaze: /* Presets */ string[];
+  outerSlip: /* Presets */ string[];
   __v: number;
   _id: string;
 }

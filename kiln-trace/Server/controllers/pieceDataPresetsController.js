@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PieceDataPresets = require("../models/pieceDataPresetsModel");
+const { PieceDataPresets } = require("../models/pieceDataPresetsModel");
 
 const loadPiecePresets = async (req, res) => {
   try {

@@ -34,13 +34,18 @@ const createPiece = async (req, res) => {
     height,
     width,
     pieceLength,
-    glaze,
-    underglaze,
-    slip,
+    innerGlaze,
+    innerUnderglaze,
+    innerSlip,
+    outerGlaze,
+    outerUnderglaze,
+    outerSlip,
     photos,
     artist,
     notes,
   } = req.body;
+
+  console.log(req.body);
 
   try {
     const piece = await Piece.create({
@@ -61,15 +66,19 @@ const createPiece = async (req, res) => {
       height,
       width,
       pieceLength,
-      glaze,
-      underglaze,
-      slip,
+      innerGlaze,
+      innerUnderglaze,
+      innerSlip,
+      outerGlaze,
+      outerUnderglaze,
+      outerSlip,
       photos,
       artist,
       notes,
     });
     res.status(201).json(piece);
   } catch (error) {
+    console.error(error);
     res.status(400).json({ error: error.message });
   }
 };

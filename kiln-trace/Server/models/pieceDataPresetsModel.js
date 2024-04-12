@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const PresetSchema = new Schema({
   preset: {
-    // type: {},
     type: String,
     required: true,
   },
@@ -107,4 +106,4 @@ const PieceDataPresets = mongoose.model(
   PieceDataPresetsSchema
 );
 
-module.exports = { PieceDataPresets, Preset };
+module.exports = { PieceDataPresets, Preset, PresetSchema };

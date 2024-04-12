@@ -23,7 +23,14 @@ function PieceFormGlazeSection({
 }) {
   //   const { glaze, underglaze, slip } = presets;
   const { glazePresets, slipPresets } = presets;
-  const { glaze, underglaze, slip } = piece;
+  const {
+    innerGlaze,
+    innerUnderglaze,
+    innerSlip,
+    outerGlaze,
+    outerUnderglaze,
+    outerSlip,
+  } = piece;
 
   console.log(glazePresets);
   console.log(slipPresets);
@@ -35,12 +42,12 @@ function PieceFormGlazeSection({
         type="single"
         collapsible
         defaultValue={
-          glaze.inner?.[0] ||
-          glaze.outer?.[0] ||
-          underglaze.inner?.[0] ||
-          underglaze.outer?.[0] ||
-          slip.inner?.[0] ||
-          slip.outer?.[0]
+          innerGlaze[0] ||
+          innerUnderglaze[0] ||
+          innerSlip[0] ||
+          outerGlaze[0] ||
+          outerUnderglaze[0] ||
+          outerSlip[0]
             ? "glazes"
             : ""
         }
@@ -63,15 +70,15 @@ function PieceFormGlazeSection({
                 </div>
                 <PresetSelectMenu
                   // testing set up- MUST CHANGE
-                  preset={glaze.inner?.[0] && glaze.inner?.[0]}
+                  preset={innerUnderglaze[0]}
                   setPreset={updatePiece}
-                  presetName="glaze"
+                  presetName="innerGlaze"
                   presetList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="underglazeInner">Inner Underglaze</label>
-                <input
+                {/* <input
                   type="text"
                   name="underglazeInner"
                   id="underglazeInner"
@@ -80,11 +87,11 @@ function PieceFormGlazeSection({
                   }
                   value={underglaze.inner}
                   className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                />
+                /> */}
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="slipInner">Inner Slip</label>
-                <input
+                {/* <input
                   type="text"
                   name="slipInner"
                   id="slipInner"
@@ -93,13 +100,13 @@ function PieceFormGlazeSection({
                   }
                   value={slip.inner}
                   className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                />
+                /> */}
               </div>
             </div>
             <div className="flex gap-2">
               <div className="flex flex-col gap-2">
                 <label htmlFor="glazeOuter">Outer Glaze</label>
-                <input
+                {/* <input
                   type="text"
                   name="glazeOuter"
                   id="glazeOuter"
@@ -108,11 +115,11 @@ function PieceFormGlazeSection({
                   }
                   value={glaze.outer}
                   className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                />
+                /> */}
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="underglazeOuter">Outer Underglaze</label>
-                <input
+                {/* <input
                   type="text"
                   name="underglazeOuter"
                   id="underglazeOuter"
@@ -121,11 +128,11 @@ function PieceFormGlazeSection({
                   }
                   value={underglaze.outer}
                   className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                />
+                /> */}
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="slipOuter">Outer Slip</label>
-                <input
+                {/* <input
                   type="text"
                   name="slipOuter"
                   id="slipOuter"
@@ -134,7 +141,7 @@ function PieceFormGlazeSection({
                   }
                   value={slip.outer}
                   className="border border-secondary rounded-[6px] px-2 py-1 w-full"
-                />
+                /> */}
               </div>
             </div>
           </AccordionContent>
