@@ -1,6 +1,46 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const Preset = require("./pieceDataPresetsModel");
+
+const GlazeLayerSchema = new Schema({
+  glaze1: {
+    type: Preset,
+    required: false,
+    default: () => {
+      return new Preset();
+    },
+  },
+  glaze2: {
+    type: Preset,
+    required: false,
+    default: () => {
+      return new Preset();
+    },
+  },
+  glaze3: {
+    type: Preset,
+    required: false,
+    default: () => {
+      return new Preset();
+    },
+  },
+  glaze4: {
+    type: Preset,
+    required: false,
+    default: () => {
+      return new Preset();
+    },
+  },
+  glaze5: {
+    type: Preset,
+    required: false,
+    default: () => {
+      return new Preset();
+    },
+  },
+});
+
 const PieceSchema = new Schema(
   {
     title: {
@@ -129,85 +169,96 @@ const PieceSchema = new Schema(
         return "";
       },
     },
-    // custom type for in and out array of glazes on over and underglazes
-    // over and underglazes must be arrays of two types, in and out
-    // glaze: {
-    //   type: [String],
-    //   required: false,
-    //   // default: () => {
-    //   //   return [];
-    //   // },
-    // },
-    // glaze: {
-    //   type: GlazeLayerSchema,
-    //   required: false,
-    //   // default: () => {
-    //   //   return [];
-    //   // },
-    // },
-    glaze: {
-      inner: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
-      },
-      outer: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
+    innerGlaze: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
       },
     },
-
+    innerUnderglaze: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
+      },
+    },
+    innerSlip: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
+      },
+    },
+    outerGlaze: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
+      },
+    },
+    outerUnderglaze: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
+      },
+    },
+    outerSlip: {
+      type: GlazeLayerSchema,
+      required: false,
+      default: () => {
+        return new GlazeLayerSchema();
+      },
+    },
+    // glaze: {
+    //   inner: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
+    //   },
+    //   outer: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
+    //   },
+    // },
     // underglaze: {
-    //   type: [String],
-    //   required: false,
-    //   default: () => {
-    //     return [];
+    //   inner: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
+    //   },
+    //   outer: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
     //   },
     // },
-    underglaze: {
-      inner: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
-      },
-      outer: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
-      },
-    },
     // slip: {
-    //   type: [String],
-    //   required: false,
-    //   default: () => {
-    //     return [];
+    //   inner: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
+    //   },
+    //   outer: {
+    //     type: [String],
+    //     required: false,
+    //     default: () => {
+    //       return [];
+    //     },
     //   },
     // },
-    slip: {
-      inner: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
-      },
-      outer: {
-        type: [String],
-        required: false,
-        default: () => {
-          return [];
-        },
-      },
-    },
     // IMAGES MUST BE CHANGED TO HAVE THE PROPER DATA AND UPLOAD PROCESS
     photos: {
       type: String,

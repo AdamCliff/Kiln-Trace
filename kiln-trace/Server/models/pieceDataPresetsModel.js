@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 const PresetSchema = new Schema({
   preset: {
-    type: {},
+    // type: {},
+    type: String,
     required: true,
   },
 });
 
 const Preset = mongoose.model("preset", PresetSchema);
 
-const PresetTypeSchema = new Schema({
+const PresetGroupSchema = new Schema({
   presets: {
     type: [PresetSchema],
     required: false,
@@ -19,7 +20,7 @@ const PresetTypeSchema = new Schema({
 
 const PieceDataPresetsSchema = new Schema({
   formPresets: {
-    type: PresetTypeSchema,
+    type: PresetGroupSchema,
     required: true,
     default: () => {
       return {
@@ -39,7 +40,7 @@ const PieceDataPresetsSchema = new Schema({
     },
   },
   methodPresets: {
-    type: PresetTypeSchema,
+    type: PresetGroupSchema,
     required: true,
     default: () => {
       return {
@@ -55,7 +56,7 @@ const PieceDataPresetsSchema = new Schema({
     },
   },
   materialPresets: {
-    type: PresetTypeSchema,
+    type: PresetGroupSchema,
     required: true,
     default: () => {
       return {
@@ -69,7 +70,7 @@ const PieceDataPresetsSchema = new Schema({
     },
   },
   glazePresets: {
-    type: PresetTypeSchema,
+    type: PresetGroupSchema,
     required: true,
     default: () => {
       return {
@@ -84,7 +85,7 @@ const PieceDataPresetsSchema = new Schema({
     },
   },
   slipPresets: {
-    type: PresetTypeSchema,
+    type: PresetGroupSchema,
     rquired: true,
     default: () => {
       return {
@@ -98,7 +99,7 @@ const PieceDataPresetsSchema = new Schema({
       };
     },
   },
-  artist: { type: PresetTypeSchema, required: false },
+  artist: { type: PresetGroupSchema, required: false },
 });
 
 const PieceDataPresets = mongoose.model(
@@ -106,4 +107,4 @@ const PieceDataPresets = mongoose.model(
   PieceDataPresetsSchema
 );
 
-module.exports = PieceDataPresets;
+module.exports = { PieceDataPresets, Preset };
