@@ -7,8 +7,9 @@ import {
 
 import { Piece } from "@/types/piece";
 import PresetDialog from "../presetForm/presetDialog";
-import PresetSelectMenu from "../../pieceRoute/presetSelectMenu";
+// import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
+import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
 
 function PieceFormGlazeSection({
   piece,
@@ -68,16 +69,16 @@ function PieceFormGlazeSection({
                     dispatch={presetDispatch}
                   />
                 </div>
-                <PresetSelectMenu
-                  // testing set up- MUST CHANGE
-                  preset={innerUnderglaze[0]}
-                  setPreset={updatePiece}
+                <GlazeSelectionCollapsible
+                  index={0}
+                  presets={innerGlaze}
+                  updatePiece={updatePiece}
                   presetName="innerGlaze"
                   presetList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="underglazeInner">Inner Underglaze</label>
+                {/* <label htmlFor="underglazeInner">Inner Underglaze</label> */}
                 {/* <input
                   type="text"
                   name="underglazeInner"
@@ -90,7 +91,7 @@ function PieceFormGlazeSection({
                 /> */}
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="slipInner">Inner Slip</label>
+                {/* <label htmlFor="slipInner">Inner Slip</label> */}
                 {/* <input
                   type="text"
                   name="slipInner"
@@ -105,7 +106,7 @@ function PieceFormGlazeSection({
             </div>
             <div className="flex gap-2">
               <div className="flex flex-col gap-2">
-                <label htmlFor="glazeOuter">Outer Glaze</label>
+                {/* <label htmlFor="glazeOuter">Outer Glaze</label> */}
                 {/* <input
                   type="text"
                   name="glazeOuter"
@@ -118,7 +119,7 @@ function PieceFormGlazeSection({
                 /> */}
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="underglazeOuter">Outer Underglaze</label>
+                {/* <label htmlFor="underglazeOuter">Outer Underglaze</label> */}
                 {/* <input
                   type="text"
                   name="underglazeOuter"
@@ -131,7 +132,7 @@ function PieceFormGlazeSection({
                 /> */}
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="slipOuter">Outer Slip</label>
+                {/* <label htmlFor="slipOuter">Outer Slip</label> */}
                 {/* <input
                   type="text"
                   name="slipOuter"

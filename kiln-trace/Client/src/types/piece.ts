@@ -1,4 +1,4 @@
-import { Presets } from "./piecePresets";
+// import { Presets } from "./piecePresets";
 
 // piece interface
 export interface Piece {
