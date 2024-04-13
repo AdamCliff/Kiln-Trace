@@ -29,101 +29,105 @@ function PieceFormDialogContents({
 
   console.log("piece form rendered");
 
-  return (
-    <>
-      <DialogHeader className="mb-4">
-        <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
-      </DialogHeader>
-      <form
-        action={`/pieces${_id ? "/" + _id : ""}`}
-        method={piece ? "put" : "post"}
-        className="flex flex-col gap-6 w-full h-[95%]"
-      >
-        <div className="flex gap-2">
-          {/* about section */}
-          <div className="flex flex-col gap-2">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              onChange={(e) => updatePiece({ title: e.target.value })}
-              value={title}
-              className="border border-secondary rounded-[6px] px-2 py-1"
-            />
+  if (pieceState) {
+    console.log("pieceState checked out");
+    console.log(pieceState);
+    return (
+      <>
+        <DialogHeader className="mb-4">
+          <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
+        </DialogHeader>
+        <form
+          action={`/pieces${_id ? "/" + _id : ""}`}
+          method={piece ? "put" : "post"}
+          className="flex flex-col gap-6 w-full h-[95%]"
+        >
+          <div className="flex gap-2">
+            {/* about section */}
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                onChange={(e) => updatePiece({ title: e.target.value })}
+                value={title}
+                className="border border-secondary rounded-[6px] px-2 py-1"
+              />
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="artist">Artist</label>
+              <input
+                type="text"
+                name="artist"
+                id="artist"
+                onChange={(e) => updatePiece({ artist: e.target.value })}
+                value={artist}
+                className="border border-secondary rounded-[6px] px-2 py-1"
+              />
+            </div>
+            <div className="flex flex-col items-start justify-center gap-2">
+              <label htmlFor="photos">Photos</label>
+              <input
+                type="file"
+                name="photos"
+                id="photos"
+                onChange={(e) => updatePiece({ photos: e.target.value })}
+                value={photos}
+                className="w-[100px] overflow-hidden"
+              />
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="artist">Artist</label>
-            <input
-              type="text"
-              name="artist"
-              id="artist"
-              onChange={(e) => updatePiece({ artist: e.target.value })}
-              value={artist}
-              className="border border-secondary rounded-[6px] px-2 py-1"
-            />
-          </div>
-          <div className="flex flex-col items-start justify-center gap-2">
-            <label htmlFor="photos">Photos</label>
-            <input
-              type="file"
-              name="photos"
-              id="photos"
-              onChange={(e) => updatePiece({ photos: e.target.value })}
-              value={photos}
-              className="w-[100px] overflow-hidden"
-            />
-          </div>
-        </div>
-        {/* stage section */}
-        <PieceFormStageSection piece={pieceState} updatePiece={updatePiece} />
-        {/* details section */}
-        <PieceFormDetailsSection
-          piece={pieceState}
-          updatePiece={updatePiece}
-          presets={presets}
-          presetDispatch={presetDispatch}
-        />
-        {/* dimensions section */}
-        <PieceFormDimensionsSection
-          piece={pieceState}
-          updatePiece={updatePiece}
-        />
-        {/* glazes section */}
-        <PieceFormGlazeSection
-          piece={pieceState}
-          updatePiece={updatePiece}
-          presets={presets}
-          presetDispatch={presetDispatch}
-        />
-        {/* notes */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="notes">Notes</label>
-          <textarea
-            name="notes"
-            id="notes"
-            onChange={(e) => updatePiece({ notes: e.target.value })}
-            value={notes}
-            className="border border-secondary rounded-[6px] px-2 py-1"
+          {/* stage section */}
+          <PieceFormStageSection piece={pieceState} updatePiece={updatePiece} />
+          {/* details section */}
+          <PieceFormDetailsSection
+            piece={pieceState}
+            updatePiece={updatePiece}
+            presets={presets}
+            presetDispatch={presetDispatch}
           />
-        </div>
-        {/* submit and close dialog handling */}
-        <DialogClose asChild>
-          <Button
-            onClick={() => {
-              handleSubmit(pieceState, pieceDispatch);
-              setOpen(false);
-            }}
-            type="button"
-            variant="secondary"
-            className="m-auto bg-secondary text-background h-min w-min p-4 rounded-xl"
-          >
-            Save
-          </Button>
-        </DialogClose>
-      </form>
-    </>
-  );
+          {/* dimensions section */}
+          <PieceFormDimensionsSection
+            piece={pieceState}
+            updatePiece={updatePiece}
+          />
+          {/* glazes section */}
+          <PieceFormGlazeSection
+            piece={pieceState}
+            updatePiece={updatePiece}
+            presets={presets}
+            presetDispatch={presetDispatch}
+          />
+          {/* notes */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="notes">Notes</label>
+            <textarea
+              name="notes"
+              id="notes"
+              onChange={(e) => updatePiece({ notes: e.target.value })}
+              value={notes}
+              className="border border-secondary rounded-[6px] px-2 py-1"
+            />
+          </div>
+          {/* submit and close dialog handling */}
+          <DialogClose asChild>
+            <Button
+              onClick={() => {
+                handleSubmit(pieceState, pieceDispatch);
+                setOpen(false);
+              }}
+              type="button"
+              variant="secondary"
+              className="m-auto bg-secondary text-background h-min w-min p-4 rounded-xl"
+            >
+              Save
+            </Button>
+          </DialogClose>
+        </form>
+      </>
+    );
+  }
 }
 
 export default PieceFormDialogContents;

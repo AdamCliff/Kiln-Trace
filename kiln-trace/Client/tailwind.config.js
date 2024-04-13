@@ -70,6 +70,9 @@ module.exports = {
         //   foreground: "hsl(var(--card-foreground))",
         // },
       },
+      // content: {
+      //   'chev-down': 'u'
+      // },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -91,5 +94,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 };

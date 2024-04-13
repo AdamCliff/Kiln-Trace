@@ -38,21 +38,21 @@ function PieceFormGlazeSection({
       <Accordion
         type="single"
         collapsible
-        defaultValue={
-          innerGlaze[0] ||
-          innerUnderglaze[0] ||
-          innerSlip[0] ||
-          outerGlaze[0] ||
-          outerUnderglaze[0] ||
-          outerSlip[0]
-            ? "glazes"
-            : ""
-        }
+        // defaultValue={
+        //   innerGlaze[0] ||
+        //   innerUnderglaze[0] ||
+        //   innerSlip[0] ||
+        //   outerGlaze[0] ||
+        //   outerUnderglaze[0] ||
+        //   outerSlip[0]
+        //     ? "glazes"
+        //     : ""
+        // }
       >
         <AccordionItem value="glazes">
           <AccordionTrigger>Glazes</AccordionTrigger>
           <AccordionContent>
-            <div className="flex items-start gap-2">
+            <div className="flex items-start gap-2 mb-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
                   <h4 className="whitespace-nowrap">Inner Glaze</h4>

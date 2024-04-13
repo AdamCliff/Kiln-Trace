@@ -40,7 +40,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
+        <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary">
           <PieceFormDialogContents
             setOpen={setOpen}
             piece={row.original}

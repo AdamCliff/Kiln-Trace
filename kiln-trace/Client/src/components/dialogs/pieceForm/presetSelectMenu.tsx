@@ -29,7 +29,7 @@ function PresetSelectMenu({
         value={preset}
         name="piece-select-menu"
       >
-        <SelectTrigger className="w-40">
+        <SelectTrigger className="w-full">
           <SelectValue placeholder={`Select a ${presetName}`} />
         </SelectTrigger>
         <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>

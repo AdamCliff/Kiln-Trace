@@ -24,9 +24,6 @@ const usePieceState = (initialPiece: Piece | null) => {
     height: 0,
     width: 0,
     pieceLength: 0,
-    // glaze: { inner: [], outer: [] },
-    // underglaze: { inner: [], outer: [] },
-    // slip: { inner: [], outer: [] },
     innerGlaze: [],
     innerUnderglaze: [],
     innerSlip: [],
@@ -38,11 +35,11 @@ const usePieceState = (initialPiece: Piece | null) => {
     ...initialPiece,
   });
 
-  useEffect(() => {
-    if (initialPiece) {
-      setPiece(initialPiece);
-    }
-  }, [initialPiece]);
+  // useEffect(() => {
+  //   if (initialPiece) {
+  //     setPiece(initialPiece);
+  //   }
+  // }, [initialPiece]);
 
   const updatePiece = (updatedPiece: Partial<Piece>) => {
     setPiece((prevPiece) => ({

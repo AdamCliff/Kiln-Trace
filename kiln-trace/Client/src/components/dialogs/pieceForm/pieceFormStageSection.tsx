@@ -44,8 +44,8 @@ function PieceFormStageSection({
     <>
       {/* stage section */}
       <div id="stage" className="flex items-center justify-start gap-6">
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between gap-2">
+        <div className="flex flex-col gap-2 w-full">
+          <div className="flex justify-start gap-2">
             <input
               type="checkbox"
               name="formed"
@@ -69,8 +69,8 @@ function PieceFormStageSection({
             updateDate={updatePiece}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between gap-2">
+        <div className="flex flex-col gap-2 w-full">
+          <div className="flex justify-start gap-2">
             <input
               type="checkbox"
               name="trimmed"
@@ -94,8 +94,8 @@ function PieceFormStageSection({
             updateDate={updatePiece}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between gap-2">
+        <div className="flex flex-col justify-between gap-2 w-full">
+          <div className="flex justify-start gap-2">
             <input
               type="checkbox"
               name="bisqued"
@@ -119,8 +119,8 @@ function PieceFormStageSection({
             updateDate={updatePiece}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between gap-2">
+        <div className="flex flex-col gap-2 w-full">
+          <div className="flex justify-start gap-2">
             <input
               type="checkbox"
               name="glazed"
@@ -144,8 +144,8 @@ function PieceFormStageSection({
             updateDate={updatePiece}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between gap-2">
+        <div className="flex flex-col gap-2 w-full">
+          <div className="flex justify-start gap-2">
             <input
               type="checkbox"
               name="fired"

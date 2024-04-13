@@ -33,6 +33,24 @@ body {
   }
 }
 
+@layer webkit {
+  .scrollbar {
+    ::-webkit-scrollbar {
+      @apply w-4;
+    }
+    ::-webkit-scrollbar-track {
+      @apply bg-transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-primary;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-secondary;
+    }
+  }
+}
+
 /* Colors */
 /* :root {
   --black: #111511;

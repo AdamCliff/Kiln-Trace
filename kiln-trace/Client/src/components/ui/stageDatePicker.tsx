@@ -41,7 +41,7 @@ function StageDatePicker({
       <PopoverTrigger asChild>
         <Button
           className={cn(
-            "flex justify-between gap-2 h-min w-full p-0 bg-background hover:bg-background text-left font-normal"
+            "flex justify-start items-center gap-2 h-min w-full p-0 bg-background hover:bg-background text-left font-normal"
           )}
           onClick={() => {
             const tempDate = new Date();
@@ -50,7 +50,9 @@ function StageDatePicker({
           }}
         >
           <CalendarIcon className="w-4 h-4" />
-          {date && isStageSelected ? format(date, "MM/dd/yy") : ""}
+          <span className="flex items-center h-4">
+            {date && isStageSelected ? format(date, "MM/dd/yy") : " "}
+          </span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
