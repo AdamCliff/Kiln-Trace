@@ -41,6 +41,7 @@ function GlazePresetSelectMenu({
           updatePiece({ [presetName]: presetsCopy });
         }}
         value={presets[index]}
+        name="piece-glaze-select-menu"
       >
         <SelectTrigger className="w-40">
           <SelectValue placeholder={"Add layer"} />

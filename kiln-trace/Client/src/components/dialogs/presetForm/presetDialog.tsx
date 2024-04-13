@@ -34,11 +34,9 @@ function PresetDialog({
             e.preventDefault();
             setIsOpen(!isOpen);
           }}
-          className="w-full h-full"
+          className="w-full h-full px-2 py-1 hover:bg-accent"
         >
-          <DialogTrigger className="w-min h-min px-2 hover:bg-accent">
-            +
-          </DialogTrigger>
+          +
         </button>
         <DialogContent>
           <DialogHeader>{"Enter new " + presetName}</DialogHeader>

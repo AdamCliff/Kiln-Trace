@@ -8,7 +8,6 @@ export const handleLoadPresets = async (dispatch: React.Dispatch<any>) => {
       method: "GET",
     });
     const [res] = await req.json();
-    console.log(res);
     dispatch({
       type: presetActionTypes.LOAD_PRESETS,
       payload: res,

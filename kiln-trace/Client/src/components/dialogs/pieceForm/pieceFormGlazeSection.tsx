@@ -7,10 +7,8 @@ import {
 
 import { Piece } from "@/types/piece";
 import PresetDialog from "../presetForm/presetDialog";
-// import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
-import { useEffect } from "react";
 
 function PieceFormGlazeSection({
   piece,
@@ -23,8 +21,6 @@ function PieceFormGlazeSection({
   presets: any;
   presetDispatch: React.Dispatch<any>;
 }) {
-  //   const { glaze, underglaze, slip } = presets;
-  // const { glazePresets, slipPresets } = presets;
   const {
     innerGlaze,
     innerUnderglaze,
@@ -34,10 +30,7 @@ function PieceFormGlazeSection({
     outerSlip,
   } = piece;
 
-  // console.log(glazePresets);
-  // console.log(slipPresets);
-
-  useEffect(() => console.log(piece), [piece]);
+  console.log("glaze section rendered");
 
   return (
     <>
@@ -62,7 +55,7 @@ function PieceFormGlazeSection({
             <div className="flex items-start gap-2">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Inner Glaze</label>
+                  <h4 className="whitespace-nowrap">Inner Glaze</h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -79,7 +72,7 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Inner Underglaze</label>
+                  <h4 className="whitespace-nowrap">Inner Underglaze</h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -96,7 +89,7 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Inner Slip</label>
+                  <h4 className="whitespace-nowrap">Inner Slip</h4>
                   <PresetDialog
                     presetName="slip"
                     presetCategory="slipPresets"
@@ -115,7 +108,7 @@ function PieceFormGlazeSection({
             <div className="flex items-start gap-2">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Outer Glaze</label>
+                  <h4 className="whitespace-nowrap">Outer Glaze</h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -132,7 +125,7 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Outer Underglaze</label>
+                  <h4 className="whitespace-nowrap">Outer Underglaze</h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -149,7 +142,7 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <label className="whitespace-nowrap">Outer Slip</label>
+                  <h4 className="whitespace-nowrap">Outer Slip</h4>
                   <PresetDialog
                     presetName="slip"
                     presetCategory="slipPresets"

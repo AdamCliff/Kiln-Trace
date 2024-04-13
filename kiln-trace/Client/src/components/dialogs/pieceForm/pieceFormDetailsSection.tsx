@@ -36,7 +36,7 @@ function PieceFormDetailsSection({
           <AccordionContent className="flex gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <label htmlFor="form">Form</label>
+                <h4>Form</h4>
                 <PresetDialog
                   presetName="form"
                   presetCategory="formPresets"
@@ -53,7 +53,7 @@ function PieceFormDetailsSection({
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <label htmlFor="method">Method</label>
+                <h4>Method</h4>
                 <PresetDialog
                   presetName="method"
                   presetCategory="methodPresets"
@@ -70,7 +70,7 @@ function PieceFormDetailsSection({
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <label htmlFor="material">Material</label>
+                <h4>Material</h4>
                 <PresetDialog
                   presetName="material"
                   presetCategory="materialPresets"

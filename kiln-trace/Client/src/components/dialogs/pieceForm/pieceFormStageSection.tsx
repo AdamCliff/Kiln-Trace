@@ -60,7 +60,7 @@ function PieceFormStageSection({
               checked={formed}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
-            <label htmlFor="formed">Formed</label>
+            <label htmlFor="formed-stage">Formed</label>
           </div>
           <StageDatePicker
             isStageSelected={formed}
@@ -85,7 +85,7 @@ function PieceFormStageSection({
               checked={trimmed}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
-            <label htmlFor="trimmed">Trimmed</label>
+            <label htmlFor="trimmed-stage">Trimmed</label>
           </div>
           <StageDatePicker
             isStageSelected={trimmed}
@@ -110,7 +110,7 @@ function PieceFormStageSection({
               checked={bisqued}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
-            <label htmlFor="bisqued">Bisqued</label>
+            <label htmlFor="bisqued-stage">Bisqued</label>
           </div>
           <StageDatePicker
             isStageSelected={bisqued}
@@ -135,7 +135,7 @@ function PieceFormStageSection({
               checked={glazed}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
-            <label htmlFor="glazed">Glazed</label>
+            <label htmlFor="glazed-stage">Glazed</label>
           </div>
           <StageDatePicker
             isStageSelected={glazed}
@@ -160,7 +160,7 @@ function PieceFormStageSection({
               checked={fired}
               className="border border-secondary rounded-[6px] px-2 py-1"
             />
-            <label htmlFor="fired">Fired</label>
+            <label htmlFor="fired-stage">Fired</label>
           </div>
           <StageDatePicker
             isStageSelected={fired}

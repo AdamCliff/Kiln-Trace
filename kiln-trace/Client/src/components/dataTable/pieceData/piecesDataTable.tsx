@@ -97,6 +97,7 @@ function PiecesDataTable<TData, TValue>({
       <div id="options" className="flex items-center justify-between py-4">
         <div className="flex items-center justify-center gap-4">
           <Input
+            id="globalFilter"
             placeholder="Search all columns..."
             value={globalFilter ?? ""}
             onChange={(e) => setGlobalFilter(String(e.target.value))}

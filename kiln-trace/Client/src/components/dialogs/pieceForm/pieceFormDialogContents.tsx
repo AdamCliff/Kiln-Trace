@@ -1,14 +1,5 @@
 import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectGroup,
-//   SelectItem,
-//   SelectLabel,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
 
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "../../../context/piecesContext";
@@ -55,6 +46,7 @@ function PieceFormDialogContents({
             <input
               type="text"
               name="title"
+              id="title"
               onChange={(e) => updatePiece({ title: e.target.value })}
               value={title}
               className="border border-secondary rounded-[6px] px-2 py-1"

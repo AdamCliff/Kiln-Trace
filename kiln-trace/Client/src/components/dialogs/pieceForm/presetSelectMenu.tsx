@@ -22,14 +22,12 @@ function PresetSelectMenu({
 }) {
   const { presets } = presetList;
 
-  console.log(preset);
-  console.log(presetName);
-
   return (
     <>
       <Select
         onValueChange={(value) => setPreset({ [presetName]: value })}
         value={preset}
+        name="piece-select-menu"
       >
         <SelectTrigger className="w-40">
           <SelectValue placeholder={`Select a ${presetName}`} />

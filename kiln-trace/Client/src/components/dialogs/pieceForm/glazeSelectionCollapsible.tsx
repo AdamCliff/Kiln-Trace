@@ -32,6 +32,8 @@ function GlazeSelectionCollapsible({
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(presets.length > 0);
 
+  console.log("glaze collapsible rendered");
+
   return (
     <Collapsible
       open={isOpen}
@@ -40,6 +42,7 @@ function GlazeSelectionCollapsible({
     >
       <div className="flex items-center justify-between space-x-2 w-min">
         <GlazePresetSelectMenu
+          key={1}
           index={0}
           presets={presets}
           updatePiece={updatePiece}
@@ -65,6 +68,7 @@ function GlazeSelectionCollapsible({
             if (index < presets.length && index + 1 < 5) {
               return (
                 <GlazePresetSelectMenu
+                  key={index + 1}
                   index={index + 1}
                   presets={presets}
                   updatePiece={updatePiece}
