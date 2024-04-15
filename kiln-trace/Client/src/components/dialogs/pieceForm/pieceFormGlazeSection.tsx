@@ -102,7 +102,7 @@ function PieceFormGlazeSection({
                   presets={innerSlip}
                   updatePiece={updatePiece}
                   presetName="innerSlip"
-                  presetList={presets?.glazePresets}
+                  presetList={presets?.slipPresets}
                 />
               </div>
             </div>
@@ -155,7 +155,7 @@ function PieceFormGlazeSection({
                   presets={outerSlip}
                   updatePiece={updatePiece}
                   presetName="outerSlip"
-                  presetList={presets?.glazePresets}
+                  presetList={presets?.slipPresets}
                 />
               </div>
             </div>
