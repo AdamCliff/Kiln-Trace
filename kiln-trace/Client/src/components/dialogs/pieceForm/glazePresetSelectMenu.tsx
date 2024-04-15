@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Select,
   SelectContent,
@@ -12,12 +10,14 @@ import { Piece } from "@/types/piece";
 import { Presets } from "@/types/piecePresets";
 
 function GlazePresetSelectMenu({
+  setIsOpen,
   index,
   presets,
   updatePiece,
   presetName,
   presetList,
 }: {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   index: number;
   presets: string[];
   updatePiece: (updatedPiece: Partial<Piece>) => void;
@@ -36,11 +36,19 @@ function GlazePresetSelectMenu({
     <>
       <Select
         onValueChange={(value) => {
-          const presetsCopy = presets.slice();
-          presetsCopy[index] = value;
+          let presetsCopy = [...presets];
+          if (value === "No Glaze") {
+            // handle glaze deletions
+            presetsCopy.splice(index, 1);
+            presetsCopy.length === 0 && setIsOpen(false);
+          } else {
+            // handle glaze additions
+            presetsCopy[index] = value;
+            setIsOpen(true);
+          }
           updatePiece({ [presetName]: presetsCopy });
         }}
-        value={presets[index]}
+        value={presets[index] || ""}
         name="piece-glaze-select-menu"
       >
         <SelectTrigger className="w-40">
@@ -55,6 +63,9 @@ function GlazePresetSelectMenu({
               </SelectItem>
             );
           })}
+          <SelectItem key={"delete"} value="No Glaze">
+            No Glaze
+          </SelectItem>
         </SelectContent>
       </Select>
     </>

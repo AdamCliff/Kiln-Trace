@@ -9,6 +9,7 @@ import { Piece } from "@/types/piece";
 import PresetDialog from "../presetForm/presetDialog";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
+import React from "react";
 
 function PieceFormGlazeSection({
   piece,
@@ -165,4 +166,4 @@ function PieceFormGlazeSection({
   );
 }
 
-export default PieceFormGlazeSection;
+export default React.memo(PieceFormGlazeSection);

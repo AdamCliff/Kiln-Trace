@@ -34,20 +34,18 @@ body {
 }
 
 @layer webkit {
-  .scrollbar {
-    ::-webkit-scrollbar {
-      @apply w-4;
-    }
-    ::-webkit-scrollbar-track {
-      @apply bg-transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      @apply bg-primary;
-    }
+  .scrollbar-custom ::-webkit-scrollbar {
+    @apply w-4;
+  }
+  .scrollbar-custom ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .scrollbar-custom ::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+  }
 
-    ::-webkit-scrollbar-thumb:hover {
-      @apply bg-secondary;
-    }
+  .scrollbar-custom ::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary;
   }
 }
 
