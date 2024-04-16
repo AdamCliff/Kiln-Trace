@@ -22,57 +22,37 @@ module.exports = {
     },
     extend: {
       colors: {
-        /* base colors */
-        black: "#111511",
-        white: "#ebf4ed",
-        whiteGreen: "#f4fbf5",
-        mutedGreen: "#7e8980",
-        darkGreen: "#283a2b",
-        brightGreen: "#48b859",
-        /* color scheme */
-        text: "#111511",
-        background: "#f4fbf5",
-        primary: "#7e8980",
-        secondary: "#283a2b",
-        accent: "#48b859",
+        // /* base colors */
+        // black: "#111511",
+        // white: "#ebf4ed",
+        // whiteGreen: "#f4fbf5",
+        // mutedGreen: "#7e8980",
+        // darkGreen: "#283a2b",
+        // brightGreen: "#48b859",
+        // /* color scheme */
+        // text: "#111511",
+        // background: "#f4fbf5",
+        // primary: "#7e8980",
+        // secondary: "#283a2b",
+        // accent: "#48b859",
 
-        // border: "hsl(var(--border))",
-        // input: "hsl(var(--input))",
-        // ring: "hsl(var(--ring))",
-        // background: "hsl(var(--background))",
-        // foreground: "hsl(var(--foreground))",
-        // primary: {
-        //   DEFAULT: "hsl(var(--primary))",
-        //   foreground: "hsl(var(--primary-foreground))",
-        // },
-        // secondary: {
-        //   DEFAULT: "hsl(var(--secondary))",
-        //   foreground: "hsl(var(--secondary-foreground))",
-        // },
-        // destructive: {
-        //   DEFAULT: "hsl(var(--destructive))",
-        //   foreground: "hsl(var(--destructive-foreground))",
-        // },
-        // muted: {
-        //   DEFAULT: "hsl(var(--muted))",
-        //   foreground: "hsl(var(--muted-foreground))",
-        // },
-        // accent: {
-        //   DEFAULT: "hsl(var(--accent))",
-        //   foreground: "hsl(var(--accent-foreground))",
-        // },
-        // popover: {
-        //   DEFAULT: "hsl(var(--popover))",
-        //   foreground: "hsl(var(--popover-foreground))",
-        // },
-        // card: {
-        //   DEFAULT: "hsl(var(--card))",
-        //   foreground: "hsl(var(--card-foreground))",
-        // },
+        /* base colors v2 */
+        black: "#100C08",
+        white: "#fefaf5",
+        // orange: "#eb9100",
+        orange: "#E87A00",
+        // blue: "#005aeb",
+        blue: "#001F3D",
+        // lightBlue: "#7bbfcc",
+        lightBlue: "#045174",
+
+        /* color scheme v2 */
+        text: "#100C08",
+        background: "#fefaf5",
+        primary: "#045174",
+        secondary: "#001F3D",
+        accent: "#E87A00",
       },
-      // content: {
-      //   'chev-down': 'u'
-      // },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

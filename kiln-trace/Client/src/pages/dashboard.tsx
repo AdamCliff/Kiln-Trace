@@ -4,7 +4,7 @@ import DataPanel from "../components/dataPanel.tsx";
 function Dashboard() {
   return (
     <>
-      <div className="flex items-center justify-center gap-6 h-screen w-screen p-4 bg-primary">
+      <div className="flex items-center justify-center h-screen w-screen divide-x divide-primary p-2 bg-background">
         <Navbar />
         <DataPanel />
       </div>

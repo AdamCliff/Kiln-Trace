@@ -5,41 +5,53 @@ function Navbar() {
     <>
       <nav
         id="navbar"
-        className="flex items-center justify-between flex-col h-[100%] w-[10%] p-4 rounded-xl bg-background"
+        className="flex items-center justify-between flex-col h-[100%] w-[10%] p-4"
       >
-        <section id="nav-top" className="w-full">
+        <section id="nav-top" className="w-full h-full">
           <header
             id="nav-header"
-            className="flex items-center justify-between w-full h-fit p-2 border-b border-secondary"
+            className="flex items-center justify-between w-full h-[7.5%] p-2 border-b border-primary"
           >
             <h2
               id="nav-header-title"
-              className="uppercase text-2xl font-bold text-secondary"
+              className="uppercase text-2xl font-bold text-primary"
             >
               Kiln Trace
             </h2>
           </header>
           <div
             id="nav-routes"
-            className="flex items-start justify-start flex-col gap-4 w-full py-8 px-2 border-b border-secondary"
+            className="flex items-start justify-between flex-col w-full h-[15%] py-2 border-b border-primary"
           >
-            <Link to={"/pieces"} id="pieces-route" className="nav-link">
+            <Link
+              to={"/pieces"}
+              id="pieces-route"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden z-10"
+            >
               Pieces
             </Link>
-            <Link to={"/glazes"} id="glaze-route" className="nav-link">
+            <Link
+              to={"/glazes"}
+              id="glaze-route"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden"
+            >
               Glazes
             </Link>
-            <Link to={"/schedules"} id="schedules-route" className="nav-link">
+            <Link
+              to={"/schedules"}
+              id="schedules-route"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden"
+            >
               Schedules
             </Link>
           </div>
           <div
             id="nav-saved-sorts"
-            className="flex items-start justify-start flex-col gap-4 w-full py-8 px-2 border-b border-secondary"
+            className="flex items-start justify-start flex-col gap-4 w-full py-8 px-2 border-b border-primary"
           >
             <button
               id="save-sort-btn"
-              className="py-2 px-4 bg-secondary font-medium text-background rounded-xl"
+              className="py-2 px-4 bg-primary font-medium text-background rounded-xl"
             >
               Save This Sort
             </button>

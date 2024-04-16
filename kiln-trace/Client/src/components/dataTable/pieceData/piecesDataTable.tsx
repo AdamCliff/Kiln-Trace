@@ -135,7 +135,7 @@ function PiecesDataTable<TData, TValue>({
           </DropdownMenu>
         )}
         <Switch
-          className="justify-self-end bg-primary ml-4"
+          className="justify-self-end bg-accent ml-4"
           checked={!isRowListType}
           onCheckedChange={() => {
             setIsRowListType(!isRowListType);
