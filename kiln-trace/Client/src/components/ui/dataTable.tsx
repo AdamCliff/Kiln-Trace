@@ -31,11 +31,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import {
-  getCurrentStage,
-  getCurrentStageDate,
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
+import { fuzzyFilter } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 
@@ -74,10 +73,11 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     meta: {
       dispatch: dispatch,
-      getCurrentStage: (piece: Piece) => getCurrentStage(piece),
-      getCurrentStageDate: (piece: Piece) => getCurrentStageDate(piece),
       handleDeletePiece: (id: string, dispatch: React.Dispatch<any>) =>
         handleDeletePiece(id, dispatch),
       handleEditPiece: (piece: Piece, dispatch: React.Dispatch<any>) =>

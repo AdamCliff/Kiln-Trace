@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { TableCell, TableRow } from "../../ui/table";
 import { flexRender } from "@tanstack/react-table";
 
@@ -17,7 +16,7 @@ function DataTableRow({ row, table }: { row: any; table: any }) {
         key={row.id}
         data-state={row.getIsSelected() && "selected"}
         onClick={() => setOpen(!open)}
-        className="cursor-pointer hover:bg-primary/50"
+        className="cursor-pointer hover:bg-accent hover:bg-opacity-50"
       >
         {row.getVisibleCells().map((cell: any) => (
           <TableCell key={cell.id}>

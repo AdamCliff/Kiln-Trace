@@ -37,18 +37,18 @@ module.exports = {
         // accent: "#48b859",
 
         /* base colors v2 */
-        black: "#100C08",
-        white: "#fefaf5",
-        // orange: "#eb9100",
-        orange: "#E87A00",
-        // blue: "#005aeb",
-        blue: "#001F3D",
-        // lightBlue: "#7bbfcc",
-        lightBlue: "#045174",
+        // black: "#100C08",
+        // white: "#fefaf5",
+        // // orange: "#eb9100",
+        // orange: "#E87A00",
+        // // blue: "#005aeb",
+        // blue: "#001F3D",
+        // // lightBlue: "#7bbfcc",
+        // lightBlue: "#045174",
 
         /* color scheme v2 */
-        text: "#100C08",
-        background: "#fefaf5",
+        // text: "#100C08",
+        // background: "#fefaf5",
         // primary: "#045174",
         // secondary: "#001F3D",
         // accent: "#E87A00",

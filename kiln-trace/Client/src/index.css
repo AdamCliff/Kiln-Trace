@@ -38,7 +38,16 @@ body {
       rgba(255, 255, 255, 0),
       rgba(254, 250, 245, 1)
     );
-    @apply bg-lightBlue bg-opacity-25 rounded transition-all duration-300 hover:left-0;
+    @apply bg-accent bg-opacity-25 rounded transition-all duration-300 hover:left-0;
+  }
+}
+
+@layer utilities {
+  .shadow-custom {
+    box-shadow: 0px 2px 12px hsla(0, 0%, 0%, 0.15);
+  }
+  .shadow-inset-custom {
+    box-shadow: inset 0px 2px 6px hsla(0, 0%, 0%, 0.15);
   }
 }
 
