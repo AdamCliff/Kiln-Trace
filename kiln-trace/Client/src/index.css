@@ -32,12 +32,13 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+    border-radius: 0.25rem;
     background: linear-gradient(
       to right,
       rgba(255, 255, 255, 0),
       rgba(254, 250, 245, 1)
     );
-    @apply bg-lightBlue bg-opacity-25 transition-all duration-300 hover:left-0 hover:z-0;
+    @apply bg-lightBlue bg-opacity-25 rounded transition-all duration-300 hover:left-0;
   }
 }
 

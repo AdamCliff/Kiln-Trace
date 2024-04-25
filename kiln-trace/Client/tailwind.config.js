@@ -49,9 +49,28 @@ module.exports = {
         /* color scheme v2 */
         text: "#100C08",
         background: "#fefaf5",
-        primary: "#045174",
-        secondary: "#001F3D",
-        accent: "#E87A00",
+        // primary: "#045174",
+        // secondary: "#001F3D",
+        // accent: "#E87A00",
+
+        // /* base colors v3 */
+        // terracotta: "#c66e4e",
+        // blue: "#4ea6c6",
+        // darkBlue: "#1c3b46",
+        // darkTerra: "#925038",
+
+        // /* color scheme v3 */
+        // accent: "#4ea6c6",
+        // // secondary: "#c66e4e",
+        // primary: "#1c3b46",
+        // secondary: "#925038",
+
+        /* greyscale scheme */
+        primary: "hsl(0, 0%, 41%)",
+        secondary: "hsl(0, 0%, 23%)",
+        accent: "hsl(0, 0%, 65%)",
+        text: "hsl(0, 0%, 7%)",
+        background: "hsl(0, 0%, 91%)",
       },
       borderRadius: {
         lg: "var(--radius)",

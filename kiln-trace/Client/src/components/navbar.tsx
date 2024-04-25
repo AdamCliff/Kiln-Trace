@@ -26,23 +26,23 @@ function Navbar() {
             <Link
               to={"/pieces"}
               id="pieces-route"
-              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden z-10"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full rounded overflow-hidden z-10"
             >
-              Pieces
+              <span className="z-10 pointer-events-none">Pieces</span>
             </Link>
             <Link
               to={"/glazes"}
               id="glaze-route"
-              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full rounded overflow-hidden z-10"
             >
-              Glazes
+              <span className="z-10 pointer-events-none">Glazes</span>
             </Link>
             <Link
               to={"/schedules"}
               id="schedules-route"
-              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full overflow-hidden"
+              className="nav-link relative flex items-center justify-start text-xl font-semibold pl-4 text-secondary h-full w-full rounded overflow-hidden z-10"
             >
-              Schedules
+              <span className="z-10 pointer-events-none">Schedules</span>
             </Link>
           </div>
           <div

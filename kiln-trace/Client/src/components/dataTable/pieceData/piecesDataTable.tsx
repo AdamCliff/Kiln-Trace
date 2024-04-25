@@ -143,88 +143,92 @@ function PiecesDataTable<TData, TValue>({
         />
       </div>
 
-      {isRowListType && (
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => {
-                return <DataTableRow key={row.id} row={row} table={table} />;
-              })
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      )}
+      <div className="flex flex-col gap-2 divide-y-[1px] border border-primary border-opacity-25 rounded p-4 pb-0">
+        {isRowListType && (
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => {
+                  return <DataTableRow key={row.id} row={row} table={table} />;
+                })
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        )}
 
-      {!isRowListType && (
-        <div>
-          <div id="cards" className="flex flex-wrap gap-4 px-4">
-            {table.getRowModel().rows.map((row) => (
-              <DataTableCard key={row.id} row={row} table={table} />
-            ))}
+        {!isRowListType && (
+          <div>
+            <div id="cards" className="flex flex-wrap gap-4 px-4">
+              {table.getRowModel().rows.map((row) => (
+                <DataTableCard key={row.id} row={row} table={table} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="flex justify-between py-2">
+          <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
+            <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4 mr-4">
+              <Checkbox
+                checked={
+                  table.getIsAllPageRowsSelected() ||
+                  (table.getIsSomePageRowsSelected() && "indeterminate")
+                }
+                onCheckedChange={(value) =>
+                  table.toggleAllPageRowsSelected(!!value)
+                }
+                aria-label="Select all"
+              />
+              <span className="font-semibold text-text">Select All</span>
+            </label>
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected.
+          </div>
+          <div
+            id="pag-buttons"
+            className="flex items-center justify-center gap-4 w-fit"
+          >
+            <Button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Prev
+            </Button>
+            <Button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next
+            </Button>
           </div>
         </div>
-      )}
-
-      <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
-        <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4 mr-4">
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
-            }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
-            aria-label="Select all"
-          />
-          <span className="font-semibold text-text">Select All</span>
-        </label>
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-      <div
-        id="pag-buttons"
-        className="flex items-center justify-center gap-4 w-full"
-      >
-        <Button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Prev
-        </Button>
-        <Button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
       </div>
     </div>
   );
