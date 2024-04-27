@@ -6,7 +6,15 @@ import { flexRender } from "@tanstack/react-table";
 
 import PieceFormDialogContents from "../../dialogs/pieceForm/pieceFormDialogContents";
 
-function DataTableRow({ row, table }: { row: any; table: any }) {
+function DataTableRow({
+  row,
+  table,
+  even,
+}: {
+  row: any;
+  table: any;
+  even: boolean;
+}) {
   const [open, setOpen] = useState<boolean>(false);
   const meta = table.options.meta;
 
@@ -16,7 +24,7 @@ function DataTableRow({ row, table }: { row: any; table: any }) {
         key={row.id}
         data-state={row.getIsSelected() && "selected"}
         onClick={() => setOpen(!open)}
-        className="cursor-pointer hover:bg-accent hover:bg-opacity-50"
+        className={`cursor-pointer bg-accent ${!even ? "bg-opacity-0" : "bg-opacity-10"} hover:bg-opacity-50`}
       >
         {row.getVisibleCells().map((cell: any) => (
           <TableCell key={cell.id}>

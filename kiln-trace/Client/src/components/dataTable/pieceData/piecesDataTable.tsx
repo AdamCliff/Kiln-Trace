@@ -176,9 +176,15 @@ function PiecesDataTable<TData, TValue>({
               </TableHeader>
               <TableBody>
                 {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => {
+                  table.getRowModel().rows.map((row, i) => {
+                    console.log(`${i} - ${i % 2 !== 0}`);
                     return (
-                      <DataTableRow key={row.id} row={row} table={table} />
+                      <DataTableRow
+                        key={row.id}
+                        row={row}
+                        table={table}
+                        even={i % 2 !== 0 ? true : false}
+                      />
                     );
                   })
                 ) : (

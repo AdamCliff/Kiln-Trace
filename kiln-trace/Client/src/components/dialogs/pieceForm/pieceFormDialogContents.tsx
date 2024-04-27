@@ -1,4 +1,9 @@
-import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import {
+  DialogHeader,
+  DialogTitle,
+  DialogContent,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { Piece } from "@/types/piece";
@@ -34,6 +39,7 @@ function PieceFormDialogContents({
     console.log(pieceState);
     return (
       <>
+        {/* <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary"> */}
         <DialogHeader className="mb-4">
           <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>
@@ -125,6 +131,7 @@ function PieceFormDialogContents({
             </Button>
           </DialogClose>
         </form>
+        {/* </DialogContent> */}
       </>
     );
   }
