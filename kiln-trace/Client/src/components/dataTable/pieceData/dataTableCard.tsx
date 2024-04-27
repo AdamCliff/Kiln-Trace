@@ -14,7 +14,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
 
   return (
     <>
-      <div className="relative flex flex-col justify-center border border-primary desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
+      <div className="relative flex flex-col justify-center border-2 border-primary rounded-[6px] overflow-hidden desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
         <div className="absolute top-2 left-2">
           {flexRender(select.column.columnDef.cell, select.getContext())}
         </div>
@@ -24,18 +24,22 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
           }}
           className="w-full h-full"
         >
-          <div className="flex items-center justify-center p-1 h-[60%] border-b border-primary">
+          <div className="flex items-center justify-center p-1 h-[65%] border-b-2 border-primary">
             placeholder
           </div>
-          <div className="flex flex-col items-start justify-around p-2 h-[35%]">
-            <span>{row.original.title}</span>
-            <span>
-              {`${row.original.stage} - ${row.original.date ? format(row.original.date, "MM/dd/yy") : "--/--/--"}`}
+          <div className="flex flex-col items-start justify-around p-2 h-[35%] bg-accent">
+            <span className="text-lg font-semibold text-text">
+              {row.original.title}
             </span>
-            <span>{row.original.artist ? row.original.artist : "-"}</span>
+            <span className="text-secondary font-semibold">
+              {`${row.original.stage ? `${row.original.stage} ~ ${format(row.original.date, "MM/dd/yy")}` : "No Stage"}`}
+            </span>
+            <span className="text-secondary font-semibold text-sm">
+              {row.original.artist ? row.original.artist : "No Artist"}
+            </span>
           </div>
         </button>
-        <div className="absolute bottom-2 right-2">
+        <div className="absolute bottom-2 right-2 text-text">
           {flexRender(actions.column.columnDef.cell, actions.getContext())}
         </div>
       </div>

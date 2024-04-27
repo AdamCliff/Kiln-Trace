@@ -214,8 +214,8 @@ function PiecesDataTable<TData, TValue>({
       </div>
 
       <div className="flex justify-between py-2 pr-4 bg-accent">
-        <div className="flex flex-1 items-center text-sm text-muted-foreground px-4 py-4">
-          <label className="flex items-center gap-2 cursor-pointer border-r border-primary pr-4 mr-4">
+        <div className="flex flex-1 items-center text-sm text-muted-foreground font-semibold text-text px-4 py-4">
+          <label className="flex items-center gap-2 cursor-pointer border-r border-text pr-4 mr-4">
             <Checkbox
               checked={
                 table.getIsAllPageRowsSelected() ||
@@ -225,11 +225,12 @@ function PiecesDataTable<TData, TValue>({
                 table.toggleAllPageRowsSelected(!!value)
               }
               aria-label="Select all"
+              className="border-text"
             />
             <span className="font-semibold text-text">Select All</span>
           </label>
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredRowModel().rows.length} piece(s) selected.
         </div>
         <div
           id="pag-buttons"

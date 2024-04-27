@@ -35,8 +35,11 @@ export const pieceColumns: ColumnDef<Piece>[] = [
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         aria-label="Select row"
-        className="z-50"
+        className="z-[500]"
       />
     ),
     enableSorting: false,
