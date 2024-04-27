@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ColumnDef,
@@ -61,6 +61,7 @@ function PiecesDataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   const table = useReactTable({
     data,
@@ -91,6 +92,22 @@ function PiecesDataTable<TData, TValue>({
         handleEditPiece(piece, dispatch),
     },
   });
+
+  // handle layout based on viewport
+  useEffect(() => {
+    // Function to update viewport width in state
+    const updateViewportWidth = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    // Add event listener to update viewport width on resize
+    window.addEventListener("resize", updateViewportWidth);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateViewportWidth);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
 
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
@@ -150,7 +167,15 @@ function PiecesDataTable<TData, TValue>({
       </div>
 
       <div className="py-6 px-2">
-        {isRowListType && (
+        {!isRowListType || viewportWidth <= 1024 ? (
+          <div>
+            <div id="cards" className="flex flex-wrap gap-4 px-4">
+              {table.getRowModel().rows.map((row) => (
+                <DataTableCard key={row.id} row={row} table={table} />
+              ))}
+            </div>
+          </div>
+        ) : (
           <div className="overflow-hidden rounded border-b-4 border-accent border-opacity-50 shadow-inset-custom pb-[1px]">
             <Table>
               <TableHeader>
@@ -177,7 +202,6 @@ function PiecesDataTable<TData, TValue>({
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row, i) => {
-                    console.log(`${i} - ${i % 2 !== 0}`);
                     return (
                       <DataTableRow
                         key={row.id}
@@ -199,16 +223,6 @@ function PiecesDataTable<TData, TValue>({
                 )}
               </TableBody>
             </Table>
-          </div>
-        )}
-
-        {!isRowListType && (
-          <div>
-            <div id="cards" className="flex flex-wrap gap-4 px-4">
-              {table.getRowModel().rows.map((row) => (
-                <DataTableCard key={row.id} row={row} table={table} />
-              ))}
-            </div>
           </div>
         )}
       </div>
