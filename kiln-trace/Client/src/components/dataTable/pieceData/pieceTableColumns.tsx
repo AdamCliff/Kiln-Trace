@@ -179,7 +179,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
           </DropdownMenu>
           {/* edit piece dialog */}
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary">
+            <DialogContent className="piece-dialog shadow-inset-custom-lg">
               <PieceFormDialogContents
                 setOpen={setDialogOpen}
                 piece={row.original}

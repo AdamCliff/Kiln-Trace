@@ -1,9 +1,6 @@
-import {
-  DialogHeader,
-  DialogTitle,
-  DialogContent,
-  DialogClose,
-} from "@/components/ui/dialog";
+import { useRef } from "react";
+
+import { DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { Piece } from "@/types/piece";
@@ -32,6 +29,17 @@ function PieceFormDialogContents({
 
   const { title, artist, photos, notes, _id } = pieceState;
 
+  const firstInputRef = useRef<HTMLInputElement>(null);
+
+  // prevent title autofocus
+  if (
+    firstInputRef.current &&
+    firstInputRef.current === document.activeElement
+  ) {
+    // Remove focus from the first input field
+    firstInputRef.current.blur();
+  }
+
   if (pieceState) {
     return (
       <>
@@ -55,6 +63,8 @@ function PieceFormDialogContents({
                 id="title"
                 onChange={(e) => updatePiece({ title: e.target.value })}
                 value={title}
+                spellCheck={false}
+                ref={firstInputRef}
                 className="text-field"
               />
             </div>
@@ -68,6 +78,7 @@ function PieceFormDialogContents({
                 id="artist"
                 onChange={(e) => updatePiece({ artist: e.target.value })}
                 value={artist}
+                spellCheck={false}
                 className="text-field"
               />
             </div>
@@ -108,7 +119,9 @@ function PieceFormDialogContents({
           />
           {/* notes */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="notes">Notes</label>
+            <label htmlFor="notes" className="pl-1 text-md font-medium">
+              Notes
+            </label>
             <textarea
               name="notes"
               id="notes"

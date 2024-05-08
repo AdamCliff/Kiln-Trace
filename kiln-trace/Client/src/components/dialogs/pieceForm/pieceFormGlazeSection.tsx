@@ -50,7 +50,7 @@ function PieceFormGlazeSection({
       >
         <AccordionItem value="glazes" className="shadow-custom border-none">
           <AccordionTrigger className="accordian-trigger">
-            Glazes
+            Glaze, Underglaze, Slip
           </AccordionTrigger>
           <AccordionContent className="flex flex-col w-auto accordian-content">
             <div className="flex items-start gap-2 mb-4">
