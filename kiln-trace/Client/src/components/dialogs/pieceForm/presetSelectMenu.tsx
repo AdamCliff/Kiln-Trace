@@ -32,7 +32,10 @@ function PresetSelectMenu({
         <SelectTrigger className="select-field">
           <SelectValue placeholder={`Select a ${presetName}`} />
         </SelectTrigger>
-        <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
+        <SelectContent
+          onCloseAutoFocus={(e) => e.preventDefault()}
+          className="rounded"
+        >
           {presets.map((preset) => {
             const { preset: presetValue } = preset;
             return (
