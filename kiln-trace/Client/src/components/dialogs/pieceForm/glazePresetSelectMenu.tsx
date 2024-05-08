@@ -51,7 +51,7 @@ function GlazePresetSelectMenu({
         value={presets[index] || ""}
         name="piece-glaze-select-menu"
       >
-        <SelectTrigger className="w-40">
+        <SelectTrigger className="!w-40 select-field">
           <SelectValue placeholder={"Add layer"} />
         </SelectTrigger>
         <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>

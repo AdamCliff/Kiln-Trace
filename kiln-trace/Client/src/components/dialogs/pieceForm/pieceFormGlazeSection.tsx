@@ -56,7 +56,9 @@ function PieceFormGlazeSection({
             <div className="flex items-start gap-2 mb-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Inner Glaze</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Inner Glaze
+                  </h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -73,7 +75,9 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Inner Underglaze</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Inner Underglaze
+                  </h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -90,7 +94,9 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Inner Slip</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Inner Slip
+                  </h4>
                   <PresetDialog
                     presetName="slip"
                     presetCategory="slipPresets"
@@ -109,7 +115,9 @@ function PieceFormGlazeSection({
             <div className="flex items-start gap-2">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Outer Glaze</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Outer Glaze
+                  </h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -126,7 +134,9 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Outer Underglaze</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Outer Underglaze
+                  </h4>
                   <PresetDialog
                     presetName="glaze"
                     presetCategory="glazePresets"
@@ -143,7 +153,9 @@ function PieceFormGlazeSection({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap">Outer Slip</h4>
+                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
+                    Outer Slip
+                  </h4>
                   <PresetDialog
                     presetName="slip"
                     presetCategory="slipPresets"
