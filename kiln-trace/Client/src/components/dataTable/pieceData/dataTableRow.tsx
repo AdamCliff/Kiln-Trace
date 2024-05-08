@@ -18,12 +18,27 @@ function DataTableRow({
   const [open, setOpen] = useState<boolean>(false);
   const meta = table.options.meta;
 
+  const handleRowClick = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest("#row")) {
+      // Ignore clicks not from row element
+      return;
+    }
+    // Toggle the dialog open state for the row
+    setOpen(!open);
+  };
+
   return (
     <>
       <TableRow
         key={row.id}
+        id="row"
         data-state={row.getIsSelected() && "selected"}
-        onClick={() => setOpen(!open)}
+        onClick={(e) => {
+          handleRowClick(e);
+        }}
         className={`cursor-pointer bg-accent ${!even ? "bg-opacity-0" : "bg-opacity-10"} hover:bg-opacity-50`}
       >
         {row.getVisibleCells().map((cell: any) => (
@@ -33,7 +48,7 @@ function DataTableRow({
         ))}
       </TableRow>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary">
+        <DialogContent className="piece-dialog shadow-inset-custom-lg">
           <PieceFormDialogContents
             setOpen={setOpen}
             piece={row.original}

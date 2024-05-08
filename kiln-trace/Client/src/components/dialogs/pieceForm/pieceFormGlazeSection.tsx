@@ -9,7 +9,6 @@ import { Piece } from "@/types/piece";
 import PresetDialog from "../presetForm/presetDialog";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
-import React from "react";
 
 function PieceFormGlazeSection({
   piece,
@@ -31,14 +30,13 @@ function PieceFormGlazeSection({
     outerSlip,
   } = piece;
 
-  console.log("glaze section rendered");
-
   return (
     <>
       {/* glazes section */}
       <Accordion
         type="single"
         collapsible
+        // default open causes double render issue
         // defaultValue={
         //   innerGlaze[0] ||
         //   innerUnderglaze[0] ||
@@ -50,9 +48,11 @@ function PieceFormGlazeSection({
         //     : ""
         // }
       >
-        <AccordionItem value="glazes">
-          <AccordionTrigger>Glazes</AccordionTrigger>
-          <AccordionContent>
+        <AccordionItem value="glazes" className="shadow-custom border-none">
+          <AccordionTrigger className="accordian-trigger">
+            Glazes
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col w-auto accordian-content">
             <div className="flex items-start gap-2 mb-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
@@ -166,4 +166,4 @@ function PieceFormGlazeSection({
   );
 }
 
-export default React.memo(PieceFormGlazeSection);
+export default PieceFormGlazeSection;

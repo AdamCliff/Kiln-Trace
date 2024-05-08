@@ -22,55 +22,78 @@ function PieceFormDimensionsSection({
       <Accordion
         type="single"
         collapsible
-        defaultValue={
-          weight || height || pieceLength || width ? "dimensions" : ""
-        }
+        // doesn't cause error, but off to match other fields
+        // defaultValue={
+        //   weight || height || pieceLength || width ? "dimensions" : ""
+        // }
       >
-        <AccordionItem value="dimensions">
-          <AccordionTrigger>Dimensions, Weight</AccordionTrigger>
-          <AccordionContent className="flex gap-2">
+        <AccordionItem value="dimensions" className="shadow-custom border-none">
+          <AccordionTrigger className="accordian-trigger">
+            Dimensions, Weight
+          </AccordionTrigger>
+          <AccordionContent className="accordian-content">
             <div className="flex flex-col gap-2">
-              <label htmlFor="width">Width</label>
+              <label
+                htmlFor="width"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
+                Width
+              </label>
               <input
                 type="text"
                 name="width"
                 id="width"
                 onChange={(e) => updatePiece({ width: +e.target.value })}
                 value={width}
-                className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                className="text-field w-full"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="length">Length</label>
+              <label
+                htmlFor="length"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
+                Length
+              </label>
               <input
                 type="text"
                 name="length"
                 id="length"
                 onChange={(e) => updatePiece({ pieceLength: +e.target.value })}
                 value={pieceLength}
-                className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                className="text-field w-full"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="height">Height</label>
+              <label
+                htmlFor="height"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
+                Height
+              </label>
               <input
                 type="text"
                 name="height"
                 id="height"
                 onChange={(e) => updatePiece({ height: +e.target.value })}
                 value={height}
-                className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                className="text-field w-full"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="weight">Weight</label>
+              <label
+                htmlFor="weight"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
+                Weight
+              </label>
               <input
                 type="text"
                 name="weight"
                 id="weight"
                 onChange={(e) => updatePiece({ weight: +e.target.value })}
                 value={weight}
-                className="border border-secondary rounded-[6px] px-2 py-1 w-full"
+                className="text-field w-full"
               />
             </div>
           </AccordionContent>

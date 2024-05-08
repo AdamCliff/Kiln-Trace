@@ -19,27 +19,29 @@ body {
   width: 100vw;
 }
 
+:focus {
+  @apply outline outline-1 outline-accent !important;
+}
+
 @layer components {
   .nav-link {
     @apply relative flex items-center justify-start text-xl font-semibold pl-4 text-text h-full w-full rounded overflow-hidden z-10 transition-all duration-200;
   }
-  /* .nav-link::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    border-radius: 0.25rem;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0),
-      rgba(254, 250, 245, 1)
-    );
-    @apply bg-accent bg-opacity-25 rounded transition-all duration-300 hover:left-0;
-  } */
+  .text-field {
+    @apply field-shadow bg-accent bg-opacity-35 rounded px-2 py-1 text-md focus:bg-opacity-50 focus:outline-accent focus:outline !important;
+  }
+  .accordian-trigger {
+    @apply bg-accent bg-opacity-50 p-4 py-3 data-[state='closed']:rounded data-[state='open']:rounded-t !important;
+  }
+  .accordian-content {
+    @apply flex items-center justify-between gap-2 bg-accent bg-opacity-25 p-2 pt-3 !important;
+  }
+  .piece-dialog {
+    @apply w-fit h-fit rounded desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary !important;
+  }
+  .select-field {
+    @apply w-full text-text bg-accent bg-opacity-35 data-[state='open']:bg-opacity-50 border-none font-normal rounded divide-x-2 divide-secondary field-shadow !important;
+  }
 }
 
 @layer utilities {
@@ -49,42 +51,19 @@ body {
   .shadow-inset-custom {
     box-shadow: inset 0px 2px 6px hsla(0, 0%, 0%, 0.15);
   }
+  .shadow-inset-custom-lg {
+    box-shadow: inset 0px 0px 6px 3px hsla(0, 0%, 0%, 0.15);
+  }
+  .field-shadow {
+    box-shadow: inset 0px 0px 6px 1px hsla(0, 0%, 0%, 0.1);
+  }
   .shadow-custom-lg {
     box-shadow: 0px 1px 8px hsla(0, 0%, 0%, 0.35);
   }
+  /* ::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-color: aqua !important;
+  } */
 }
-
-/* @layer webkit {
-  .scrollbar-custom ::-webkit-scrollbar {
-    @apply w-4;
-  }
-  .scrollbar-custom ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-  .scrollbar-custom ::-webkit-scrollbar-thumb {
-    @apply bg-primary;
-  }
-
-  .scrollbar-custom ::-webkit-scrollbar-thumb:hover {
-    @apply bg-secondary;
-  }
-} */
-
-/* Colors */
-/* :root {
-  --black: #111511;
-  --white: #ebf4ed;
-  --white-green: #f4fbf5;
-  --muted-green: #86c28f;
-  --dark-green: #283a2b;
-  --bright-green: #48b859;
-
-  --text: var(--black);
-  --background: var(--white-green);
-  --primary: var(--muted-green);
-  --secondary: var(--dark-green);
-  --accent: var(--bright-green);
-} */
 
 /* @layer base {
   :root {

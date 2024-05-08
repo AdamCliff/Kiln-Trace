@@ -32,14 +32,9 @@ function PieceFormDialogContents({
 
   const { title, artist, photos, notes, _id } = pieceState;
 
-  console.log("piece form rendered");
-
   if (pieceState) {
-    console.log("pieceState checked out");
-    console.log(pieceState);
     return (
       <>
-        {/* <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary"> */}
         <DialogHeader className="mb-4">
           <DialogTitle>{piece ? "Edit Piece" : "New Piece"}</DialogTitle>
         </DialogHeader>
@@ -51,36 +46,42 @@ function PieceFormDialogContents({
           <div className="flex gap-2">
             {/* about section */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title" className="pl-1 font-medium text-md">
+                Title
+              </label>
               <input
                 type="text"
                 name="title"
                 id="title"
                 onChange={(e) => updatePiece({ title: e.target.value })}
                 value={title}
-                className="border border-secondary rounded-[6px] px-2 py-1"
+                className="text-field"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="artist">Artist</label>
+              <label htmlFor="artist" className="pl-1 font-medium text-md">
+                Artist
+              </label>
               <input
                 type="text"
                 name="artist"
                 id="artist"
                 onChange={(e) => updatePiece({ artist: e.target.value })}
                 value={artist}
-                className="border border-secondary rounded-[6px] px-2 py-1"
+                className="text-field"
               />
             </div>
             <div className="flex flex-col items-start justify-center gap-2">
-              <label htmlFor="photos">Photos</label>
+              <label htmlFor="photos" className="pl-1 font-medium text-md">
+                Photos
+              </label>
               <input
                 type="file"
                 name="photos"
                 id="photos"
                 onChange={(e) => updatePiece({ photos: e.target.value })}
                 value={photos}
-                className="w-[100px] overflow-hidden"
+                className="text-background w-[100px] overflow-hidden file:cursor-pointer file:bg-accent file:bg-opacity-75 file:border-none file:outline-none file:rounded file:p-1 file:px-2 file:shadow-custom"
               />
             </div>
           </div>
@@ -113,7 +114,7 @@ function PieceFormDialogContents({
               id="notes"
               onChange={(e) => updatePiece({ notes: e.target.value })}
               value={notes}
-              className="border border-secondary rounded-[6px] px-2 py-1"
+              className="text-field min-h-8"
             />
           </div>
           {/* submit and close dialog handling */}

@@ -29,14 +29,17 @@ function PieceFormDetailsSection({
       <Accordion
         type="single"
         collapsible
-        defaultValue={form || method || material ? "details" : ""}
+        // default open causes double render issue
+        // defaultValue={form || method || material ? "details" : ""}
       >
-        <AccordionItem value="details">
-          <AccordionTrigger>Form, Method, Material</AccordionTrigger>
-          <AccordionContent className="flex items-center justify-between gap-2">
+        <AccordionItem value="details" className="shadow-custom border-none">
+          <AccordionTrigger className="accordian-trigger">
+            Form, Method, Material
+          </AccordionTrigger>
+          <AccordionContent className="accordian-content">
             <div className="flex flex-col gap-2 w-full">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <h4>Form</h4>
+                <h4 className="pl-1 font-medium text-md">Form</h4>
                 <PresetDialog
                   presetName="form"
                   presetCategory="formPresets"
@@ -53,7 +56,7 @@ function PieceFormDetailsSection({
             </div>
             <div className="flex flex-col gap-2 w-full">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <h4>Method</h4>
+                <h4 className="pl-1 font-medium text-md">Method</h4>
                 <PresetDialog
                   presetName="method"
                   presetCategory="methodPresets"
@@ -70,7 +73,7 @@ function PieceFormDetailsSection({
             </div>
             <div className="flex flex-col gap-2 w-full">
               <div className="flex items-center justify-start gap-2 h-full w-min">
-                <h4>Material</h4>
+                <h4 className="pl-1 font-medium text-md">Material</h4>
                 <PresetDialog
                   presetName="material"
                   presetCategory="materialPresets"

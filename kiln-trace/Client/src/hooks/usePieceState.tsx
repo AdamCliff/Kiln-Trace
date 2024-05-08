@@ -35,11 +35,11 @@ const usePieceState = (initialPiece: Piece | null) => {
     ...initialPiece,
   });
 
-  // useEffect(() => {
-  //   if (initialPiece) {
-  //     setPiece(initialPiece);
-  //   }
-  // }, [initialPiece]);
+  useEffect(() => {
+    if (initialPiece) {
+      setPiece(initialPiece);
+    }
+  }, [initialPiece]);
 
   const updatePiece = (updatedPiece: Partial<Piece>) => {
     setPiece((prevPiece) => ({
