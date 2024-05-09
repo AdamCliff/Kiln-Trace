@@ -15,7 +15,7 @@ function GlazePresetSelectMenu({
   presets,
   updatePiece,
   presetName,
-  presetList,
+  presetOptionList,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   index: number;
@@ -28,9 +28,9 @@ function GlazePresetSelectMenu({
     | "outerGlaze"
     | "outerUnderglaze"
     | "outerSlip";
-  presetList: Presets;
+  presetOptionList: Presets;
 }) {
-  const { presets: presetsList } = presetList;
+  const { presets: presetsList } = presetOptionList;
 
   return (
     <>
@@ -51,8 +51,8 @@ function GlazePresetSelectMenu({
         value={presets[index] || ""}
         name="piece-glaze-select-menu"
       >
-        <SelectTrigger className="!w-40 select-field">
-          <SelectValue placeholder={"Add layer"} />
+        <SelectTrigger className="w-full min-w-40 select-field !font-semibold">
+          <SelectValue placeholder="Add Layer" />
         </SelectTrigger>
         <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
           {presetsList.map((preset) => {

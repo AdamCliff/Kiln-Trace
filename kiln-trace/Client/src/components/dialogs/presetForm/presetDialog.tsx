@@ -10,12 +10,12 @@ import {
 import PresetDialogContents from "./presetDialogContents";
 
 function PresetDialog({
-  presetName,
+  presetType,
   presetCategory,
   handleSubmit,
   dispatch,
 }: {
-  presetName: string;
+  presetType: string;
   presetCategory: string;
   handleSubmit: (
     presetName: string | undefined,
@@ -34,7 +34,7 @@ function PresetDialog({
             e.preventDefault();
             setIsOpen(!isOpen);
           }}
-          className="w-full h-full p-1 rounded shadow-custom hover:bg-accent bg-accent"
+          className="w-min h-min p-1 rounded shadow-custom hover:bg-accent bg-accent"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +52,10 @@ function PresetDialog({
           </svg>
         </button>
         <DialogContent>
-          <DialogHeader>{"Enter new " + presetName}</DialogHeader>
+          <DialogHeader>{"Enter new " + presetType}</DialogHeader>
           <PresetDialogContents
             setIsOpen={setIsOpen}
-            presetName={presetName}
+            presetName={presetType}
             presetCategory={presetCategory}
             handleSubmit={handleSubmit}
             dispatch={dispatch}

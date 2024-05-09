@@ -9,6 +9,7 @@ import { Piece } from "@/types/piece";
 import PresetDialog from "../presetForm/presetDialog";
 import { handleNewPreset } from "@/helpers/presetHelperFunctions";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
+import GlazeSelectMenu from "./glazeSelectMenu";
 
 function PieceFormGlazeSection({
   piece,
@@ -52,8 +53,96 @@ function PieceFormGlazeSection({
           <AccordionTrigger className="accordian-trigger">
             Glaze, Underglaze, Slip
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col w-auto accordian-content">
-            <div className="flex items-start gap-2 mb-4">
+          <AccordionContent className="flex flex-col !gap-4 w-full accordian-content">
+            <div
+              id="glazes"
+              className="flex items-start justify-around gap-8 px-4 h-auto w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+            >
+              <GlazeSelectMenu
+                presetType="glaze"
+                presetCategory="glazePresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={innerGlaze}
+                updatePiece={updatePiece}
+                presetName="innerGlaze"
+                presetOptionList={presets?.glazePresets}
+              />
+
+              <GlazeSelectMenu
+                presetType="glaze"
+                presetCategory="glazePresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={outerGlaze}
+                updatePiece={updatePiece}
+                presetName="outerGlaze"
+                presetOptionList={presets?.glazePresets}
+              />
+            </div>
+            <div
+              id="underglazes"
+              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+            >
+              <GlazeSelectMenu
+                presetType="underglaze"
+                presetCategory="underglazePresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={innerUnderglaze}
+                updatePiece={updatePiece}
+                presetName="innerUnderglaze"
+                presetOptionList={presets?.underglazePresets}
+              />
+
+              <GlazeSelectMenu
+                presetType="underglaze"
+                presetCategory="underglazePresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={outerUnderglaze}
+                updatePiece={updatePiece}
+                presetName="outerUnderglaze"
+                presetOptionList={presets?.underglazePresets}
+              />
+            </div>
+            <div
+              id="slips"
+              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+            >
+              <GlazeSelectMenu
+                presetType="slip"
+                presetCategory="slipPresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={innerSlip}
+                updatePiece={updatePiece}
+                presetName="innerSlip"
+                presetOptionList={presets?.slipPresets}
+              />
+
+              <GlazeSelectMenu
+                presetType="slip"
+                presetCategory="slipPresets"
+                handleSubmit={handleNewPreset}
+                dispatch={presetDispatch}
+                selectedPresets={outerSlip}
+                updatePiece={updatePiece}
+                presetName="outerSlip"
+                presetOptionList={presets?.slipPresets}
+              />
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </>
+  );
+}
+
+export default PieceFormGlazeSection;
+
+{
+  /* <div className="flex items-start gap-2 mb-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-start gap-2 h-full w-min">
                   <h4 className="whitespace-nowrap pl-1 font-medium text-md">
@@ -70,7 +159,7 @@ function PieceFormGlazeSection({
                   presets={innerGlaze}
                   updatePiece={updatePiece}
                   presetName="innerGlaze"
-                  presetList={presets?.glazePresets}
+                  presetOptionList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -89,7 +178,7 @@ function PieceFormGlazeSection({
                   presets={innerUnderglaze}
                   updatePiece={updatePiece}
                   presetName="innerUnderglaze"
-                  presetList={presets?.glazePresets}
+                  presetOptionList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -108,7 +197,7 @@ function PieceFormGlazeSection({
                   presets={innerSlip}
                   updatePiece={updatePiece}
                   presetName="innerSlip"
-                  presetList={presets?.slipPresets}
+                  presetOptionList={presets?.slipPresets}
                 />
               </div>
             </div>
@@ -129,7 +218,7 @@ function PieceFormGlazeSection({
                   presets={outerGlaze}
                   updatePiece={updatePiece}
                   presetName="outerGlaze"
-                  presetList={presets?.glazePresets}
+                  presetOptionList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -148,7 +237,7 @@ function PieceFormGlazeSection({
                   presets={outerUnderglaze}
                   updatePiece={updatePiece}
                   presetName="outerUnderglaze"
-                  presetList={presets?.glazePresets}
+                  presetOptionList={presets?.glazePresets}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -167,15 +256,8 @@ function PieceFormGlazeSection({
                   presets={outerSlip}
                   updatePiece={updatePiece}
                   presetName="outerSlip"
-                  presetList={presets?.slipPresets}
+                  presetOptionList={presets?.slipPresets}
                 />
               </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
+            </div> */
 }
-
-export default PieceFormGlazeSection;

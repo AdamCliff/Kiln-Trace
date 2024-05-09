@@ -23,6 +23,36 @@ body {
   @apply outline outline-1 outline-accent !important;
 }
 
+@layer base {
+  .CollapsibleContent {
+    overflow: hidden;
+  }
+  .CollapsibleContent[data-state="open"] {
+    animation: slideDown 200ms ease-out;
+  }
+  .CollapsibleContent[data-state="closed"] {
+    animation: slideUp 200ms ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
 @layer components {
   .nav-link {
     @apply relative flex items-center justify-start text-xl font-semibold pl-4 text-text h-full w-full rounded overflow-hidden z-10 transition-all duration-200;
@@ -60,10 +90,25 @@ body {
   .shadow-custom-lg {
     box-shadow: 0px 1px 8px hsla(0, 0%, 0%, 0.35);
   }
-  /* ::-webkit-scrollbar-button:single-button:vertical:decrement {
-    background-color: aqua !important;
-  } */
 }
+
+/* @keyframes collapsibleSlideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes collapsibleSlideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+} */
 
 /* @layer base {
   :root {

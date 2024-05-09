@@ -18,6 +18,7 @@ export interface PiecePresets {
   methodPresets: { [presetName: string]: Presets };
   materialPresets: { [presetName: string]: Presets };
   glazePresets: { [presetName: string]: Presets };
+  underglazePresets: { [presetName: string]: Presets };
   slipPresets: { [presetName: string]: Presets };
   artistPresets: { [presetName: string]: Presets };
 }

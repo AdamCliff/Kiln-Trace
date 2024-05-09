@@ -1,8 +1,3 @@
-import { useState } from "react";
-
-import { ChevronsUpDown } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 
 import { Presets } from "@/types/piecePresets";
@@ -10,12 +5,16 @@ import { Piece } from "@/types/piece";
 import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 
 function GlazeSelectionCollapsible({
-  presets,
+  isOpen,
+  setIsOpen,
+  selectedPresets,
   updatePiece,
   presetName,
-  presetList,
+  presetOptionList,
 }: {
-  presets: string[];
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedPresets: string[];
   updatePiece: (updatedPiece: Partial<Piece>) => void;
   presetName:
     | "innerGlaze"
@@ -24,53 +23,38 @@ function GlazeSelectionCollapsible({
     | "outerGlaze"
     | "outerUnderglaze"
     | "outerSlip";
-  presetList: Presets;
+  presetOptionList: Presets;
 }) {
-  const [isOpen, setIsOpen] = useState<boolean>(presets.length > 0);
-
   return (
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="w-min space-y-2"
+      className="w-full space-y-2 transition-all"
     >
-      <div className="flex items-center justify-between space-x-2 w-min">
+      <div className="flex items-center justify-between space-x-2 w-full">
         <GlazePresetSelectMenu
           setIsOpen={setIsOpen}
           key={0}
           index={0}
-          presets={presets}
+          presets={selectedPresets}
           updatePiece={updatePiece}
           presetName={presetName}
-          presetList={presetList}
+          presetOptionList={presetOptionList}
         />
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-9 p-0"
-          disabled={presets.length === 0}
-          onClick={(e) => {
-            e.preventDefault();
-            setIsOpen(!isOpen);
-          }}
-        >
-          <ChevronsUpDown className="h-4 w-4" />
-          <span className="sr-only">Toggle</span>
-        </Button>
       </div>
-      <CollapsibleContent className="space-y-2">
-        {presets.length &&
-          presets.map((_, index) => {
-            if (index <= presets.length && index + 1 < 5) {
+      <CollapsibleContent className="space-y-2 CollapsibleContent">
+        {selectedPresets.length &&
+          selectedPresets.map((_, index) => {
+            if (index <= selectedPresets.length && index + 1 < 5) {
               return (
                 <GlazePresetSelectMenu
                   key={index + 1}
                   setIsOpen={setIsOpen}
                   index={index + 1}
-                  presets={presets}
+                  presets={selectedPresets}
                   updatePiece={updatePiece}
                   presetName={presetName}
-                  presetList={presetList}
+                  presetOptionList={presetOptionList}
                 />
               );
             }

@@ -83,6 +83,21 @@ const PieceDataPresetsSchema = new Schema({
       };
     },
   },
+  underglazePresets: {
+    type: PresetGroupSchema,
+    required: true,
+    default: () => {
+      return {
+        presets: [
+          new Preset({ preset: "underglaze1" }),
+          new Preset({ preset: "underglaze2" }),
+          new Preset({ preset: "underglaze3" }),
+          new Preset({ preset: "underglaze4" }),
+          new Preset({ preset: "underglaze5" }),
+        ],
+      };
+    },
+  },
   slipPresets: {
     type: PresetGroupSchema,
     rquired: true,
