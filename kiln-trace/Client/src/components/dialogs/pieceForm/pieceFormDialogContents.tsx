@@ -54,7 +54,10 @@ function PieceFormDialogContents({
           <div className="flex gap-2">
             {/* about section */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="title" className="pl-1 font-medium text-md">
+              <label
+                htmlFor="title"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
                 Title
               </label>
               <input
@@ -69,7 +72,10 @@ function PieceFormDialogContents({
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="artist" className="pl-1 font-medium text-md">
+              <label
+                htmlFor="artist"
+                className="pl-1 font-medium text-md pointer-events-none"
+              >
                 Artist
               </label>
               <input

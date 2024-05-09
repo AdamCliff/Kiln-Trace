@@ -37,6 +37,9 @@ function GlazeSelectMenu({
     | "outerSlip";
   presetOptionList: Presets;
 }) {
+  // setting this to false allows for glaze accordion to expand smoothly
+  // similar feeling problem to double opening dialog as result of conditional expansion on open
+  // see if the same solution can work for both problems
   const [isOpen, setIsOpen] = useState<boolean>(selectedPresets.length > 0);
 
   return (

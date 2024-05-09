@@ -41,7 +41,7 @@ function StageDatePicker({
       <PopoverTrigger asChild>
         <Button
           className={cn(
-            "flex justify-start items-center gap-2 h-min w-full p-0 bg-background hover:bg-background text-left font-normal"
+            "flex justify-start items-center gap-2 h-min w-full p-0 bg-transparent hover:bg-transparent text-left font-normal focus:!outline-none"
           )}
           onClick={() => {
             const tempDate = new Date();

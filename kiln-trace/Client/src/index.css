@@ -75,6 +75,9 @@ body {
 }
 
 @layer utilities {
+  .shadow-custom-sm {
+    box-shadow: 0px 1px 6px hsla(0, 0%, 0%, 0.1);
+  }
   .shadow-custom {
     box-shadow: 0px 2px 12px hsla(0, 0%, 0%, 0.15);
   }
