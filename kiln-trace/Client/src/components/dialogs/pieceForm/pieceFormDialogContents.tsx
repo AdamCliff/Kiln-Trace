@@ -31,14 +31,14 @@ function PieceFormDialogContents({
 
   const firstInputRef = useRef<HTMLInputElement>(null);
 
-  // prevent title autofocus
-  if (
-    firstInputRef.current &&
-    firstInputRef.current === document.activeElement
-  ) {
-    // Remove focus from the first input field
-    firstInputRef.current.blur();
-  }
+  // // prevent title autofocus
+  // if (
+  //   firstInputRef.current &&
+  //   firstInputRef.current === document.activeElement
+  // ) {
+  //   // Remove focus from the first input field
+  //   firstInputRef.current.blur();
+  // }
 
   if (pieceState) {
     return (
@@ -67,7 +67,7 @@ function PieceFormDialogContents({
                 onChange={(e) => updatePiece({ title: e.target.value })}
                 value={title}
                 spellCheck={false}
-                ref={firstInputRef}
+                // ref={firstInputRef}
                 className="text-field"
               />
             </div>
