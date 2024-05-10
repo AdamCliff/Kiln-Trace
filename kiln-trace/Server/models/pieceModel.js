@@ -171,54 +171,6 @@ const PieceSchema = new Schema(
         return [];
       },
     },
-    // glaze: {
-    //   inner: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    //   outer: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    // },
-    // underglaze: {
-    //   inner: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    //   outer: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    // },
-    // slip: {
-    //   inner: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    //   outer: {
-    //     type: [String],
-    //     required: false,
-    //     default: () => {
-    //       return [];
-    //     },
-    //   },
-    // },
     // IMAGES MUST BE CHANGED TO HAVE THE PROPER DATA AND UPLOAD PROCESS
     photos: {
       type: String,

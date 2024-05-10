@@ -1,4 +1,5 @@
 import StageDatePicker from "@/components/dialogs/pieceForm/stageDatePicker";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Piece } from "@/types/piece";
 
 function StagePicker({
@@ -22,36 +23,21 @@ function StagePicker({
             htmlFor={`${stageName}-stage`}
             className=" relative flex justify-start items-center gap-2 capitalize cursor-pointer"
           >
-            <input
-              type="checkbox"
-              name={stageName}
-              id={`${stageName}-stage`}
-              onChange={(e) => {
-                const isChecked = e.target.checked;
+            <Checkbox
+              checked={stage}
+              onCheckedChange={(e) => {
+                const isChecked = e;
                 updatePiece({ [stageName]: isChecked });
                 updatePiece({
                   [stageDateName]: isChecked ? new Date() : undefined,
                 });
               }}
-              checked={stage}
-              className="relative peer appearance-none w-[0.875rem] h-[0.875rem] bg-background border border-text rounded checked:bg-accent cursor-pointer"
+              aria-label="Select All"
+              name={stageName}
+              id={`${stageName}-stage`}
+              className="rounded !w-[0.875rem] !h-[0.875rem]"
             />
             {stageName}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 256 256"
-              className="w-[0.875rem] h-[0.875rem] hidden peer-checked:block fill-background absolute top-2/4 -translate-y-1/2"
-            >
-              <rect width="256" height="256" fill="none" />
-              <path
-                d="M104,147.43l98.34-97.09a8,8,0,0,1,11.32,0l24,23.6a8,8,0,0,1,0,11.32l-128.4,128.4a8,8,0,0,1-11.32,0l-71.6-72a8,8,0,0,1,0-11.31l24-24a8,8,0,0,1,11.32,0Z"
-                fill="background"
-                stroke="primary"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="16"
-              />
-            </svg>
           </label>
         </div>
         <StageDatePicker

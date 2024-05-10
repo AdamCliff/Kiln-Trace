@@ -34,7 +34,9 @@ export const pieceColumns: ColumnDef<Piece>[] = [
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        name="select-check"
         aria-label="Select all"
+        className="rounded"
       />
     ),
     cell: ({ row }) => (
@@ -45,7 +47,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
           e.stopPropagation();
         }}
         aria-label="Select row"
-        className="z-[500]"
+        className="rounded"
       />
     ),
     enableSorting: false,

@@ -32,22 +32,23 @@ function PieceFormDimensionsSection({
           <AccordionTrigger className="accordian-trigger">
             Dimensions, Weight
           </AccordionTrigger>
-          <AccordionContent className="accordian-content">
+          <AccordionContent
+            id="dimensions-accordion"
+            className="accordian-content"
+          >
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="width"
                 className="pl-1 font-medium text-md pointer-events-none"
               >
-                Width
+                Width <span className="italic font-normal">{`\( cm \)`}</span>
               </label>
-              <input
-                type="number"
-                name="width"
-                id="width"
-                onChange={(e) => updatePiece({ width: +e.target.value })}
-                value={width}
-                max={100}
-                className="text-field w-full"
+              <NumberInputField
+                limit={254}
+                inputName="width"
+                pieceField={width}
+                pieceFieldName="width"
+                updatePiece={updatePiece}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -55,16 +56,14 @@ function PieceFormDimensionsSection({
                 htmlFor="length"
                 className="pl-1 font-medium text-md pointer-events-none"
               >
-                Length
+                Length <span className="italic font-normal">{`\( cm \)`}</span>
               </label>
-              <input
-                type="number"
-                name="length"
-                id="length"
-                onChange={(e) => updatePiece({ pieceLength: +e.target.value })}
-                value={pieceLength}
-                max={100}
-                className="text-field w-full"
+              <NumberInputField
+                limit={254}
+                inputName="length"
+                pieceField={pieceLength}
+                pieceFieldName="pieceLength"
+                updatePiece={updatePiece}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -72,16 +71,14 @@ function PieceFormDimensionsSection({
                 htmlFor="height"
                 className="pl-1 font-medium text-md pointer-events-none"
               >
-                Height
+                Height <span className="italic font-normal">{`\( cm \)`}</span>
               </label>
-              <input
-                type="number"
-                name="height"
-                id="height"
-                onChange={(e) => updatePiece({ height: +e.target.value })}
-                value={height}
-                max={100}
-                className="text-field w-full"
+              <NumberInputField
+                limit={254}
+                inputName="height"
+                pieceField={height}
+                pieceFieldName="height"
+                updatePiece={updatePiece}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -89,22 +86,16 @@ function PieceFormDimensionsSection({
                 htmlFor="weight"
                 className="pl-1 font-medium text-md pointer-events-none"
               >
-                Weight
+                Weight <span className="italic font-normal">{`\( oz \)`}</span>
               </label>
-              <input
-                type="text"
-                name="weight"
-                id="weight"
-                onChange={(e) => updatePiece({ weight: +e.target.value })}
-                value={weight}
-                className="text-field w-full"
+              <NumberInputField
+                limit={1000}
+                inputName="weight"
+                pieceField={weight}
+                pieceFieldName="weight"
+                updatePiece={updatePiece}
               />
             </div>
-            <NumberInputField
-              pieceField={weight}
-              pieceFieldName="weight"
-              updatePiece={updatePiece}
-            />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

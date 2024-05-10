@@ -127,7 +127,10 @@ function PieceFormDialogContents({
           />
           {/* notes */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="notes" className="pl-1 text-md font-medium">
+            <label
+              htmlFor="notes"
+              className="pl-1 text-md font-medium pointer-events-none"
+            >
               Notes
             </label>
             <textarea
@@ -135,7 +138,8 @@ function PieceFormDialogContents({
               id="notes"
               onChange={(e) => updatePiece({ notes: e.target.value })}
               value={notes}
-              className="text-field min-h-8 max-h-64 overflow-scrol overflow-x-hidden scrollbar-thin scrollbar-track-transparent"
+              spellCheck={false}
+              className="text-field min-h-24 max-h-64 overflow-scrol overflow-x-hidden scrollbar-thin scrollbar-track-transparent"
             />
           </div>
           {/* submit and close dialog handling */}
