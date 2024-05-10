@@ -255,9 +255,10 @@ const PieceSchema = new Schema(
 
 // dimensions field calculation
 PieceSchema.virtual("dimensions").get(function () {
-  return `${
-    this.pieceLength > 0 ? this.pieceLength : "-"
-  } x ${this.width > 0 ? this.width : "-"} x ${this.height > 0 ? this.height : "-"}`;
+  if (this.pieceLength > 0 || this.width > 0 || this.height > 0)
+    return `${this.pieceLength > 0 ? this.pieceLength : "-"} x ${
+      this.width > 0 ? this.width : "-"
+    } x ${this.height > 0 ? this.height : "-"}`;
 });
 
 // stage field calculation

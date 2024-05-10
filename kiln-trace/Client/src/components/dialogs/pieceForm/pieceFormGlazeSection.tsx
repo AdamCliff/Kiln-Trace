@@ -56,7 +56,7 @@ function PieceFormGlazeSection({
           <AccordionContent className="flex flex-col !gap-4 w-full accordian-content">
             <div
               id="glazes"
-              className="flex items-start justify-around gap-8 px-4 h-auto w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+              className="flex items-start justify-around gap-8 px-4 h-auto w-full bg-accent bg-opacity-25 rounded p-2 py-4 shadow-custom transition-all"
             >
               <GlazeSelectMenu
                 presetType="glaze"
@@ -82,7 +82,7 @@ function PieceFormGlazeSection({
             </div>
             <div
               id="underglazes"
-              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-25 rounded p-2 py-4 shadow-custom transition-all"
             >
               <GlazeSelectMenu
                 presetType="underglaze"
@@ -108,7 +108,7 @@ function PieceFormGlazeSection({
             </div>
             <div
               id="slips"
-              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-50 rounded p-2 py-4 shadow-custom transition-all"
+              className="flex items-start justify-around gap-8 px-4 w-full bg-accent bg-opacity-25 rounded p-2 py-4 shadow-custom transition-all"
             >
               <GlazeSelectMenu
                 presetType="slip"
@@ -140,124 +140,3 @@ function PieceFormGlazeSection({
 }
 
 export default PieceFormGlazeSection;
-
-{
-  /* <div className="flex items-start gap-2 mb-4">
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Inner Glaze
-                  </h4>
-                  <PresetDialog
-                    presetName="glaze"
-                    presetCategory="glazePresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={innerGlaze}
-                  updatePiece={updatePiece}
-                  presetName="innerGlaze"
-                  presetOptionList={presets?.glazePresets}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Inner Underglaze
-                  </h4>
-                  <PresetDialog
-                    presetName="glaze"
-                    presetCategory="glazePresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={innerUnderglaze}
-                  updatePiece={updatePiece}
-                  presetName="innerUnderglaze"
-                  presetOptionList={presets?.glazePresets}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Inner Slip
-                  </h4>
-                  <PresetDialog
-                    presetName="slip"
-                    presetCategory="slipPresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={innerSlip}
-                  updatePiece={updatePiece}
-                  presetName="innerSlip"
-                  presetOptionList={presets?.slipPresets}
-                />
-              </div>
-            </div>
-            <div className="flex items-start gap-2">
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Outer Glaze
-                  </h4>
-                  <PresetDialog
-                    presetName="glaze"
-                    presetCategory="glazePresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={outerGlaze}
-                  updatePiece={updatePiece}
-                  presetName="outerGlaze"
-                  presetOptionList={presets?.glazePresets}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Outer Underglaze
-                  </h4>
-                  <PresetDialog
-                    presetName="glaze"
-                    presetCategory="glazePresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={outerUnderglaze}
-                  updatePiece={updatePiece}
-                  presetName="outerUnderglaze"
-                  presetOptionList={presets?.glazePresets}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-start gap-2 h-full w-min">
-                  <h4 className="whitespace-nowrap pl-1 font-medium text-md">
-                    Outer Slip
-                  </h4>
-                  <PresetDialog
-                    presetName="slip"
-                    presetCategory="slipPresets"
-                    handleSubmit={handleNewPreset}
-                    dispatch={presetDispatch}
-                  />
-                </div>
-                <GlazeSelectionCollapsible
-                  presets={outerSlip}
-                  updatePiece={updatePiece}
-                  presetName="outerSlip"
-                  presetOptionList={presets?.slipPresets}
-                />
-              </div>
-            </div> */
-}

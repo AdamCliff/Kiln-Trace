@@ -7,7 +7,7 @@ function DataPanel() {
     <>
       <div
         id="data-panel"
-        className="flex items-center justify-start flex-col gap-6 w-[90%] h-full"
+        className="relative flex items-center justify-start flex-col gap-6 w-[90%] h-full"
       >
         <section id="data-section" className="w-full h-full bg-background">
           <Routes>

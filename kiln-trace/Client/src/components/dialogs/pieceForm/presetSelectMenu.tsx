@@ -34,7 +34,7 @@ function PresetSelectMenu({
         </SelectTrigger>
         <SelectContent
           onCloseAutoFocus={(e) => e.preventDefault()}
-          className="rounded"
+          className="rounded shadow-custom"
         >
           {presets.map((preset) => {
             const { preset: presetValue } = preset;

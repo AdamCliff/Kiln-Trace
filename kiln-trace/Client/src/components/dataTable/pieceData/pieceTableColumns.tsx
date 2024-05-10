@@ -10,6 +10,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "@radix-ui/react-tooltip";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
@@ -68,6 +74,25 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     header: "Title",
     filterFn: "fuzzy",
     enableGlobalFilter: true,
+    cell: ({ row }) => {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <span className="line-clamp-1">{row.original.title}</span>
+            </TooltipTrigger>
+            <TooltipContent
+              className="bg-background border border-primary rounded p-1 shadow-custom"
+              align="start"
+              alignOffset={8}
+              sideOffset={12}
+            >
+              {row.original.title}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
   {
     accessorKey: "artist",
@@ -105,6 +130,9 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "weight",
     header: "Weight",
+    cell: ({ row }) => {
+      return <>{row.original.weight ? row.original.weight : ""}</>;
+    },
   },
   {
     accessorKey: "dimensions",
@@ -134,6 +162,25 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "notes",
     header: "Notes",
+    cell: ({ row }) => {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <span className="line-clamp-2">{row.original.notes}</span>
+            </TooltipTrigger>
+            <TooltipContent
+              className="bg-background border border-primary rounded p-1 shadow-custom max-w-80"
+              align="end"
+              alignOffset={8}
+              sideOffset={12}
+            >
+              <span className="max-w-40">{row.original.notes}</span>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    },
   },
   {
     accessorKey: "actions",
@@ -147,12 +194,12 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         <div>
           <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 rounded">
                 <span className="sr-only">Open menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className=" bg-background">
+            <DropdownMenuContent align="end" className=" bg-background rounded">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={(e) => {

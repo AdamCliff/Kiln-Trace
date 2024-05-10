@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { Piece } from "@/types/piece";
+import NumberInputField from "./numberInputField";
 
 function PieceFormDimensionsSection({
   piece,
@@ -40,11 +41,12 @@ function PieceFormDimensionsSection({
                 Width
               </label>
               <input
-                type="text"
+                type="number"
                 name="width"
                 id="width"
                 onChange={(e) => updatePiece({ width: +e.target.value })}
                 value={width}
+                max={100}
                 className="text-field w-full"
               />
             </div>
@@ -56,11 +58,12 @@ function PieceFormDimensionsSection({
                 Length
               </label>
               <input
-                type="text"
+                type="number"
                 name="length"
                 id="length"
                 onChange={(e) => updatePiece({ pieceLength: +e.target.value })}
                 value={pieceLength}
+                max={100}
                 className="text-field w-full"
               />
             </div>
@@ -72,11 +75,12 @@ function PieceFormDimensionsSection({
                 Height
               </label>
               <input
-                type="text"
+                type="number"
                 name="height"
                 id="height"
                 onChange={(e) => updatePiece({ height: +e.target.value })}
                 value={height}
+                max={100}
                 className="text-field w-full"
               />
             </div>
@@ -96,6 +100,11 @@ function PieceFormDimensionsSection({
                 className="text-field w-full"
               />
             </div>
+            <NumberInputField
+              pieceField={weight}
+              pieceFieldName="weight"
+              updatePiece={updatePiece}
+            />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

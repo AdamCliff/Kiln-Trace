@@ -68,6 +68,7 @@ function PieceFormDialogContents({
                 value={title}
                 spellCheck={false}
                 // ref={firstInputRef}
+                maxLength={50}
                 className="text-field"
               />
             </div>
@@ -85,6 +86,7 @@ function PieceFormDialogContents({
                 onChange={(e) => updatePiece({ artist: e.target.value })}
                 value={artist}
                 spellCheck={false}
+                maxLength={25}
                 className="text-field"
               />
             </div>
@@ -133,7 +135,7 @@ function PieceFormDialogContents({
               id="notes"
               onChange={(e) => updatePiece({ notes: e.target.value })}
               value={notes}
-              className="text-field min-h-8"
+              className="text-field min-h-8 max-h-64 overflow-scrol overflow-x-hidden scrollbar-thin scrollbar-track-transparent"
             />
           </div>
           {/* submit and close dialog handling */}
