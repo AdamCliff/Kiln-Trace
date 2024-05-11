@@ -41,13 +41,26 @@ function GlazeSelectMenu({
   // similar feeling problem to double opening dialog as result of conditional expansion on open
   // see if the same solution can work for both problems
   const [isOpen, setIsOpen] = useState<boolean>(selectedPresets.length > 0);
+  let innerOrOuter;
+  if (
+    presetName === "innerGlaze" ||
+    presetName === "innerUnderglaze" ||
+    presetName === "innerSlip"
+  )
+    innerOrOuter = "Inner";
+  if (
+    presetName === "outerGlaze" ||
+    presetName === "outerUnderglaze" ||
+    presetName === "outerSlip"
+  )
+    innerOrOuter = "Outer";
 
   return (
     <>
       <div className="flex flex-col gap-2 w-full transition-all">
         <div className="flex items-center justify-start gap-2 h-full w-full">
           <h4 className="whitespace-nowrap pl-1 font-medium text-md capitalize">
-            Inner {presetType}
+            {innerOrOuter} {presetType}
           </h4>
           <PresetDialog
             presetType={presetType}

@@ -9,6 +9,7 @@ import {
 declare module "@tanstack/react-table" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
+    custom: FilterFn<unknown>;
   }
   interface FilterMeta {
     itemRank: RankingInfo;
@@ -39,4 +40,28 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, ColumnId) => {
 
   // provide an alphanumeric fallback for when the item ranks are equal
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, ColumnId) : dir;
+};
+
+export const customFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+  // get cell value
+  // console.log(columnId);
+  const cellValue = row.getValue(columnId);
+  let joinedCells;
+
+  console.log(row);
+  console.log(cellValue);
+
+  if (Array.isArray(cellValue)) {
+    // console.log("cell is an array");
+    joinedCells = cellValue.map((index) => index).join(" ");
+  }
+
+  // rank the Item
+  const itemRank = rankItem(/* row.getValue(columnId) */ joinedCells, value);
+
+  // store the itemRank info
+  addMeta({ itemRank });
+
+  // return if the item should be filtered in/out
+  return itemRank.passed;
 };

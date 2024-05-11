@@ -14,7 +14,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
 
   return (
     <>
-      <div className="relative flex flex-col justify-center border-2 border-primary rounded-[6px] overflow-hidden desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
+      <div className="relative flex flex-col justify-center border border-primary rounded-[6px] shadow-custom-sm overflow-hidden desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
         <div className="absolute top-2 left-2">
           {flexRender(select.column.columnDef.cell, select.getContext())}
         </div>
@@ -27,8 +27,8 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
           <div className="flex items-center justify-center p-1 h-[65%] border-b-2 border-primary">
             placeholder
           </div>
-          <div className="flex flex-col items-start justify-around p-2 h-[35%] bg-accent">
-            <span className="text-lg font-semibold text-text">
+          <div className="flex flex-col items-start justify-around p-2 h-[35%] bg-accent bg-opacity-75">
+            <span className="text-lg font-semibold text-text line-clamp-1 text-left">
               {row.original.title}
             </span>
             <span className="text-secondary font-semibold">

@@ -55,7 +55,7 @@ function StageDatePicker({
           </span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
+      <PopoverContent className="w-auto p-0 rounded shadow-custom">
         <Calendar
           mode="single"
           selected={date}

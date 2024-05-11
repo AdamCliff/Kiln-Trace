@@ -81,10 +81,12 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <span className="line-clamp-1">{row.original.title}</span>
+              <span className="line-clamp-1 text-left">
+                {row.original.title}
+              </span>
             </TooltipTrigger>
             <TooltipContent
-              className="bg-background border border-primary rounded p-1 shadow-custom"
+              className="bg-background border border-primary rounded p-2 shadow-custom"
               align="start"
               alignOffset={8}
               sideOffset={12}
@@ -145,18 +147,55 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "glaze",
+    accessorFn: (row) => {
+      return row.innerGlaze, row.outerGlaze;
+    },
     header: "Glaze",
     cell: ({ row }) => {
-      return <>{row.original.innerGlaze?.[0]}</>;
+      return (
+        <>
+          {row.original.innerGlaze?.[0]
+            ? row.original.innerGlaze?.[0]
+            : row.original.outerGlaze?.[0]}
+        </>
+      );
+    },
+    filterFn: "custom",
+    enableGlobalFilter: true,
+    enableColumnFilter: true,
+  },
+  {
+    accessorKey: "underglaze",
+    accessorFn: (row) => {
+      return row.innerUnderglaze, row.outerUnderglaze;
+    },
+    header: "Underglaze",
+    cell: ({ row }) => {
+      return (
+        <>
+          {row.original.innerUnderglaze?.[0]
+            ? row.original.innerUnderglaze?.[0]
+            : row.original.outerUnderglaze?.[0]}
+        </>
+      );
     },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
   },
   {
-    accessorKey: "underglaze",
-    header: "Underglaze",
+    accessorKey: "slip",
+    accessorFn: (row) => {
+      return row.innerSlip, row.outerSlip;
+    },
+    header: "Slip",
     cell: ({ row }) => {
-      return <>{row.original.innerUnderglaze?.[0]}</>;
+      return (
+        <>
+          {row.original.innerSlip?.[0]
+            ? row.original.innerSlip?.[0]
+            : row.original.outerSlip?.[0]}
+        </>
+      );
     },
     filterFn: "fuzzy",
     enableGlobalFilter: true,
@@ -169,10 +208,12 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <span className="line-clamp-2">{row.original.notes}</span>
+              <span className="line-clamp-2 text-left">
+                {row.original.notes}
+              </span>
             </TooltipTrigger>
             <TooltipContent
-              className="bg-background border border-primary rounded p-1 shadow-custom max-w-80"
+              className="bg-background border border-primary rounded p-2 shadow-custom max-w-80"
               align="end"
               alignOffset={8}
               sideOffset={12}

@@ -36,11 +36,12 @@ import {
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
-import { fuzzyFilter } from "@/helpers/tableFilterFunctions";
+import { fuzzyFilter, customFilter } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
 import DataTableRow from "@/components/dataTable/pieceData/dataTableRow";
+import Filters from "./filters";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,6 +59,7 @@ function PiecesDataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
+  // const [customFilter, setCustomFilter] = useState<any>("");
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
@@ -76,6 +78,7 @@ function PiecesDataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     filterFns: {
       fuzzy: fuzzyFilter,
+      custom: customFilter,
     },
     state: {
       sorting,
@@ -109,6 +112,8 @@ function PiecesDataTable<TData, TValue>({
     };
   }, []); // Empty dependency array ensures the effect runs only once
 
+  // console.log(columnFilters);
+
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
       <div
@@ -120,8 +125,25 @@ function PiecesDataTable<TData, TValue>({
             id="globalFilter"
             placeholder="Search all columns..."
             value={globalFilter ?? ""}
-            onChange={(e) => setGlobalFilter(String(e.target.value))}
+            onChange={(e) => {
+              setGlobalFilter(String(e.target.value));
+            }}
             className="w-96 rounded shadow-inset-custom border-none"
+          />
+          {/* <Input
+            id="customFilter"
+            placeholder="Arr search"
+            value={(table.getColumn("glaze")?.getFilterValue() as []) ?? []}
+            onChange={(e) => {
+              table.getColumn("glaze")?.setFilterValue(e.target.value);
+              // setCustomFilter(String(e.target.value));
+            }}
+            className="w-96 rounded shadow-inset-custom border-none"
+          /> */}
+          {/* <Filter column={header.column} /> */}
+          <Filters
+            columnFilters={columnFilters}
+            setColumnFilters={setColumnFilters}
           />
           <div>date range picker</div>
         </div>
