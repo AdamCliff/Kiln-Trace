@@ -44,20 +44,16 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, ColumnId) => {
 
 export const customFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // get cell value
-  // console.log(columnId);
   const cellValue = row.getValue(columnId);
   let joinedCells;
 
-  console.log(row);
-  console.log(cellValue);
-
+  // if the cell is an array, join cells as string for ranking
   if (Array.isArray(cellValue)) {
-    // console.log("cell is an array");
     joinedCells = cellValue.map((index) => index).join(" ");
   }
 
   // rank the Item
-  const itemRank = rankItem(/* row.getValue(columnId) */ joinedCells, value);
+  const itemRank = rankItem(joinedCells, value);
 
   // store the itemRank info
   addMeta({ itemRank });

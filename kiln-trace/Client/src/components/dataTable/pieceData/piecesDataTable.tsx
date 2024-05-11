@@ -130,17 +130,6 @@ function PiecesDataTable<TData, TValue>({
             }}
             className="w-96 rounded shadow-inset-custom border-none"
           />
-          {/* <Input
-            id="customFilter"
-            placeholder="Arr search"
-            value={(table.getColumn("glaze")?.getFilterValue() as []) ?? []}
-            onChange={(e) => {
-              table.getColumn("glaze")?.setFilterValue(e.target.value);
-              // setCustomFilter(String(e.target.value));
-            }}
-            className="w-96 rounded shadow-inset-custom border-none"
-          /> */}
-          {/* <Filter column={header.column} /> */}
           <Filters
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}

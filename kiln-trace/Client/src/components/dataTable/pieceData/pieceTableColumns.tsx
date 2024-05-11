@@ -15,7 +15,12 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@radix-ui/react-tooltip";
+} from "@/components/ui/tooltip";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
@@ -23,6 +28,7 @@ import { format } from "date-fns";
 
 import { Piece } from "@/types/piece";
 import PieceFormDialogContents from "../../dialogs/pieceForm/pieceFormDialogContents";
+import ArrayCellPopoverCard from "./arrayCellPopoverCard";
 
 export const pieceColumns: ColumnDef<Piece>[] = [
   {
@@ -148,15 +154,29 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "glaze",
     accessorFn: (row) => {
-      return row.innerGlaze, row.outerGlaze;
+      return [...row.innerGlaze, ...row.outerGlaze];
     },
     header: "Glaze",
     cell: ({ row }) => {
       return (
         <>
-          {row.original.innerGlaze?.[0]
-            ? row.original.innerGlaze?.[0]
-            : row.original.outerGlaze?.[0]}
+          <Popover>
+            <PopoverTrigger onClick={(e) => e.stopPropagation()}>
+              {row.original.innerGlaze?.[0]
+                ? row.original.innerGlaze?.[0]
+                : row.original.outerGlaze?.[0]}{" "}
+              {row.original.innerGlaze.length > 1 && "..."}
+            </PopoverTrigger>
+            <PopoverContent className="rounded bg-accent shadow-custom border-none focus:!outline-none">
+              <ArrayCellPopoverCard
+                glazeType="glaze"
+                contents={{
+                  innerGlaze: row.original.innerGlaze,
+                  outerGlaze: row.original.outerGlaze,
+                }}
+              />
+            </PopoverContent>
+          </Popover>
         </>
       );
     },
@@ -167,37 +187,67 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "underglaze",
     accessorFn: (row) => {
-      return row.innerUnderglaze, row.outerUnderglaze;
+      return [...row.innerUnderglaze, ...row.outerUnderglaze];
     },
     header: "Underglaze",
     cell: ({ row }) => {
       return (
         <>
-          {row.original.innerUnderglaze?.[0]
-            ? row.original.innerUnderglaze?.[0]
-            : row.original.outerUnderglaze?.[0]}
+          <Popover>
+            <PopoverTrigger onClick={(e) => e.stopPropagation()}>
+              {row.original.innerUnderglaze?.[0]
+                ? row.original.innerUnderglaze?.[0]
+                : row.original.outerUnderglaze?.[0]}{" "}
+              {row.original.innerUnderglaze.length > 1 && "..."}
+            </PopoverTrigger>
+            <PopoverContent className="rounded bg-accent shadow-custom border-none focus:!outline-none">
+              <ArrayCellPopoverCard
+                glazeType="underglaze"
+                contents={{
+                  innerUnderglaze: row.original.innerUnderglaze,
+                  outerUnderglaze: row.original.outerUnderglaze,
+                }}
+              />
+            </PopoverContent>
+          </Popover>
         </>
       );
     },
-    filterFn: "fuzzy",
+    filterFn: "custom",
+    // filterFn: "custom",
     enableGlobalFilter: true,
   },
   {
     accessorKey: "slip",
     accessorFn: (row) => {
-      return row.innerSlip, row.outerSlip;
+      return [...row.innerSlip, ...row.outerSlip];
     },
     header: "Slip",
     cell: ({ row }) => {
       return (
         <>
-          {row.original.innerSlip?.[0]
-            ? row.original.innerSlip?.[0]
-            : row.original.outerSlip?.[0]}
+          <Popover>
+            <PopoverTrigger onClick={(e) => e.stopPropagation()}>
+              {row.original.innerSlip?.[0]
+                ? row.original.innerSlip?.[0]
+                : row.original.outerSlip?.[0]}{" "}
+              {row.original.innerSlip.length > 1 && "..."}
+            </PopoverTrigger>
+            <PopoverContent className="rounded bg-accent shadow-custom border-none focus:!outline-none">
+              <ArrayCellPopoverCard
+                glazeType="slip"
+                contents={{
+                  innerSlip: row.original.innerSlip,
+                  outerSlip: row.original.outerSlip,
+                }}
+              />
+            </PopoverContent>
+          </Popover>
         </>
       );
     },
-    filterFn: "fuzzy",
+    filterFn: "custom",
+    enableColumnFilter: true,
     enableGlobalFilter: true,
   },
   {
