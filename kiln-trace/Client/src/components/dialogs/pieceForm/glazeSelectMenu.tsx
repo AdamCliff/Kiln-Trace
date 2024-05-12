@@ -4,7 +4,7 @@ import { ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Piece } from "@/types/piece";
-import { Presets } from "@/types/piecePresets";
+import { Preset } from "@/types/piecePresets";
 import PresetDialog from "../presetForm/presetDialog";
 import GlazeSelectionCollapsible from "./glazeSelectionCollapsible";
 
@@ -35,7 +35,7 @@ function GlazeSelectMenu({
     | "outerGlaze"
     | "outerUnderglaze"
     | "outerSlip";
-  presetOptionList: Presets;
+  presetOptionList: Preset[];
 }) {
   // setting this to false allows for glaze accordion to expand smoothly
   // similar feeling problem to double opening dialog as result of conditional expansion on open

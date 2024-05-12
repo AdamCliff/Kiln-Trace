@@ -1,6 +1,6 @@
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 
-import { Presets } from "@/types/piecePresets";
+import { Preset } from "@/types/piecePresets";
 import { Piece } from "@/types/piece";
 import GlazePresetSelectMenu from "./glazePresetSelectMenu";
 
@@ -23,7 +23,7 @@ function GlazeSelectionCollapsible({
     | "outerGlaze"
     | "outerUnderglaze"
     | "outerSlip";
-  presetOptionList: Presets;
+  presetOptionList: Preset[];
 }) {
   return (
     <Collapsible

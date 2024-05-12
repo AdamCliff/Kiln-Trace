@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 
 import { Piece } from "@/types/piece";
-import { Presets } from "@/types/piecePresets";
+import { Preset } from "@/types/piecePresets";
 
 function GlazePresetSelectMenu({
   setIsOpen,
@@ -28,9 +28,9 @@ function GlazePresetSelectMenu({
     | "outerGlaze"
     | "outerUnderglaze"
     | "outerSlip";
-  presetOptionList: Presets;
+  presetOptionList: Preset[];
 }) {
-  const { presets: presetsList } = presetOptionList;
+  const presetsList = presetOptionList;
 
   return (
     <>

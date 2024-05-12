@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 
 import { Piece } from "@/types/piece";
-import { Presets } from "@/types/piecePresets";
+import { Preset } from "@/types/piecePresets";
 
 function PresetSelectMenu({
   preset,
@@ -18,9 +18,9 @@ function PresetSelectMenu({
   preset: string;
   setPreset: (updatedPiece: Partial<Piece>) => void;
   presetName: string;
-  presetList: Presets;
+  presetList: Preset[];
 }) {
-  const { presets } = presetList;
+  const presets = presetList;
 
   return (
     <>

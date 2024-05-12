@@ -9,7 +9,6 @@ const loadPiecePresets = async (req, res) => {
     if (!piecePresets[0]) {
       // if presets don't exist, create defaults, refind, and return
       const presets = new PieceDataPresets();
-      console.log(presets);
       await presets.save();
       piecePresets = await PieceDataPresets.find({});
       res.status(200).json(piecePresets);
@@ -35,15 +34,9 @@ const createPiecePreset = async (req, res) => {
 
     const [presets] = await PieceDataPresets.find({});
     let newPresets;
-    console.log("presets list");
-    console.log(presets);
     if (!presets[presetCategory].find((preset) => preset === presetName)) {
-      console.log("no match found");
       presets[presetCategory].push(presetName);
       newPresets = await presets.save();
-      console.log(newPresets);
-    } else {
-      console.log("match found");
     }
 
     res.status(200).json(newPresets);

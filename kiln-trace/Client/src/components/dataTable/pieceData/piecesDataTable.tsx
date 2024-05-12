@@ -42,6 +42,7 @@ import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
 import DataTableRow from "@/components/dataTable/pieceData/dataTableRow";
 import Filters from "./filters";
+import FilterPopover from "./filterPopover";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -131,6 +132,10 @@ function PiecesDataTable<TData, TValue>({
             className="w-96 rounded shadow-inset-custom border-none"
           />
           <Filters
+            columnFilters={columnFilters}
+            setColumnFilters={setColumnFilters}
+          />
+          <FilterPopover
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
           />

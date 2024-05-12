@@ -41,7 +41,7 @@ function PieceFormDetailsSection({
               <div className="flex items-center justify-start gap-2 h-full w-min">
                 <h4 className="pl-1 font-medium text-md">Form</h4>
                 <PresetDialog
-                  presetName="form"
+                  presetType="form"
                   presetCategory="formPresets"
                   handleSubmit={handleNewPreset}
                   dispatch={presetDispatch}
@@ -58,7 +58,7 @@ function PieceFormDetailsSection({
               <div className="flex items-center justify-start gap-2 h-full w-min">
                 <h4 className="pl-1 font-medium text-md">Method</h4>
                 <PresetDialog
-                  presetName="method"
+                  presetType="method"
                   presetCategory="methodPresets"
                   handleSubmit={handleNewPreset}
                   dispatch={presetDispatch}
@@ -75,7 +75,7 @@ function PieceFormDetailsSection({
               <div className="flex items-center justify-start gap-2 h-full w-min">
                 <h4 className="pl-1 font-medium text-md">Material</h4>
                 <PresetDialog
-                  presetName="material"
+                  presetType="material"
                   presetCategory="materialPresets"
                   handleSubmit={handleNewPreset}
                   dispatch={presetDispatch}

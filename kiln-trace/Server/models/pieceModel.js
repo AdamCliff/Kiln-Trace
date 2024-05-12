@@ -194,17 +194,6 @@ const PieceSchema = new Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// const GlazeLayerSchema = new Schema({
-//   inner: {
-//     type: [String],
-//     required: false,
-//   },
-//   outer: {
-//     type: [String],
-//     required: false,
-//   },
-// });
-
 // dimensions field calculation
 PieceSchema.virtual("dimensions").get(function () {
   if (this.pieceLength > 0 || this.width > 0 || this.height > 0)

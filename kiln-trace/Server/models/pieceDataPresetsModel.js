@@ -10,110 +10,98 @@ const PresetSchema = new Schema({
 
 const Preset = mongoose.model("preset", PresetSchema);
 
-const PresetGroupSchema = new Schema({
-  presets: {
-    type: [PresetSchema],
-    required: false,
-  },
-});
+// const PresetGroupSchema = new Schema({
+//   presets: {
+//     type: [PresetSchema],
+//     required: false,
+//   },
+// });
 
 const PieceDataPresetsSchema = new Schema({
   formPresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     required: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "bowl" }),
-          new Preset({ preset: "Coffee Cup" }),
-          new Preset({ preset: "Jar" }),
-          new Preset({ preset: "Mug" }),
-          new Preset({ preset: "Planter" }),
-          new Preset({ preset: "Plate" }),
-          new Preset({ preset: "Platter" }),
-          new Preset({ preset: "Tea Cup" }),
-          new Preset({ preset: "Test Tile" }),
-          new Preset({ preset: "Vase" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "bowl" }),
+        new Preset({ preset: "Coffee Cup" }),
+        new Preset({ preset: "Jar" }),
+        new Preset({ preset: "Mug" }),
+        new Preset({ preset: "Planter" }),
+        new Preset({ preset: "Plate" }),
+        new Preset({ preset: "Platter" }),
+        new Preset({ preset: "Tea Cup" }),
+        new Preset({ preset: "Test Tile" }),
+        new Preset({ preset: "Vase" }),
+      ];
     },
   },
   methodPresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     required: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "Mold Formed" }),
-          new Preset({ preset: "Pinched" }),
-          new Preset({ preset: "Slab Built" }),
-          new Preset({ preset: "Slip Cast" }),
-          new Preset({ preset: "Thrown and Altered" }),
-          new Preset({ preset: "Wheel Thrown" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "Mold Formed" }),
+        new Preset({ preset: "Pinched" }),
+        new Preset({ preset: "Slab Built" }),
+        new Preset({ preset: "Slip Cast" }),
+        new Preset({ preset: "Thrown and Altered" }),
+        new Preset({ preset: "Wheel Thrown" }),
+      ];
     },
   },
   materialPresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     required: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "Terracotta" }),
-          new Preset({ preset: "Ball Clay" }),
-          new Preset({ preset: "Earthenware" }),
-          new Preset({ preset: "Stoneware" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "Terracotta" }),
+        new Preset({ preset: "Ball Clay" }),
+        new Preset({ preset: "Earthenware" }),
+        new Preset({ preset: "Stoneware" }),
+      ];
     },
   },
   glazePresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     required: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "glaze1" }),
-          new Preset({ preset: "glaze2" }),
-          new Preset({ preset: "glaze3" }),
-          new Preset({ preset: "glaze4" }),
-          new Preset({ preset: "glaze5" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "glaze1" }),
+        new Preset({ preset: "glaze2" }),
+        new Preset({ preset: "glaze3" }),
+        new Preset({ preset: "glaze4" }),
+        new Preset({ preset: "glaze5" }),
+      ];
     },
   },
   underglazePresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     required: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "underglaze1" }),
-          new Preset({ preset: "underglaze2" }),
-          new Preset({ preset: "underglaze3" }),
-          new Preset({ preset: "underglaze4" }),
-          new Preset({ preset: "underglaze5" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "underglaze1" }),
+        new Preset({ preset: "underglaze2" }),
+        new Preset({ preset: "underglaze3" }),
+        new Preset({ preset: "underglaze4" }),
+        new Preset({ preset: "underglaze5" }),
+      ];
     },
   },
   slipPresets: {
-    type: PresetGroupSchema,
+    type: [PresetSchema],
     rquired: true,
     default: () => {
-      return {
-        presets: [
-          new Preset({ preset: "slip1" }),
-          new Preset({ preset: "slip2" }),
-          new Preset({ preset: "slip3" }),
-          new Preset({ preset: "slip4" }),
-          new Preset({ preset: "slip5" }),
-        ],
-      };
+      return [
+        new Preset({ preset: "slip1" }),
+        new Preset({ preset: "slip2" }),
+        new Preset({ preset: "slip3" }),
+        new Preset({ preset: "slip4" }),
+        new Preset({ preset: "slip5" }),
+      ];
     },
   },
-  artist: { type: PresetGroupSchema, required: false },
+  artist: { type: [PresetSchema], required: false },
 });
 
 const PieceDataPresets = mongoose.model(
