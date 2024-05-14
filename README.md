@@ -37,6 +37,7 @@ Kiln Trace is built on TypeScript, React.js, Tailwind, Node.js, Express.js, Mong
 I was inspired to make this application when my fiancee brought to my attention that there wasn't really an all encompassing, digital way to keep track of the work that goes on in a pottery studio. I decided to take that opportunity to create a system that would go above and beyond the needs she described, and serve as a nexus for all operations the would go on in a pottery studio.
 
 ## Visuals
+(Greyscale for the time being)
 ![dashboard](https://github.com/AdamCliff/Kiln-Trace/assets/70744076/8b82da5a-434d-48e2-93d1-3ed443aaf903)
 ![dialog](https://github.com/AdamCliff/Kiln-Trace/assets/70744076/f6ccde77-0839-4675-b8c7-87f867ea6e0d)
 ![glazeDropdown](https://github.com/AdamCliff/Kiln-Trace/assets/70744076/a9558d88-a857-4920-92aa-7d61ba335023)
