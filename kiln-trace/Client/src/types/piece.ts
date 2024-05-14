@@ -26,20 +26,12 @@ export interface Piece {
   width: number;
   dimensions?: number | undefined;
   notes: string;
-  // glaze: { inner?: string[]; outer?: string[] };
-  // underglaze: { inner?: string[]; outer?: string[] };
-  // slip: { inner?: string[]; outer?: string[] };
-  innerGlaze: /* Presets */ string[];
-  innerUnderglaze: /* Presets */ string[];
-  innerSlip: /* Presets */ string[];
-  outerGlaze: /* Presets */ string[];
-  outerUnderglaze: /* Presets */ string[];
-  outerSlip: /* Presets */ string[];
+  innerGlaze: string[];
+  innerUnderglaze: string[];
+  innerSlip: string[];
+  outerGlaze: string[];
+  outerUnderglaze: string[];
+  outerSlip: string[];
   __v: number;
   _id: string;
-}
-
-export interface GlazeLayer {
-  inner: string[];
-  outer: string[];
 }

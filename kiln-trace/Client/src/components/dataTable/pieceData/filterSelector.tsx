@@ -1,40 +1,60 @@
-import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
 
 import { usePresetsContext } from "@/context/presetsContext";
 import { PiecePresets } from "@/types/piecePresets";
 import FilterSelectItem from "./filterSelectItem";
+import { useFiltersContext } from "@/context/pieceFilterContext";
 
 function FilterSelector({
+  presetTarget,
   filterTarget,
+  presetCategory,
+  handleFilterChange,
 }: {
-  filterTarget:
+  presetTarget:
     | "formPresets"
     | "glazePresets"
     | "materialPresets"
     | "methodPresets"
     | "underglazePresets"
     | "slipPresets";
+  filterTarget:
+    | "formFilters"
+    | "glazeFilters"
+    | "materialFilters"
+    | "methodFilters"
+    | "underglazeFilters"
+    | "slipFilters";
+  presetCategory: string;
+  handleFilterChange: (id: string, value: string) => void;
 }) {
-  const { presets }: { presets: PiecePresets | undefined; dispatch: any } =
+  const { presets }: { presets: PiecePresets | undefined } =
     usePresetsContext();
+  const { filters } = useFiltersContext();
 
-  const targetPresets = presets?.[filterTarget];
+  const targetPresets = presets?.[presetTarget];
 
-  // console.log(targetPresets);
-  // targetPresets?.map((preset) => {
-  //   console.log(preset);
-  //   console.log(typeof preset);
-  //   console.log(preset.preset);
-  //   console.log(typeof preset.preset);
-  // });
+  const [selectedFilters, setSelectedFilters] = useState<string>(
+    (filters as any)?.[filterTarget]
+  );
+
+  useEffect(() => {
+    handleFilterChange(presetCategory, selectedFilters);
+  }, [selectedFilters]);
 
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-1 w-full">
         {targetPresets &&
           targetPresets.map((preset) => {
-            const presetName = preset.preset;
-            return <FilterSelectItem key={preset._id} preset={preset} />;
+            return (
+              <FilterSelectItem
+                key={preset._id}
+                preset={preset}
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+              />
+            );
           })}
       </div>
     </>

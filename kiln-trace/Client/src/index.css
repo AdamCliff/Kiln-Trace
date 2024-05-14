@@ -97,6 +97,9 @@ body {
   input[type="number"]::-webkit-outer-spin-button {
     @apply appearance-none;
   }
+  .scroll-hidden::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* @keyframes collapsibleSlideDown {

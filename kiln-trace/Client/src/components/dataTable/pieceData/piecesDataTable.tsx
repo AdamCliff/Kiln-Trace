@@ -43,6 +43,8 @@ import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
 import DataTableRow from "@/components/dataTable/pieceData/dataTableRow";
 import Filters from "./filters";
 import FilterPopover from "./filterPopover";
+import { useFiltersContext } from "@/context/pieceFilterContext";
+import useFiltersState from "@/hooks/useFilterState";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,6 +58,9 @@ function PiecesDataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const { dispatch } = usePieceContext();
+  const { filters, dispatch: filtersDispatch } = useFiltersContext();
+
+  const { filters: filterState, updateFilters } = useFiltersState();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -113,7 +118,24 @@ function PiecesDataTable<TData, TValue>({
     };
   }, []); // Empty dependency array ensures the effect runs only once
 
-  // console.log(columnFilters);
+  // useEffect(() => {
+  //   console.log(columnFilters);
+  // }, [columnFilters]);
+
+  // console.log("filters");
+  // console.log(filters);
+  // console.log("filterState");
+  // console.log(filterState);
+
+  useEffect(() => {
+    console.log("effect filter state");
+    console.log(filterState);
+  }, [filterState]);
+
+  useEffect(() => {
+    console.log("effect filters context");
+    console.log(filters);
+  }, [filters]);
 
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
@@ -131,13 +153,14 @@ function PiecesDataTable<TData, TValue>({
             }}
             className="w-96 rounded shadow-inset-custom border-none"
           />
-          <Filters
+          {/* <Filters
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
-          />
+          /> */}
           <FilterPopover
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
+            filtersDispatch={filtersDispatch}
           />
           <div>date range picker</div>
         </div>

@@ -23,7 +23,7 @@ const PieceDataPresetsSchema = new Schema({
     required: true,
     default: () => {
       return [
-        new Preset({ preset: "bowl" }),
+        new Preset({ preset: "Bowl" }),
         new Preset({ preset: "Coffee Cup" }),
         new Preset({ preset: "Jar" }),
         new Preset({ preset: "Mug" }),
