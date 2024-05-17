@@ -10,6 +10,8 @@ declare module "@tanstack/react-table" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
     custom: FilterFn<unknown>;
+    globalFuzzy: FilterFn<unknown>;
+    orFuzzy: FilterFn<unknown>;
   }
   interface FilterMeta {
     itemRank: RankingInfo;
@@ -54,6 +56,56 @@ export const customFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 
   // rank the Item
   const itemRank = rankItem(joinedCells, value);
+
+  // store the itemRank info
+  addMeta({ itemRank });
+
+  // return if the item should be filtered in/out
+  return itemRank.passed;
+};
+
+export const orLogicFuzzyFilter: FilterFn<any> = (
+  row,
+  columnId,
+  value,
+  addMeta
+) => {
+  console.log(row.getValue(columnId));
+
+  // rank the Item
+  const itemRank = rankItem(row.getValue(columnId), value);
+
+  if (
+    !itemRank.passed &&
+    row.original?.[columnId] !== "" &&
+    value.includes(row.original?.[columnId])
+  ) {
+    itemRank.passed = true;
+  }
+
+  // store the itemRank info
+  addMeta({ itemRank });
+
+  // return if the item should be filtered in/out
+  return itemRank.passed;
+};
+
+export const globalFuzzyFilter: FilterFn<any> = (
+  row,
+  columnId,
+  value,
+  addMeta
+) => {
+  // rank the Item
+  const itemRank = rankItem(row.getValue(columnId), value);
+
+  if (
+    !itemRank.passed &&
+    row.original?.[columnId] !== "" &&
+    value.includes(row.original?.[columnId])
+  ) {
+    itemRank.passed = true;
+  }
 
   // store the itemRank info
   addMeta({ itemRank });

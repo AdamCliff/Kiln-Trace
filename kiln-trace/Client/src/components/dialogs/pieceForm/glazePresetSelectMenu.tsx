@@ -54,7 +54,10 @@ function GlazePresetSelectMenu({
         <SelectTrigger className="w-full min-w-40 select-field !font-semibold">
           <SelectValue placeholder="Add Layer" />
         </SelectTrigger>
-        <SelectContent onCloseAutoFocus={(e) => e.preventDefault()}>
+        <SelectContent
+          onCloseAutoFocus={(e) => e.preventDefault()}
+          className="rounded"
+        >
           {presetsList.map((preset) => {
             const { preset: presetValue } = preset;
             return (

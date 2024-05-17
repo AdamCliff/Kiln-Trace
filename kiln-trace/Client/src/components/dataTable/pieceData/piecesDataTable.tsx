@@ -36,7 +36,12 @@ import {
   handleDeletePiece,
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
-import { fuzzyFilter, customFilter } from "@/helpers/tableFilterFunctions";
+import {
+  fuzzyFilter,
+  customFilter,
+  globalFuzzyFilter,
+  orLogicFuzzyFilter,
+} from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
@@ -60,12 +65,13 @@ function PiecesDataTable<TData, TValue>({
   const { dispatch } = usePieceContext();
   const { filters, dispatch: filtersDispatch } = useFiltersContext();
 
-  const { filters: filterState, updateFilters } = useFiltersState();
+  // const { filters: filterState, updateFilters } = useFiltersState();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
-  // const [customFilter, setCustomFilter] = useState<any>("");
+  const [globalSearch, setGlobalSearch] = useState("");
+  const [selectFilter, setSelectFilter] = useState("");
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [isRowListType, setIsRowListType] = useState<boolean>(true);
@@ -82,9 +88,12 @@ function PiecesDataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    globalFilterFn: globalFuzzyFilter,
     filterFns: {
       fuzzy: fuzzyFilter,
       custom: customFilter,
+      globalFuzzy: globalFuzzyFilter,
+      orFuzzy: orLogicFuzzyFilter,
     },
     state: {
       sorting,
@@ -118,24 +127,12 @@ function PiecesDataTable<TData, TValue>({
     };
   }, []); // Empty dependency array ensures the effect runs only once
 
-  // useEffect(() => {
-  //   console.log(columnFilters);
-  // }, [columnFilters]);
-
-  // console.log("filters");
-  // console.log(filters);
-  // console.log("filterState");
-  // console.log(filterState);
-
+  // handle global filter updates from both select dropdown and search bar
   useEffect(() => {
-    console.log("effect filter state");
-    console.log(filterState);
-  }, [filterState]);
-
-  useEffect(() => {
-    console.log("effect filters context");
-    console.log(filters);
-  }, [filters]);
+    setGlobalFilter(
+      `${selectFilter ? selectFilter : ""}${globalSearch ? `${selectFilter ? "," : ""}` + globalSearch : ""}`
+    );
+  }, [globalSearch, selectFilter]);
 
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
@@ -146,23 +143,21 @@ function PiecesDataTable<TData, TValue>({
         <div className="flex items-center justify-center gap-4">
           <Input
             id="globalFilter"
-            placeholder="Search all columns..."
-            value={globalFilter ?? ""}
+            placeholder="Search..."
+            value={globalSearch ?? ""}
             onChange={(e) => {
-              setGlobalFilter(String(e.target.value));
+              setGlobalSearch(String(e.target.value));
             }}
             className="w-96 rounded shadow-inset-custom border-none"
           />
-          {/* <Filters
-            columnFilters={columnFilters}
-            setColumnFilters={setColumnFilters}
-          /> */}
           <FilterPopover
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
+            selectFilter={selectFilter}
+            setSelectFilters={setSelectFilter}
             filtersDispatch={filtersDispatch}
           />
-          <div>date range picker</div>
+          <div>{globalFilter}</div>
         </div>
 
         {isRowListType && (

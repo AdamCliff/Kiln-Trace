@@ -224,6 +224,52 @@ PieceSchema.virtual("date").get(function () {
   return date;
 });
 
+PieceSchema.virtual("glazes").get(function () {
+  let glazeList = "";
+  if (this.innerGlaze)
+    this.innerGlaze.forEach((glaze) =>
+      glaze ? (glazeList += `${glazeList && ","}${glaze}`) : ""
+    );
+  if (this.outerGlaze)
+    this.outerGlaze.forEach((glaze) =>
+      glaze ? (glazeList += `${glazeList && ","}${glaze}`) : ""
+    );
+  // console.log(glazeList);
+  return glazeList;
+});
+
+PieceSchema.virtual("underglazes").get(function () {
+  let underglazeList = "";
+  if (this.innerUnderglaze)
+    this.innerUnderglaze.forEach((underglaze) =>
+      underglaze
+        ? (underglazeList += `${underglazeList && ","}${underglaze}`)
+        : ""
+    );
+  if (this.outerUnderglaze)
+    this.outerUnderglaze.forEach((underglaze) =>
+      underglaze
+        ? (underglazeList += `${underglazeList && ","}${underglaze}`)
+        : ""
+    );
+  console.log(underglazeList);
+  return underglazeList;
+});
+
+PieceSchema.virtual("slips").get(function () {
+  let slipList = "";
+  if (this.innerSlip)
+    this.innerSlip.forEach((slip) =>
+      slip ? (slipList += `${slipList && ","}${slip}`) : ""
+    );
+  if (this.outerSlip)
+    this.outerSlip.forEach((slip) =>
+      slip ? (slipList += `${slipList && ","}${slip}`) : ""
+    );
+  console.log(slipList);
+  return slipList;
+});
+
 const Piece = mongoose.model("piece", PieceSchema);
 
 module.exports = Piece;

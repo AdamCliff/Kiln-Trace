@@ -1,17 +1,11 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -20,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Switch } from "@/components/dataTable/pieceData/filterSwitch";
 import { ColumnFiltersState } from "@tanstack/react-table";
 
 import FilterSelector from "./filterSelector";
@@ -29,23 +24,37 @@ import { Filters } from "@/types/filters";
 function FilterPopover({
   columnFilters,
   setColumnFilters,
+  selectFilter,
+  setSelectFilters,
   filtersDispatch,
 }: {
   columnFilters: ColumnFiltersState;
   setColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  selectFilter: string;
+  setSelectFilters: React.Dispatch<React.SetStateAction<string>>;
   filtersDispatch: React.Dispatch<any>;
 }) {
-  const onFilterChange = (id: string, value: string) => {
-    setColumnFilters((prev) =>
-      prev.filter((f) => f.id !== id).concat({ id, value })
-    );
-    filtersDispatch({
-      type: filterActionTypes.UPDATE_CURRENT_FILTERS,
-      payload: { [`${id}Filters`]: value },
-    });
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isAny, setIsAny] = useState<boolean>(isChecked);
+
+  const onCheckedChange = () => {
+    let check = !isChecked;
+    setIsChecked(check);
+    setIsAny(check);
   };
 
-  console.log(columnFilters);
+  const onFilterChange = (id: string, value: string) => {
+    if (!isAny || id === "glaze" || id === "underglaze" || id === "slip")
+      setSelectFilters(value);
+    if (isAny)
+      setColumnFilters((prev) =>
+        prev.filter((f) => f.id !== id).concat({ id, value })
+      );
+    // filtersDispatch({
+    //   type: filterActionTypes.UPDATE_CURRENT_FILTERS,
+    //   payload: { [`${id}Filters`]: value },
+    // });
+  };
 
   return (
     <>
@@ -67,11 +76,11 @@ function FilterPopover({
           </svg>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-background rounded shadow-custom w-fit min-w-48 h-fit max-h-[32rem] pb-2 space-y-2 overflow-scroll overflow-x-hidden scroll-hidden">
-          <Accordion
-            type="multiple"
-            className="w-full min-w-48" /* defaultValue={`${columnFilters.}`} */
-          >
-            <DropdownMenuLabel>Filter By...</DropdownMenuLabel>
+          <Accordion type="multiple" className="w-full min-w-48">
+            <div className="flex justify-between items-center">
+              <DropdownMenuLabel>Filter By...</DropdownMenuLabel>
+              <Switch checked={isChecked} onCheckedChange={onCheckedChange} />
+            </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={(e) => e.preventDefault()}
@@ -87,6 +96,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="formPresets"
                       filterTarget="formFilters"
@@ -111,6 +121,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="methodPresets"
                       filterTarget="methodFilters"
@@ -135,6 +146,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="materialPresets"
                       filterTarget="materialFilters"
@@ -159,6 +171,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="glazePresets"
                       filterTarget="glazeFilters"
@@ -183,6 +196,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="underglazePresets"
                       filterTarget="underglazeFilters"
@@ -207,6 +221,7 @@ function FilterPopover({
                   </AccordionTrigger>
                   <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
                     <FilterSelector
+                      isAny={isAny}
                       handleFilterChange={onFilterChange}
                       presetTarget="slipPresets"
                       filterTarget="slipFilters"

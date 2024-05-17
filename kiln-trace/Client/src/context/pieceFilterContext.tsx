@@ -69,8 +69,8 @@ export const filtersReducer = (
       return {};
     }
     case filterActionTypes.UPDATE_CURRENT_FILTERS: {
-      console.log("dispatch update");
-      console.log(action.payload);
+      // console.log("dispatch update");
+      // console.log(action.payload);
       return {
         filters: {
           ...state.filters,

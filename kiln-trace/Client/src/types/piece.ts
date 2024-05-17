@@ -32,6 +32,9 @@ export interface Piece {
   outerGlaze: string[];
   outerUnderglaze: string[];
   outerSlip: string[];
+  glazes?: string;
+  underglazes?: string;
+  slips?: string;
   __v: number;
   _id: string;
 }

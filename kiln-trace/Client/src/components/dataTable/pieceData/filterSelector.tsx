@@ -4,13 +4,16 @@ import { usePresetsContext } from "@/context/presetsContext";
 import { PiecePresets } from "@/types/piecePresets";
 import FilterSelectItem from "./filterSelectItem";
 import { useFiltersContext } from "@/context/pieceFilterContext";
+import { RadioGroup } from "@/components/ui/radio-group";
 
 function FilterSelector({
+  isAny,
   presetTarget,
   filterTarget,
   presetCategory,
   handleFilterChange,
 }: {
+  isAny: boolean;
   presetTarget:
     | "formPresets"
     | "glazePresets"
@@ -50,7 +53,9 @@ function FilterSelector({
             return (
               <FilterSelectItem
                 key={preset._id}
+                isAny={isAny}
                 preset={preset}
+                presetCategory={presetCategory}
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
               />

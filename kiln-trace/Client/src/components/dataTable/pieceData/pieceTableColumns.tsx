@@ -154,7 +154,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   {
     accessorKey: "glaze",
     accessorFn: (row) => {
-      return [...row.innerGlaze, ...row.outerGlaze];
+      return row.glazes;
     },
     header: "Glaze",
     cell: ({ row }) => {
@@ -180,14 +180,14 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </>
       );
     },
-    filterFn: "custom",
+    filterFn: "orFuzzy",
     enableGlobalFilter: true,
     enableColumnFilter: true,
   },
   {
     accessorKey: "underglaze",
     accessorFn: (row) => {
-      return [...row.innerUnderglaze, ...row.outerUnderglaze];
+      return row.underglazes;
     },
     header: "Underglaze",
     cell: ({ row }) => {
@@ -213,14 +213,14 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </>
       );
     },
-    filterFn: "custom",
-    // filterFn: "custom",
+    filterFn: "orFuzzy",
+    enableColumnFilter: true,
     enableGlobalFilter: true,
   },
   {
     accessorKey: "slip",
     accessorFn: (row) => {
-      return [...row.innerSlip, ...row.outerSlip];
+      return row.slips;
     },
     header: "Slip",
     cell: ({ row }) => {
@@ -246,7 +246,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
         </>
       );
     },
-    filterFn: "custom",
+    filterFn: "orFuzzy",
     enableColumnFilter: true,
     enableGlobalFilter: true,
   },
