@@ -35,7 +35,7 @@ function PieceListHeader() {
         </h2>
         <div className="absolute top-1/2 left-2/4 -translate-y-1/2 -translate-x-1/2">
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger>
+            <DialogTrigger className="shadow-custom">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

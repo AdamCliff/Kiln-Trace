@@ -61,6 +61,9 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "date",
+    accessorFn: (row) => {
+      return row.date;
+    },
     header: ({ column }) => {
       return (
         <Button
@@ -76,6 +79,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
       return <>{row.original.date && format(row.original.date, "MM/dd/yy")}</>;
     },
     sortingFn: "datetime",
+    filterFn: "dateRange",
   },
   {
     accessorKey: "title",
@@ -139,6 +143,9 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "weight",
+    accessorFn: (row) => {
+      return row.weight + "";
+    },
     header: "Weight",
     cell: ({ row }) => {
       return <>{row.original.weight ? row.original.weight : ""}</>;
@@ -146,6 +153,9 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "dimensions",
+    accessorFn: (row) => {
+      return row.dimensions;
+    },
     header: "Dimensions",
     cell: ({ row }) => {
       return <>{row.original.dimensions}</>;

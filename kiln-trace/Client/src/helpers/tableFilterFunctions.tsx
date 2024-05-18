@@ -9,9 +9,9 @@ import {
 declare module "@tanstack/react-table" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
-    custom: FilterFn<unknown>;
     globalFuzzy: FilterFn<unknown>;
     orFuzzy: FilterFn<unknown>;
+    dateRange: FilterFn<unknown>;
   }
   interface FilterMeta {
     itemRank: RankingInfo;
@@ -42,26 +42,6 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, ColumnId) => {
 
   // provide an alphanumeric fallback for when the item ranks are equal
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, ColumnId) : dir;
-};
-
-export const customFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-  // get cell value
-  const cellValue = row.getValue(columnId);
-  let joinedCells;
-
-  // if the cell is an array, join cells as string for ranking
-  if (Array.isArray(cellValue)) {
-    joinedCells = cellValue.map((index) => index).join(" ");
-  }
-
-  // rank the Item
-  const itemRank = rankItem(joinedCells, value);
-
-  // store the itemRank info
-  addMeta({ itemRank });
-
-  // return if the item should be filtered in/out
-  return itemRank.passed;
 };
 
 export const orLogicFuzzyFilter: FilterFn<any> = (
@@ -99,13 +79,43 @@ export const globalFuzzyFilter: FilterFn<any> = (
   // rank the Item
   const itemRank = rankItem(row.getValue(columnId), value);
 
+  // normalize filter value and column value to check without case sensitivity
+  let normalizedValue = value.toLowerCase();
+  let normalizedColValue = (row.getValue(columnId) as string)?.toLowerCase();
+
+  // adjust passing boolean based on the column value's inclusion as a substring in the filter value
   if (
     !itemRank.passed &&
     row.original?.[columnId] !== "" &&
-    value.includes(row.original?.[columnId])
+    normalizedColValue !== "" &&
+    normalizedValue.includes(normalizedColValue)
   ) {
     itemRank.passed = true;
   }
+
+  // store the itemRank info
+  addMeta({ itemRank });
+
+  // return if the item should be filtered in/out
+  return itemRank.passed;
+};
+
+export const dateRangeFilter: FilterFn<any> = (
+  row,
+  columnId,
+  value,
+  addMeta
+) => {
+  // rank the Item
+  const itemRank = rankItem(row.getValue(columnId), value);
+
+  // get current date, date of piece, and target date range bound
+  let today = new Date();
+  let pieceDate = new Date(row.getValue(columnId));
+  let dateRange = new Date(value);
+
+  // if the piece date is between the current and bound dates, set passed to true
+  if (pieceDate >= dateRange && pieceDate <= today) itemRank.passed = true;
 
   // store the itemRank info
   addMeta({ itemRank });

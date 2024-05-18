@@ -50,16 +50,16 @@ function FilterPopover({
       setColumnFilters((prev) =>
         prev.filter((f) => f.id !== id).concat({ id, value })
       );
-    // filtersDispatch({
-    //   type: filterActionTypes.UPDATE_CURRENT_FILTERS,
-    //   payload: { [`${id}Filters`]: value },
-    // });
+    filtersDispatch({
+      type: filterActionTypes.UPDATE_CURRENT_FILTERS,
+      payload: { [`${id}Filters`]: value },
+    });
   };
 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="bg-background rounded p-2">
+        <DropdownMenuTrigger className="bg-background rounded p-2 shadow-custom">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

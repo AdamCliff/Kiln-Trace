@@ -45,7 +45,7 @@ const createPiece = async (req, res) => {
     notes,
   } = req.body;
 
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const piece = await Piece.create({

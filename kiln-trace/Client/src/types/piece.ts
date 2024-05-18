@@ -24,7 +24,7 @@ export interface Piece {
   height: number;
   pieceLength: number;
   width: number;
-  dimensions?: number | undefined;
+  dimensions?: string;
   notes: string;
   innerGlaze: string[];
   innerUnderglaze: string[];

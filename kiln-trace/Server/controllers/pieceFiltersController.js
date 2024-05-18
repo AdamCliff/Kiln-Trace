@@ -23,7 +23,7 @@ const createFilters = async (req, res) => {
       artistFilters,
     } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const filters = await Filters.create({
       formFilters,

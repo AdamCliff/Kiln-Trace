@@ -37,8 +37,8 @@ import {
   handleEditPiece,
 } from "@/helpers/pieceHelperFunctions";
 import {
+  dateRangeFilter,
   fuzzyFilter,
-  customFilter,
   globalFuzzyFilter,
   orLogicFuzzyFilter,
 } from "@/helpers/tableFilterFunctions";
@@ -46,10 +46,9 @@ import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
 import DataTableCard from "@/components/dataTable/pieceData/dataTableCard";
 import DataTableRow from "@/components/dataTable/pieceData/dataTableRow";
-import Filters from "./filters";
 import FilterPopover from "./filterPopover";
+import DateRangeDropdown from "./dateRangeDropdown";
 import { useFiltersContext } from "@/context/pieceFilterContext";
-import useFiltersState from "@/hooks/useFilterState";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,8 +63,6 @@ function PiecesDataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { dispatch } = usePieceContext();
   const { filters, dispatch: filtersDispatch } = useFiltersContext();
-
-  // const { filters: filterState, updateFilters } = useFiltersState();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -91,9 +88,9 @@ function PiecesDataTable<TData, TValue>({
     globalFilterFn: globalFuzzyFilter,
     filterFns: {
       fuzzy: fuzzyFilter,
-      custom: customFilter,
       globalFuzzy: globalFuzzyFilter,
       orFuzzy: orLogicFuzzyFilter,
+      dateRange: dateRangeFilter,
     },
     state: {
       sorting,
@@ -157,7 +154,7 @@ function PiecesDataTable<TData, TValue>({
             setSelectFilters={setSelectFilter}
             filtersDispatch={filtersDispatch}
           />
-          <div>{globalFilter}</div>
+          <DateRangeDropdown setColumnFilters={setColumnFilters} />
         </div>
 
         {isRowListType && (
@@ -192,7 +189,7 @@ function PiecesDataTable<TData, TValue>({
           </DropdownMenu>
         )}
         <Switch
-          className="justify-self-end bg-accent ml-4"
+          className="justify-self-end bg-accent ml-4 shadow-custom"
           checked={!isRowListType}
           onCheckedChange={() => {
             setIsRowListType(!isRowListType);

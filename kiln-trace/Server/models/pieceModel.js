@@ -196,10 +196,12 @@ const PieceSchema = new Schema(
 
 // dimensions field calculation
 PieceSchema.virtual("dimensions").get(function () {
-  if (this.pieceLength > 0 || this.width > 0 || this.height > 0)
+  if (this.pieceLength > 0 || this.width > 0 || this.height > 0) {
     return `${this.pieceLength > 0 ? this.pieceLength : "-"} x ${
       this.width > 0 ? this.width : "-"
     } x ${this.height > 0 ? this.height : "-"}`;
+  }
+  return "";
 });
 
 // stage field calculation
@@ -252,7 +254,7 @@ PieceSchema.virtual("underglazes").get(function () {
         ? (underglazeList += `${underglazeList && ","}${underglaze}`)
         : ""
     );
-  console.log(underglazeList);
+  // console.log(underglazeList);
   return underglazeList;
 });
 
@@ -266,7 +268,7 @@ PieceSchema.virtual("slips").get(function () {
     this.outerSlip.forEach((slip) =>
       slip ? (slipList += `${slipList && ","}${slip}`) : ""
     );
-  console.log(slipList);
+  // console.log(slipList);
   return slipList;
 });
 
