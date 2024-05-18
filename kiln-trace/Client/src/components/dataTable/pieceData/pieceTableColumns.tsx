@@ -116,11 +116,25 @@ export const pieceColumns: ColumnDef<Piece>[] = [
   },
   {
     accessorKey: "stage",
-    header: "Stage",
+    accessorFn: (row) => {
+      return row.stage;
+    },
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Stage
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return <>{row.original.stage}</>;
     },
     filterFn: "fuzzy",
+    sortingFn: "stage",
     enableGlobalFilter: true,
   },
   {

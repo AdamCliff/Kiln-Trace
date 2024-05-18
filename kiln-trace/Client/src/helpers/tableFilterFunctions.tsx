@@ -13,6 +13,9 @@ declare module "@tanstack/react-table" {
     orFuzzy: FilterFn<unknown>;
     dateRange: FilterFn<unknown>;
   }
+  interface SortingFns {
+    stage: SortingFn<unknown>;
+  }
   interface FilterMeta {
     itemRank: RankingInfo;
   }
@@ -39,6 +42,51 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, ColumnId) => {
       rowB.columnFiltersMeta[ColumnId]?.itemRank!
     );
   }
+
+  // provide an alphanumeric fallback for when the item ranks are equal
+  return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, ColumnId) : dir;
+};
+
+export const stageSort: SortingFn<any> = (rowA, rowB, ColumnId) => {
+  let dir = 0;
+
+  // create vars for row values and ranks
+  const rowAValue = rowA.getValue(ColumnId);
+  const rowBValue = rowB.getValue(ColumnId);
+  let rowARank = 0;
+  let rowBRank = 0;
+
+  // assign numeric value to rows for custom ranking criteria
+  const rankRow = (value: any) => {
+    switch (value) {
+      case "Formed": {
+        return 1;
+      }
+      case "Trimmed": {
+        return 2;
+      }
+      case "Bisqued": {
+        return 3;
+      }
+      case "Glazed": {
+        return 4;
+      }
+      case "Fired": {
+        return 5;
+      }
+      default: {
+        return 0;
+      }
+    }
+  };
+
+  // assign ranks
+  rowARank = rankRow(rowAValue);
+  rowBRank = rankRow(rowBValue);
+
+  // assign dir based on ranks
+  if (rowARank > rowBRank) dir = -1;
+  if (rowARank < rowBRank) dir = 1;
 
   // provide an alphanumeric fallback for when the item ranks are equal
   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, ColumnId) : dir;

@@ -41,6 +41,7 @@ import {
   fuzzyFilter,
   globalFuzzyFilter,
   orLogicFuzzyFilter,
+  stageSort,
 } from "@/helpers/tableFilterFunctions";
 import { Piece } from "@/types/piece";
 import { usePieceContext } from "@/context/piecesContext";
@@ -93,6 +94,9 @@ function PiecesDataTable<TData, TValue>({
       globalFuzzy: globalFuzzyFilter,
       orFuzzy: orLogicFuzzyFilter,
       dateRange: dateRangeFilter,
+    },
+    sortingFns: {
+      stage: stageSort,
     },
     state: {
       sorting,

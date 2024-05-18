@@ -82,6 +82,32 @@ function FilterPopover({
               <Switch checked={isChecked} onCheckedChange={onCheckedChange} />
             </div>
             <DropdownMenuSeparator />
+            {/* NEED TO CREATE STAGE PRESETS FOR THIS TO WORK */}
+            {/* <DropdownMenuItem
+              onClick={(e) => e.preventDefault()}
+              className="p-0 rounded focus:!bg-background hover:!outline-none"
+            >
+              <div className="w-full min-w-48 mx-1">
+                <AccordionItem
+                  value="stage-filter"
+                  className="border-none focus:bg-none hover:bg-none"
+                >
+                  <AccordionTrigger className="accordian-trigger !py-1 !px-2 !bg-opacity-100 w-full focus:bg-none hover:bg-none">
+                    Stage
+                  </AccordionTrigger>
+                  <AccordionContent className="accordian-content w-full rounded-b focus:bg-none hover:bg-none">
+                    <FilterSelector
+                      isAny={isAny}
+                      handleFilterChange={onFilterChange}
+                      presetTarget="stagePresets"
+                      filterTarget="stageFilters"
+                      presetCategory="stage"
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator /> */}
             <DropdownMenuItem
               onClick={(e) => e.preventDefault()}
               className="p-0 rounded focus:!bg-background hover:!outline-none"
