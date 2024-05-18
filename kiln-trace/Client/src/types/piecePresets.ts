@@ -4,6 +4,7 @@ export interface Preset {
 }
 
 export interface PiecePresets {
+  stagePresets: Preset[];
   formPresets: Preset[];
   methodPresets: Preset[];
   materialPresets: Preset[];

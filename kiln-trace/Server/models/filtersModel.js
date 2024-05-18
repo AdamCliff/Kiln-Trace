@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FiltersSchema = new Schema({
+  stageFilters: {
+    type: String,
+    required: false,
+  },
   formFilters: {
     type: String,
     required: false,

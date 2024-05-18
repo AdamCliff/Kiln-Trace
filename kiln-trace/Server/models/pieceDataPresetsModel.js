@@ -18,6 +18,19 @@ const Preset = mongoose.model("preset", PresetSchema);
 // });
 
 const PieceDataPresetsSchema = new Schema({
+  stagePresets: {
+    type: [PresetSchema],
+    required: true,
+    default: () => {
+      return [
+        new Preset({ preset: "Formed" }),
+        new Preset({ preset: "Trimmed" }),
+        new Preset({ preset: "Bisqued" }),
+        new Preset({ preset: "Glazed" }),
+        new Preset({ preset: "Fired" }),
+      ];
+    },
+  },
   formPresets: {
     type: [PresetSchema],
     required: true,

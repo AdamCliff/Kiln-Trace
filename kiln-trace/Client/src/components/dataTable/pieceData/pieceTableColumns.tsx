@@ -135,6 +135,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
     },
     filterFn: "fuzzy",
     sortingFn: "stage",
+    enableColumnFilter: true,
     enableGlobalFilter: true,
   },
   {

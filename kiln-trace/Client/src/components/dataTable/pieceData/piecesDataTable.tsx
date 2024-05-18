@@ -137,8 +137,6 @@ function PiecesDataTable<TData, TValue>({
     );
   }, [globalSearch, selectFilter]);
 
-  console.log(table.getState().sorting);
-
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
       <div

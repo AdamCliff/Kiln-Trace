@@ -5,6 +5,7 @@ import { Filters } from "@/types/filters";
 
 const initialState = {
   filters: {
+    stageFilters: "",
     formFilters: "",
     methodFilters: "",
     materialFilters: "",
@@ -14,9 +15,6 @@ const initialState = {
     artistFilters: "",
   } as Filters,
 };
-// const initialState = {
-//   filters: {} as Filters,
-// };
 
 type FiltersContextValue = {
   filters: Filters | undefined;

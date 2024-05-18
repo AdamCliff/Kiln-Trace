@@ -83,7 +83,7 @@ function FilterPopover({
             </div>
             <DropdownMenuSeparator />
             {/* NEED TO CREATE STAGE PRESETS FOR THIS TO WORK */}
-            {/* <DropdownMenuItem
+            <DropdownMenuItem
               onClick={(e) => e.preventDefault()}
               className="p-0 rounded focus:!bg-background hover:!outline-none"
             >
@@ -107,7 +107,7 @@ function FilterPopover({
                 </AccordionItem>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuSeparator /> */}
+            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={(e) => e.preventDefault()}
               className="p-0 rounded focus:!bg-background hover:!outline-none"

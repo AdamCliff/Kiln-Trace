@@ -1,4 +1,5 @@
 export interface Filters {
+  stageFilters: string;
   formFilters: string;
   methodFilters: string;
   materialFilters: string;

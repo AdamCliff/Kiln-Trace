@@ -15,6 +15,7 @@ function FilterSelector({
 }: {
   isAny: boolean;
   presetTarget:
+    | "stagePresets"
     | "formPresets"
     | "glazePresets"
     | "materialPresets"
@@ -22,6 +23,7 @@ function FilterSelector({
     | "underglazePresets"
     | "slipPresets";
   filterTarget:
+    | "stageFilters"
     | "formFilters"
     | "glazeFilters"
     | "materialFilters"
