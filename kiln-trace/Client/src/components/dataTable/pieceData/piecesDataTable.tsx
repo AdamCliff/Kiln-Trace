@@ -64,7 +64,9 @@ function PiecesDataTable<TData, TValue>({
   const { dispatch } = usePieceContext();
   const { filters, dispatch: filtersDispatch } = useFiltersContext();
 
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "date", desc: true },
+  ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [globalSearch, setGlobalSearch] = useState("");
@@ -130,6 +132,8 @@ function PiecesDataTable<TData, TValue>({
       `${selectFilter ? selectFilter : ""}${globalSearch ? `${selectFilter ? "," : ""}` + globalSearch : ""}`
     );
   }, [globalSearch, selectFilter]);
+
+  console.log(table.getState().sorting);
 
   return (
     <div className="flex flex-col rounded shadow-custom mt-4 overflow-hidden">
