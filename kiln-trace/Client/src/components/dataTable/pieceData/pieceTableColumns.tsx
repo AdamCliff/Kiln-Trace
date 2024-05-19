@@ -68,6 +68,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
       return (
         <Button
           variant="ghost"
+          className="pl-0 items-center justify-start"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
@@ -123,6 +124,7 @@ export const pieceColumns: ColumnDef<Piece>[] = [
       return (
         <Button
           variant="ghost"
+          className="pl-0 items-center justify-start"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Stage
