@@ -12,11 +12,11 @@ function Navbar() {
     <>
       <nav
         id="navbar"
-        className="flex items-center justify-start flex-col h-full w-[10%] p-4 bg-accent shadow-primary shadow-[inset_-10px_0px_15px_-12px_#00000024]"
+        className="flex items-center justify-start flex-col h-full w-[10%] p-4 bg-accent shadow-primary shadow-[inset_-10px_0px_15px_-12px_#00000024] md:w-full md:h-fit md:flex-row md:justify-evenly"
       >
         <header
           id="nav-header"
-          className="flex items-center justify-between w-full h-[7.5%] p-2 border-b border-primary"
+          className="flex items-center justify-between w-full h-[7.5%] p-2 border-b border-primary md:border-none md:w-fit md:whitespace-nowrap"
         >
           <h2
             id="nav-header-title"
@@ -27,7 +27,7 @@ function Navbar() {
         </header>
         <div
           id="nav-routes"
-          className="flex items-start justify-between flex-col w-full h-[15%] py-4 border-b border-primary"
+          className="flex items-start justify-between flex-col w-full h-[15%] py-4 border-b border-primary md:border-none md:flex-row md:h-full md:justify-center md:gap-4"
         >
           <NavLink
             to={"/pieces"}
@@ -57,7 +57,7 @@ function Navbar() {
             <span className="z-10 pointer-events-none">Schedules</span>
           </NavLink>
         </div>
-        <div
+        {/* <div
           id="nav-saved-sorts"
           className="flex items-start justify-start flex-col gap-4 w-full py-8 px-2 border-b border-primary"
         >
@@ -84,35 +84,11 @@ function Navbar() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        </div>
+        </div> */}
         <div
           id="account-management"
-          className="flex items-center justify-around w-full mt-auto py-6"
+          className="flex items-center justify-around w-full mt-auto py-6 md:p-0 md:m-0 md:justify-center md:gap-4 md:w-fit"
         >
-          <div className="flex flex-col items-center justify-center gap-2">
-            <button
-              id="profile-open-btn"
-              className="bg-primary bg-opacity-80 rounded-full shadow-custom-lg"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.25"
-                stroke="currentColor"
-                className="w-10 h-10 stroke-text"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-            </button>
-            <span className="text-text text-opacity-90 font-semibold text-sm pointer-events-none">
-              Profile
-            </span>
-          </div>
           <div className="flex flex-col items-center justify-center gap-2">
             <button
               id="settings-open-btn"
@@ -138,9 +114,33 @@ function Navbar() {
                 />
               </svg>
             </button>
-            <span className="text-text text-opacity-90 font-semibold text-sm pointer-events-none">
+            {/* <span className="text-text text-opacity-90 font-semibold text-sm pointer-events-none">
               Settings
-            </span>
+            </span> */}
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <button
+              id="profile-open-btn"
+              className="bg-primary bg-opacity-80 rounded-full shadow-custom-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.25"
+                stroke="currentColor"
+                className="w-10 h-10 stroke-text"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </button>
+            {/* <span className="text-text text-opacity-90 font-semibold text-sm pointer-events-none">
+              Profile
+            </span> */}
           </div>
         </div>
       </nav>

@@ -14,7 +14,7 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
 
   return (
     <>
-      <div className="relative flex flex-col justify-center border border-primary rounded-[6px] shadow-custom-sm overflow-hidden desktop:w-[15rem] desktop:h-[20rem] laptop:w-[10rem] laptop:h-[15rem]">
+      <div className="relative flex flex-col justify-center border border-primary rounded-[6px] shadow-custom-sm overflow-hidden lg:w-[15rem] lg:h-[20rem]">
         <div className="absolute top-2 left-2">
           {flexRender(select.column.columnDef.cell, select.getContext())}
         </div>
@@ -39,12 +39,12 @@ function DataTableCard({ row, table }: { row: any; table: any }) {
             </span>
           </div>
         </button>
-        <div className="absolute bottom-2 right-2 text-text">
+        <div className="absolute bottom-0 right-0 mb-[1%] mr-[1%] text-text">
           {flexRender(actions.column.columnDef.cell, actions.getContext())}
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-fit h-fit desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary">
+        <DialogContent className="w-fit h-fit lg:w-[700px] lg:max-h-[900px] md:w-[600px] md:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary">
           <PieceFormDialogContents
             setOpen={setOpen}
             piece={row.original}

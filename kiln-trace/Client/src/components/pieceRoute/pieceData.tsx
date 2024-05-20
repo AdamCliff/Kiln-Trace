@@ -12,7 +12,7 @@ function PieceData() {
           <PresetsContextProvider>
             <FiltersContextProvider>
               <PiecesListHeader />
-              <div id="pieces-list" className="h-[92.5%]">
+              <div id="pieces-list" className="h-[92.5%] md:h-full">
                 <PiecesList />
               </div>
             </FiltersContextProvider>

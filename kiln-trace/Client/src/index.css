@@ -55,7 +55,7 @@ body {
 
 @layer components {
   .nav-link {
-    @apply relative flex items-center justify-start text-xl font-semibold pl-4 text-text h-full w-full rounded overflow-hidden z-10 transition-all duration-200;
+    @apply relative flex items-center justify-start text-xl font-semibold pl-4 text-text h-full w-full rounded overflow-hidden z-10 transition-all duration-200 md:w-fit md:px-4;
   }
   .text-field {
     @apply field-shadow bg-accent bg-opacity-35 rounded px-2 py-1 text-md focus:bg-opacity-50 focus:outline-accent focus:outline !important;
@@ -67,7 +67,7 @@ body {
     @apply flex items-center justify-between gap-2 bg-accent bg-opacity-25 p-2 pt-3 !important;
   }
   .piece-dialog {
-    @apply w-fit h-fit rounded desktop:w-[700px] desktop:max-h-[900px] laptop:w-[600px] laptop:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary !important;
+    @apply w-fit h-fit rounded lg:w-[700px] lg:max-h-[900px] md:w-[600px] md:max-h-[800px] overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary hover:scrollbar-thumb-secondary !important;
   }
   .select-field {
     @apply w-full text-text bg-accent bg-opacity-35 data-[state='open']:bg-opacity-50 border-none font-normal rounded divide-x-2 divide-secondary field-shadow !important;
