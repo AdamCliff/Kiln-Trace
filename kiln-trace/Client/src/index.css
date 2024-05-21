@@ -93,6 +93,9 @@ body {
   .shadow-custom-lg {
     box-shadow: 0px 1px 8px hsla(0, 0%, 0%, 0.35);
   }
+  .mobile-nav-shadow {
+    box-shadow: 0px 0px 10px 1px hsla(0, 0%, 0%, 0.25);
+  }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     @apply appearance-none;

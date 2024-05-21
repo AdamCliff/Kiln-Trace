@@ -12,7 +12,7 @@ function Navbar() {
     <>
       <nav
         id="navbar"
-        className="flex items-center justify-start flex-col h-full w-[10%] p-4 bg-accent shadow-primary shadow-[inset_-10px_0px_15px_-12px_#00000024] md:w-full md:h-fit md:flex-row md:justify-evenly"
+        className="flex items-center justify-start flex-col h-full w-[10%] p-4 bg-accent shadow-primary shadow-[inset_-10px_0px_15px_-12px_#00000024] md:w-[99.25%] md:h-fit md:flex-row md:justify-evenly md:rounded-t-xl md:mobile-nav-shadow md:z-50"
       >
         <header
           id="nav-header"
@@ -20,7 +20,7 @@ function Navbar() {
         >
           <h2
             id="nav-header-title"
-            className="uppercase text-2xl font-bold text-text"
+            className="uppercase text-2xl font-bold text-text md:text-lg"
           >
             Kiln Trace
           </h2>

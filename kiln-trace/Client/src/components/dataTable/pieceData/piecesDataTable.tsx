@@ -119,6 +119,7 @@ function PiecesDataTable<TData, TValue>({
     // Function to update viewport width in state
     const updateViewportWidth = () => {
       setViewportWidth(window.innerWidth);
+      if (window.innerWidth <= 1024) setIsRowListType(false);
     };
 
     // Add event listener to update viewport width on resize
@@ -128,7 +129,7 @@ function PiecesDataTable<TData, TValue>({
     return () => {
       window.removeEventListener("resize", updateViewportWidth);
     };
-  }, []); // Empty dependency array ensures the effect runs only once
+  }, []);
 
   // handle global filter updates from both select dropdown and search bar
   useEffect(() => {
@@ -163,7 +164,7 @@ function PiecesDataTable<TData, TValue>({
           <DateRangeDropdown setColumnFilters={setColumnFilters} />
         </div>
 
-        {isRowListType && (
+        {isRowListType && viewportWidth > 1024 && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -194,13 +195,15 @@ function PiecesDataTable<TData, TValue>({
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <Switch
-          className="justify-self-end bg-accent ml-4 shadow-custom"
-          checked={!isRowListType}
-          onCheckedChange={() => {
-            setIsRowListType(!isRowListType);
-          }}
-        />
+        {viewportWidth > 1024 && (
+          <Switch
+            className="justify-self-end bg-accent ml-4 shadow-custom"
+            checked={!isRowListType}
+            onCheckedChange={() => {
+              setIsRowListType(!isRowListType);
+            }}
+          />
+        )}
       </div>
 
       <div className="py-6 px-2">
